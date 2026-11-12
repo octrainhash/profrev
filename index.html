@@ -1172,7 +1172,7 @@ function bankPrompt(m,s){
 }
 function buildBank(keys){
   if(BUILD.running){ toast("Already building…"); return; }
-  if(AI.mode==="none"){ toast("The AI isn't available in this copy. Add a key in Settings, or use the claude.ai version."); go("settings"); return; }
+  if(AI.mode==="none"){ toast("Rev needs an OpenRouter key. Paste it in Settings → AI tutor."); go("settings"); return; }
   var todo=[], est=0, tries={}; DATA.forEach(function(m){ ORDER.forEach(function(s){ var k=m.id+"-"+s; if(keys && keys.indexOf(k)<0) return; var need=Math.max(0,Math.ceil((TARGET-(BANK[k]||[]).length)/BATCH)); if(need){ todo.push(k); est+=need; tries[k]=need+4; } }); });
   if(!todo.length){ toast("This part of the bank is already full ✓"); return; }
   BUILD={running:true,stop:false,ctrl:null,cur:"",done:0,todo:est,err:"",log:[]};
@@ -1295,7 +1295,7 @@ $("#ai-clear").addEventListener("click",function(){ if(AI.ctrl) AI.ctrl.abort();
 var QUICK=[["🧠 Explain this card","Explain the card I'm looking at more simply, with a mnemonic."],["📝 10 MCQs on this","Write 10 mixed-difficulty MCQs on what I'm studying right now, using create_mcqs."],["🎯 Quiz my weak spots","Check my progress and start a quiz on my weak spots."],["🔬 Morphology drill","Take me to the morphology atlas and start a hard quiz on pathology."],["📅 Plan my week","Look at my progress and days to profs, and make me a realistic 7-day revision plan."],["🏦 Build MCQ bank","Open the MCQ bank page for me."],["🗣️ Viva me","Ask me 5 viva questions one at a time on the current subject and grade each answer I give."]];
 function drawChat(){
   var b=$("#ai-body"); var h="";
-  if(AI.mode==="none"){ h+='<div class="ai-note">✨ The AI tutor runs through claude.ai. Open this app from its claude.ai link to chat for free with your Claude account. In the offline copy, add an Anthropic API key in Settings → AI tutor (billed per use).</div>'; }
+  if(AI.mode==="none"){ h+='<div class="ai-note">✨ Rev needs an OpenRouter key to chat. Paste it once in Settings → AI tutor.</div>'; }
   if(!AI.msgs.length) h+='<div class="msg bot"><p>Hi'+esc(nm(" "))+'! I\'m <b>Rev</b> ✨, your tutor. I can explain anything, write MCQs with explanations, quiz you, plan your revision, or take you anywhere in the app. Try a button below, or select any word on a card and tap “Explain”.</p></div>';
   AI.msgs.forEach(function(m){ if(m.role==="tool") h+='<div class="msg tool">⚙️ '+esc(m.text)+'</div>'; else h+='<div class="msg '+(m.role==="user"?"user":"bot")+'">'+(m.role==="user"?esc(m.text).replace(/\n/g,"<br>"):md(m.text))+'</div>'; });
   b.innerHTML=h; linkGloss(b); b.scrollTop=b.scrollHeight;
@@ -1317,7 +1317,7 @@ function aiSend(text){
   var ctxText="[App context: "+JSON.stringify(describeView()).slice(0,2500)+"]\n\n"+text;
   var p = AI.mode==="claude" ? aiViaClaude(ctxText) : AI.mode==="key" ? (isOR()?aiViaOpenRouter(ctxText):aiViaKey(ctxText)) : Promise.reject({code:"none"});
   p.then(function(ans){ AI.msgs.push({role:"assistant",text:ans||"Done."}); })
-   .catch(function(err){ var m = err && err.name==="AbortError" ? "Stopped." : err && err.code==="none" ? "The AI tutor isn't available in this copy. Open the claude.ai version, or add an API key in Settings." : err && err.code==="not_granted" ? "AI access wasn't granted. You can allow it when asked, then try again." : err && err.code==="rate_limited" ? "Too many requests right now. Wait a minute and try again." : "Sorry, something went wrong"+(err&&err.message?": "+err.message:"")+"."; if(err && err.text) m=err.text+"\n\n_"+m+"_"; AI.msgs.push({role:"assistant",text:m}); })
+   .catch(function(err){ var m = err && err.name==="AbortError" ? "Stopped." : err && err.code==="none" ? "Rev needs an OpenRouter key. Paste it in Settings → AI tutor." : err && err.code==="not_granted" ? "AI access wasn't granted. You can allow it when asked, then try again." : err && err.code==="rate_limited" ? "Too many requests right now. Wait a minute and try again." : "Sorry, something went wrong"+(err&&err.message?": "+err.message:"")+"."; if(err && err.text) m=err.text+"\n\n_"+m+"_"; AI.msgs.push({role:"assistant",text:m}); })
    .then(function(){ AI.busy=false; AI.ctrl=null; liveBubble=null; AI.msgs=AI.msgs.slice(-60); LS.set("chat",AI.msgs.filter(function(m){ return m.role!=="tool"; }).slice(-40)); drawChat(); });
 }
 function histFor(ctxText){
