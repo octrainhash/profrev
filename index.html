@@ -1753,7 +1753,7 @@ function aiViaKey(ctxText){
 }
 
 /* ---------- My files: upload anything, Rev reads it ---------- */
-var FILES=[], ATT=[], FILE_BUSY={};
+var FILES=[], ATT=[], FILE_BUSY={}, PDF_FULL=false;
 var LIBS={
   pdf:["https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js","https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"],
   pdfw:["https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js","https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js"],
@@ -1804,10 +1804,10 @@ function readPDF(file,prog){
           var lines=[], last=null; tc.items.forEach(function(it){ var y=Math.round(it.transform[5]); if(last!==null && Math.abs(y-last)>3) lines.push("\n"); else if(lines.length) lines.push(" "); lines.push(it.str); last=y; });
           var t=lines.join("").replace(/[ \t]+/g," ").replace(/\n\s*\n+/g,"\n").trim();
           pages.push("--- Page "+i+" ---\n"+t);
-          if(t.replace(/\s/g,"").length<25 && images.length<30){
-            var vp=pg.getViewport({scale:1}), sc=Math.min(2,1400/Math.max(vp.width,vp.height)), v2=pg.getViewport({scale:sc});
+          if((PDF_FULL || t.replace(/\s/g,"").length<25) && images.length<(PDF_FULL?400:30)){
+            var vp=pg.getViewport({scale:1}), sc=Math.min(PDF_FULL?3:2,(PDF_FULL?2200:1400)/Math.max(vp.width,vp.height)), v2=pg.getViewport({scale:sc});
             var c=document.createElement("canvas"); c.width=v2.width; c.height=v2.height;
-            return pg.render({canvasContext:c.getContext("2d"),viewport:v2}).promise.then(function(){ images.push({page:i,src:c.toDataURL("image/jpeg",0.8)}); });
+            return pg.render({canvasContext:c.getContext("2d"),viewport:v2}).promise.then(function(){ images.push({page:i,src:c.toDataURL("image/jpeg",PDF_FULL?0.92:0.8)}); });
           }
         });
       }).then(next);
@@ -2957,19 +2957,21 @@ window.__rev={deficits:function(){ return allTopics(FMCM).map(function(x){ retur
 /* ===== Universal notes importer: every notes app / file format -> My notes pages ===== */
 var IMPORT_ACCEPT="image/*,.pdf,.txt,.text,.md,.markdown,.mdown,.mkd,.html,.htm,.xhtml,.mht,.rtf,.rtfd,.docx,.odt,.pptx,.odp,.xlsx,.xls,.ods,.csv,.tsv,.json,.enex,.zip,.jex,.tar,.opml,.org,.tex,.xml,.yaml,.yml,.ini,.log,.nfo,.srt,.vtt,.note,.notes,.bear,.textbundle,.textpack,.ipynb,.epub,.js,.py,.c,.cpp,.java,.sql,.css,.heic,.heif";
 var NOTE_APPS=[
- ["Apple Notes (iPhone/iPad/Mac)","Open the note → Share (⬆) → Save to Files as PDF, or Copy and paste. Many notes: select them → Share → Export as PDF. Then import the PDFs (handwriting/sketches are transcribed)."],
- ["Notes++ / Notepad++ / any text editor","Import the .txt/.md/code file directly. Any plain-text file works."],
- ["Evernote","File → Export notes → choose ENEX (.enex). Import the .enex: every note becomes a page, with its pictures."],
- ["Notion","••• → Export → Markdown & CSV (or HTML), include subpages. Import the .zip as it is."],
- ["OneNote","File → Export → PDF or Word (.docx) for a page/section. Import that file."],
- ["Google Keep","Google Takeout → Keep → download the .zip. Import the .zip (all notes, checklists and images)."],
- ["Google Docs / Word / Pages","Download as .docx (or PDF). Pages: File → Export To → Word or PDF."],
- ["Obsidian / Bear / Logseq / Typora / iA Writer","Import the .md files, a .textbundle, or zip the vault folder and import the .zip."],
- ["Joplin","File → Export all → JEX (or MD directory zipped). Import the .jex or .zip."],
- ["Simplenote / Standard Notes / Zoho / Samsung Notes","Export to text/JSON/zip/PDF and import it."],
- ["GoodNotes / Notability / Noteshelf / Nebo / CollaNote / Flexcil","Export the notebook as PDF (Share → Export → PDF). Import the PDF and tap Read handwriting to type it out."],
- ["Photos, scans, screenshots, whiteboard pics","Import images or take a photo. Rev transcribes handwriting."],
- ["Slides, spreadsheets, Jupyter, EPUB, subtitles","PowerPoint/Keynote (.pptx), Excel/Numbers (.xlsx/.csv), .ipynb, .epub, .srt/.vtt all import as text."]
+ ["🍎 Apple Notes","📱 iPhone / iPad: open the note → Share (⬆) → Send a copy → Save to Files (saves a PDF). For many notes, put them in a folder → ••• → Share → Export.\n💻 Mac: open the note → File → Export as PDF. Or select notes, Copy, and paste into a new page here.\n🤖 Android / 🪟 Windows: open icloud.com/notes → open the note → Share → Copy, then paste into a new page here."],
+ ["🐘 Evernote","💻 Windows / Mac: select the notes → File (or ••• ) → Export notes → choose ENEX (.enex), then import the .enex.\n📱 iPhone / iPad / 🤖 Android: open the note → ••• → Share → Send a copy (or Export as PDF) → Save to Files / Drive, then import it. For many notes at once, export from the computer app."],
+ ["📓 Notion","💻 Windows / Mac / browser: ••• (top right) → Export → Markdown & CSV (or HTML), tick Include subpages → import the .zip as it is.\n📱 iPhone / iPad / 🤖 Android: open the page → ••• → Export → Markdown → Save to Files / Drive, then import it."],
+ ["🟣 OneNote","🪟 Windows: File → Export → Page or Section → PDF or Word (.docx).\n💻 Mac: File → Save as PDF.\n📱 iPhone / iPad / 🤖 Android: open the page → ••• → Share → Export as PDF (or Send a copy) → Save to Files / Drive. Then import the file."],
+ ["🟡 Google Keep","💻 Any computer: go to takeout.google.com → select only Keep → download the .zip → import the .zip (all notes, checklists and pictures).\n📱 iPhone / iPad / 🤖 Android: open the note → ⋮ → Send → Copy to Google Docs, then download it as .docx or PDF, or Copy the text and paste it into a new page here."],
+ ["📄 Google Docs / Word / Pages","💻 Google Docs: File → Download → Word (.docx) or PDF. Word: File → Save As → .docx or PDF. Pages (Mac): File → Export To → Word or PDF.\n📱 iPhone / iPad / 🤖 Android: Google Docs: ⋮ → Share & export → Save as Word or PDF. Word app: ••• → Save a copy / Export → PDF. Pages: ••• → Export → Word or PDF. Then import the file."],
+ ["🟪 Obsidian / Bear / Logseq / Typora / iA Writer","💻 Windows / Mac: zip your vault (or notes) folder → import the .zip, or import single .md files. Bear: File → Export notes → Markdown or TextBundle.\n📱 iPhone / iPad / 🤖 Android: Obsidian: share the note → Save to Files. Bear: ••• → Export → Markdown / PDF. Then import the file."],
+ ["🗒️ Joplin","💻 Windows / Mac / Linux: File → Export all → JEX (or MD - Markdown directory, then zip it) → import the .jex or .zip.\n📱 iPhone / iPad / 🤖 Android: open the note → ⋮ → Share (or Export to PDF) → Save, then import it."],
+ ["🟦 Samsung Notes","🤖 Android / Galaxy Tab: open the note → ⋮ → Share (or Save as file) → PDF → Save to My Files or Drive, then import the PDF here. Pen writing is kept exactly as you wrote it; tap 🔤 Read handwriting for a typed copy.\n🪟 Windows (Samsung Notes app): ⋮ → Save as file → PDF."],
+ ["📝 Simplenote / Standard Notes / Zoho Notebook","💻 Simplenote: Settings → Export notes (.zip). Standard Notes: Preferences → Backups → Download (.json / .zip). Zoho: notebook ••• → Export.\n📱 iPhone / iPad / 🤖 Android: Share each note → Copy, and paste into a new page here, or export from the website on a computer. Then import the file."],
+ ["✍️ GoodNotes / Notability / Noteshelf / Nebo / CollaNote / Flexcil","📱 iPad / iPhone: open the notebook → Share (⬆) or ••• → Export → PDF → Save to Files, then import the PDF here. Your handwriting and colours stay exactly as they are; tap 🔤 Read handwriting for a typed copy.\n🤖 Android: Noteshelf / Nebo / Flexcil: ⋮ → Export → PDF → Save to Drive.\n💻 Windows / Mac: export to PDF from the File or Share menu."],
+ ["📸 Photos, scans, screenshots, whiteboard pictures","📱 iPhone / iPad / 🤖 Android: tap 📷 to take a photo, or 🖼️ to pick from your gallery. Scan with Files (iPhone) or Google Drive (Android) for sharp PDFs.\n💻 Windows / Mac: import any image file. Rev can type out the handwriting for you."],
+ ["📊 Slides, spreadsheets, notebooks, e-books, subtitles","Any device: PowerPoint / Keynote (export as .pptx or PDF), Excel / Numbers (.xlsx / .csv), Jupyter (.ipynb), e-books (.epub) and subtitles (.srt / .vtt) all import as text. Keynote and Numbers: Share → Export → PowerPoint / Excel / PDF."],
+ ["📃 Notepad / Notepad++ / any text editor","🪟 Windows / 💻 Mac / 🐧 Linux: import the .txt, .md or code file directly.\n📱 iPhone / iPad / 🤖 Android: share the note as a text file, or Copy and paste it into a new page here."],
+ ["📋 Anything else","Every device: if an app can Share, Export, Print to PDF or Copy, it works. Use Print → Save as PDF (or Copy + paste) and import that here."]
 ];
 function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function txtToHtml(t){ return "<p>"+escHtml(t).replace(/\n\n+/g,"</p><p>").replace(/\n/g,"<br>")+"</p>"; }
@@ -3031,7 +3033,7 @@ function impORG(file){ return file.text().then(function(t){ var m=t.replace(/^(\
 function impTEX(file){ return file.text().then(function(t){ var m=t.replace(/%.*$/gm,"").replace(/\\(section|chapter)\*?\{([^}]*)\}/g,"\n## $2\n").replace(/\\subsection\*?\{([^}]*)\}/g,"\n### $1\n").replace(/\\textbf\{([^}]*)\}/g,"**$1**").replace(/\\emph\{([^}]*)\}|\\textit\{([^}]*)\}/g,"*$1$2*").replace(/\\item\s*/g,"- ").replace(/\\(begin|end)\{[^}]*\}|\\[a-zA-Z]+\*?(\[[^\]]*\])?(\{[^}]*\})?/g,""); return [{title:titleFrom(file.name),html:mdToHtml(m)}]; }); }
 function impEPUB(file){ return loadLib("jszip","JSZip").then(function(Z){ return readAsBuf(file).then(function(b){ return Z.loadAsync(b); }); }).then(function(zip){ var hs=[]; zip.forEach(function(p,f){ if(/\.x?html?$/i.test(p)) hs.push(f); }); hs.sort(function(a,b){ return a.name<b.name?-1:1; });
   return Promise.all(hs.map(function(f){ return f.async("string"); })).then(function(ts){ return [{title:titleFrom(file.name),html:cleanHtml(ts.map(function(t){ return t.replace(/^[\s\S]*<body[^>]*>|<\/body>[\s\S]*$/gi,""); }).join("<hr>"))}]; }); }); }
-function impPDF(file,prog){ PDF_FULL=true; return ingest(file,prog).then(function(x){ PDF_FULL=false; var keep={id:x.id,name:x.name,size:x.size,added:x.added,text:x.text,images:[],pages:x.pages,kind:x.kind};
+function impPDF(file,prog){ PDF_FULL=true; return ingest(file,prog).catch(function(e){ PDF_FULL=false; throw e; }).then(function(x){ PDF_FULL=false; var keep={id:x.id,name:x.name,size:x.size,added:x.added,text:x.text,images:[],pages:x.pages,kind:x.kind};
   return filePut(keep).then(function(){ var hasText=!!x.text.replace(/\s|--- Page \d+ ---/g,"").length;
     return [{title:titleFrom(file.name),html:(x.images||[]).map(function(im){ return '<p class="pdfpage"><img src="'+im.src+'" alt="page '+im.page+'"></p>'; }).join("")+(hasText?'<details class="typed"><summary>🔤 Text found in the PDF (searchable copy)</summary>'+txtToHtml(x.text.replace(/--- Page (\d+) ---/g,"\n\n— Page $1 —\n"))+'</details>':""),needsOCR:!hasText,file:x}]; }); },function(e){ PDF_FULL=false; throw e; }); }
 function impImage(file){ return readAsDataURL(file).then(function(d){ return file.size<=6*1048576&&/^data:image\/(png|jpe?g|gif|webp|svg)/.test(d)?d:shrinkImage(d,3000); }).then(function(src){ if(!src) throw new Error(file.name+": this photo format can't be opened here (on iPhone set Camera → Formats → Most Compatible, or screenshot it)."); return [{title:titleFrom(file.name),html:'<p><img src="'+src+'" alt="'+escHtml(file.name)+'"></p><p></p>',needsOCR:true,img:src}]; }); }
@@ -3072,7 +3074,7 @@ importToPages=function(fs){ return importNotes(fs,{ocr:S.importOcr!==false}); };
   sec.innerHTML='<div class="imp-head"><b>📥 Bring your notes from any app</b><span class="hint">Drop files here, or tap to choose. PDFs, photos, scans, Word, Markdown, Evernote, Notion, Keep, OneNote, Obsidian, Joplin and more.</span></div>'+
    '<div class="row"><label class="btn" style="cursor:pointer">Choose files<input type="file" id="mn-imp2" multiple hidden accept="'+IMPORT_ACCEPT+'"></label><label class="btn ghost" style="cursor:pointer">📷 Photo of notes<input type="file" id="mn-cam2" accept="image/*" capture="environment" multiple hidden></label>'+
    '<label class="hint" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="mn-ocr"'+(S.importOcr!==false?" checked":"")+'> Type out handwriting & scans with Rev</label></div><p class="hint" id="mn-prog" hidden></p>'+
-   '<details><summary>How to export from your notes app</summary><div class="imp-apps">'+NOTE_APPS.map(function(a){ return '<div><b>'+esc(a[0])+'</b><span>'+esc(a[1])+'</span></div>'; }).join("")+'</div></details>';
+   '<details><summary>📤 How to export from your notes app (every device)</summary><div class="imp-apps">'+NOTE_APPS.map(function(a){ return '<div><b>'+esc(a[0])+'</b><span>'+a[1].split("\n").map(esc).join("<br>")+'</span></div>'; }).join("")+'</div></details>';
   var list=$("#mn-list"); list.parentNode.insertBefore(sec,list);
   function take(fl){ var fs=[].slice.call(fl||[]); if(fs.length) importNotes(fs,{ocr:$("#mn-ocr").checked}); }
   $("#mn-imp2").addEventListener("change",function(){ take(this.files); this.value=""; }); $("#mn-cam2").addEventListener("change",function(){ take(this.files); this.value=""; });
@@ -3841,6 +3843,7 @@ addEventListener("resize",debounce(function(){ document.querySelectorAll(".pane"
 addEventListener("keydown",function(e){ if(e.key!=="Escape") return; var top=null, z=-1; document.querySelectorAll(".pane.pn-max").forEach(function(w){ if(+w.style.zIndex>z){ z=+w.style.zIndex; top=w; } }); if(top){ var b=top.querySelector('[data-pn="max"]'); if(b) b.click(); e.stopPropagation(); } },true);
 
 /* ---------- 🌐 in-app browser ---------- */
+var brGo=function(u){ openBrowser(u); };
 var BRZ=LS.get("browser",{id:"browser",x:null,y:null,w:560,h:520,mode:"float",url:"",hist:[],hi:-1,recent:[]});
 function brUrl(q){ q=String(q||"").trim(); if(!q) return ""; if(/^https?:\/\//i.test(q)) return q; if(/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(q)) return "https://"+q; return "https://www.google.com/search?igu=1&q="+encodeURIComponent(q); }
 var BR_QUICK=[["🔎 Google","https://www.google.com/webhp?igu=1"],["📚 Wikipedia","https://en.m.wikipedia.org/wiki/Main_Page"],["🧪 PubMed","https://pubmed.ncbi.nlm.nih.gov/"],["🩻 Radiopaedia","https://radiopaedia.org/"],["🔬 Pathology Outlines","https://www.pathologyoutlines.com/"],["🌍 WHO","https://www.who.int/"]];
@@ -3851,7 +3854,7 @@ function openBrowser(url){ var old=document.querySelector('.pane[data-pane="brow
   var w=makePane({state:BRZ,node:node,title:"ProfScope",icon:"🔬",cls:"pane-br",save:function(){ LS.set("browser",BRZ); }});
   var inp=node.querySelector(".br-url"), fr=node.querySelector(".br-frame"), home=node.querySelector(".br-home"), op=node.querySelector(".br-open");
   function recent(){ node.querySelector(".br-recent").innerHTML=(BRZ.recent||[]).length?'<b class="hint">Recent</b><div class="row">'+BRZ.recent.slice(0,8).map(function(u){ return '<button type="button" class="chip" data-brgo="'+esc(u)+'">'+esc(u.replace(/^https?:\/\/(www\.)?/,"").replace(/[?#].*$/,"").slice(0,40))+'</button>'; }).join("")+'</div>':""; }
-  window.brGo=function(u,noHist){ u=brUrl(u); if(!u) return; if(!noHist){ BRZ.hist=(BRZ.hist||[]).slice(0,BRZ.hi+1).concat([u]).slice(-50); BRZ.hi=BRZ.hist.length-1; } BRZ.url=u; inp.value=/google\.com\/search/.test(u)?decodeURIComponent((u.match(/[?&]q=([^&]*)/)||["",""])[1].replace(/\+/g," ")):u; op.href=u.replace("igu=1&","").replace("?igu=1",""); home.hidden=true; fr.hidden=false; fr.src=u;
+  brGo=function(u,noHist){ u=brUrl(u); if(!u) return; if(!noHist){ BRZ.hist=(BRZ.hist||[]).slice(0,BRZ.hi+1).concat([u]).slice(-50); BRZ.hi=BRZ.hist.length-1; } BRZ.url=u; inp.value=/google\.com\/search/.test(u)?decodeURIComponent((u.match(/[?&]q=([^&]*)/)||["",""])[1].replace(/\+/g," ")):u; op.href=u.replace("igu=1&","").replace("?igu=1",""); home.hidden=true; fr.hidden=false; fr.src=u;
     if(!/google\.com/.test(u)){ BRZ.recent=[u].concat((BRZ.recent||[]).filter(function(x){ return x!==u; })).slice(0,10); } LS.set("browser",BRZ); };
   function goHome(){ fr.hidden=true; fr.removeAttribute("src"); home.hidden=false; inp.value=""; recent(); }
   node.querySelector(".br-bar").addEventListener("submit",function(e){ e.preventDefault(); brGo(inp.value); });
@@ -3971,7 +3974,7 @@ var MNSEL=null;
 function stickyBtn(){ return '<button type="button" class="chip stkhere" title="Stick a sticky note on this page. It stays right here every time you open it">🗒️ Sticky</button>'; }
 document.addEventListener("click",function(e){ var b=e.target.closest(".stkhere"); if(!b) return; e.preventDefault(); e.stopPropagation(); var r=b.getBoundingClientRect(); newSticky({x:Math.min(innerWidth-260,Math.max(10,r.left)),y:Math.max(70,r.bottom+8)}); toast("📎 Stuck to this page: it'll be right here whenever you open it"); },true);
 function decorateStk(){
-  document.querySelectorAll(".nb-bar:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); x.insertAdjacentHTML("beforeend",stickyBtn()); });
+
   document.querySelectorAll(".mytools:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); var sp=x.querySelector(".spacer"); if(sp) sp.insertAdjacentHTML("beforebegin",stickyBtn()); });
   var fc=document.getElementById("fc"); if(fc&&!fc.hasAttribute("data-stkb")){ fc.setAttribute("data-stkb","1"); var tg=fc.querySelector(".tags"); if(tg) tg.insertAdjacentHTML("beforeend",stickyBtn()); }
   document.querySelectorAll(".tblock h3:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); x.insertAdjacentHTML("beforeend",' '+stickyBtn()); });
