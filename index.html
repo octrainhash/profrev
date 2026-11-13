@@ -436,6 +436,31 @@ body.lang-ar{font-family:"Noto Sans Arabic","Segoe UI",var(--body,system-ui),san
 .imp-apps div{display:grid;gap:3px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.45)}.imp-apps span{font-size:13px;opacity:.8}
 [data-theme=dark] .imp-apps div{background:rgba(255,255,255,.06)}
 [hidden]{display:none!important}
+.livediag{margin:14px 0;padding:10px 12px 12px;border-radius:18px;background:color-mix(in srgb,var(--glass,#fff) 70%,transparent);border:1px solid var(--line);box-shadow:var(--shadow)}
+.ld-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px}.ld-head .chip{padding:4px 10px;font-size:.82rem}
+.ld-svg{width:100%;height:auto;display:block;max-height:70vh}.ld-pen{pointer-events:none;transition:opacity .2s}.diagraw{white-space:pre-wrap;font-size:.8rem}
+.pane .pane-b{position:relative;flex:1;overflow:auto;background:color-mix(in srgb,var(--bg) 92%,transparent);color:var(--ink)}.pane.pn-mini .pane-b,.pane.pn-mini .st-rs{display:none}.pane.moving .pane-b{pointer-events:none}.pane.pn-max{border-radius:14px}
+.pin-body{padding:14px 16px;font-size:.95rem}.pin-body h2{margin-top:0}.pin-body table{font-size:.85rem}.pin-img{width:100%;border-radius:10px}.pc-q{font-weight:600;margin-bottom:8px}
+.br{display:flex;flex-direction:column;height:100%}.br-bar{display:flex;gap:4px;align-items:center;padding:6px;border-bottom:1px solid var(--line)}.br-bar>button:not(.btn){border:0;background:none;color:inherit;padding:4px 7px;border-radius:8px;cursor:pointer}.br-bar>button:hover{background:color-mix(in srgb,var(--accent) 15%,transparent)}.br-url{flex:1;min-width:80px;padding:6px 10px!important;font-size:.88rem}.br-open{text-decoration:none;padding:4px 7px;color:inherit}
+.br-view{position:relative;flex:1}.br-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}.br-home{padding:18px;display:grid;gap:12px;align-content:start}.br-home h3{margin:0}
+.pinbtn{padding:3px 8px!important;font-size:.8rem!important}.msg.bot .pinbtn{float:right;opacity:.55;margin-top:4px}.msg.bot:hover .pinbtn{opacity:1}
+.stkhere{padding:3px 9px!important;font-size:.8rem!important}
+.sticklet{box-shadow:5px 5px 0 -1px color-mix(in srgb,var(--st) 85%,#000 15%),10px 10px 0 -2px color-mix(in srgb,var(--st) 70%,#000 30%),0 12px 30px #0003!important}
+.sk-bar{display:flex;align-items:center;gap:4px;padding:0 6px 4px;font-size:.8rem}.sk-bar button{border:0;background:#0000000f;border-radius:8px;padding:2px 9px;cursor:pointer;color:inherit;font-size:.95rem}.sk-bar button:hover{background:#00000022}
+.sk-pop{position:absolute;top:34px;right:6px;z-index:5;display:grid;gap:4px;padding:10px;border-radius:14px;width:250px;max-height:300px;overflow:auto;color:var(--ink)}.sk-pop button{text-align:left;border:0;background:color-mix(in srgb,var(--ink) 6%,transparent);border-radius:10px;padding:7px 10px;cursor:pointer;color:inherit;font-size:.85rem}.sk-pop button:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.mn-selbar,.nb-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-radius:16px;margin-bottom:10px;position:sticky;top:8px;z-index:20}.mn-ck{width:20px;height:20px;margin-right:6px;flex:none;accent-color:var(--accent)}
+.exitf{position:sticky;top:0;float:right;z-index:2}
+#notebody.focusmode{position:fixed;inset:0;z-index:180;overflow:auto;border-radius:0;padding:5vh max(5vw,calc(50vw - 420px))!important;margin:0}
+.sticky.st-max{position:fixed!important;left:12px!important;top:12px!important;width:calc(100vw - 24px)!important;height:calc(100vh - 24px)!important;z-index:190!important;transform:none!important}
+.genimg{margin:10px 0;display:grid;gap:8px}.genimg img{width:100%;max-width:640px;border-radius:14px;box-shadow:var(--shadow)}.genimg figcaption{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--muted)}.gi-ph{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+.keybox{display:grid;gap:10px;padding:14px;border-radius:16px;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent)}.keyrow .nrow{padding:8px 12px}.tag{font-size:.7rem;padding:2px 8px;border-radius:999px;background:var(--accent);color:#fff;vertical-align:middle;margin-left:4px}.keyadv{border-top:1px solid var(--line);padding-top:10px}.keyadv>summary{cursor:pointer;font-weight:600;margin-bottom:10px}.keyadv[open]{display:grid;gap:12px}
+.ld-sketch path,.ld-sketch ellipse{filter:url(#ldpencil)}.ld-onpaper .ld-svg text{fill:#2b2b33}
+.svrow{display:flex;align-items:center;gap:6px}.svrow>.nrow,.svrow>div.nrow{flex:1;min-width:0}.delbtn{flex:none;opacity:.55;transition:opacity .15s}.svrow:hover .delbtn,.delbtn:focus-visible,.delbtn.armed{opacity:1}
+.armed{background:var(--warn)!important;color:#fff!important;border-color:transparent!important}
+.svthumb{width:40px;height:40px;object-fit:cover;border-radius:8px;flex:none}
+.board{margin:0;padding:0;list-style:none;display:grid;gap:6px}.board li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.bar.alt{margin-top:4px}.bar.alt i{background:linear-gradient(90deg,var(--blob2),color-mix(in srgb,var(--blob2) 60%,#fff))}
+@media (hover:none){.delbtn{opacity:1}}
 .bank-n{min-width:42px;display:inline-block;font-size:1.05rem}.bank-done{display:block;margin-top:2px}
 .nextcard{padding:18px;display:grid;gap:10px}.nx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.nx{display:grid;gap:4px;text-align:left;padding:14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.35);cursor:pointer;font:inherit;color:inherit}.nx .ic{font-size:22px}.nx small{opacity:.75}.nx.rec{border:2px solid #8c5aff;box-shadow:0 8px 24px rgba(140,90,255,.2)}[data-theme=dark] .nx{background:rgba(255,255,255,.05)}.nx:hover{transform:translateY(-1px)}
 .llm-err{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:300;max-width:min(560px,calc(100vw - 24px));display:grid;gap:4px;padding:14px 44px 14px 18px;border-radius:16px;background:#d92d3a;color:#fff;box-shadow:0 14px 40px rgba(217,45,58,.45);font-size:.92rem}.llm-err b{font-size:1rem}.llm-err button{position:absolute;top:8px;right:10px;border:0;background:transparent;color:#fff;font-size:1.1rem;cursor:pointer}
@@ -761,9 +786,9 @@ function renderSide(){
   var due=dueList().length;
   h+='<div class="lbl">'+T("Learn")+'</div>'+nb("📒",T("Notes"),"notes","Full topic notes for every module and subject, with diagrams. Highlight, sticky notes and pen")+nb("🎓",T("Teach me"),"teach","Rev teaches any topic step by step and checks you understood")+nb("✍️",T("My notes"),"mynotes","Your own notes: type, draw with Pencil/finger, add photos")+nb("✨",T("Rev Studio"),"studio","Rev writes more notes, flashcards, BCQs and viva into the app");
   h+='<div class="lbl">'+T("Practise")+'</div>'+nb("🧪",T("OSPE practice"),"ospe","Timed OSPE stations for every module and subject, observed and unobserved")+nb("🃏","Study session","study","Build your own flashcard session from any modules, subjects, topics and card types",due?due+" due":"")+nb("📝","Quiz & exam mode","quiz","MCQ practice and timed exams generated from all the tables, with explanations for every option")+nb("🏦","BCQ bank","bank","Best choice questions for every module and subject, with explanations, offline",bankTotal()?bankTotal():"");
-  h+='<div class="lbl">Exam prep</div>'+nb("🗓️","Study planner","plan","A day-by-day plan up to your prof date that adapts as you go")+nb("🎯","Weak topics","weak","Your accuracy for every topic, and one tap to fix the weakest")+nb("🏁","Mock prof exam","mock","A full timed paper in JSMU format: BCQs then OSPE stations, with a breakdown")+nb("📜","Past papers","papers","Upload past papers: Rev sorts every question by topic and shows what repeats")+nb("⚡","Rapid review","rapid","Mnemonics, one-liners and exam pearls for the night before");
+  h+='<div class="lbl">Exam prep</div>'+nb("🗓️","Study planner","plan","A day-by-day plan up to your prof date that adapts as you go")+nb("🎯","Weak topics","weak","Your accuracy for every topic, and one tap to fix the weakest")+nb("🏁","Mock prof exam","mock","A full timed paper in JSMU format: BCQs then OSPE stations, with a breakdown")+nb("📜","Past papers","papers","Upload past papers: Rev sorts every question by topic and shows what repeats")+nb("⚡","Rapid review","rapid","Mnemonics, one-liners and exam pearls for the night before")+nb("🏆","My results","results","Log your real exam marks and compare them with your mocks")+nb("👥","Study group","group","Challenge friends on the same BCQs, with a leaderboard");
   h+='<div class="lbl">Cheat sheets</div>'+nb("🔬","Morphology atlas","atlas-patho","Every pathology morphology sheet and table across all six modules")+nb("💊","Drug atlas","atlas-pharma","Every drug table across all modules")+nb("🦠","Organism atlas","atlas-micro","Every microbiology table across all modules")+nb("⚖️","Forensic atlas","atlas-forensic","Every forensic medicine and toxicology table: poisons, injuries, law")+nb("🏘️","Community atlas","atlas-community","Every community medicine table: diseases, vaccines, programmes, indicators");
-  h+='<div class="lbl">You</div>'+nb("📂","My files","files","Upload past papers, syllabus, marking schemes, notes or photos. Rev reads them for you",FILES.length?FILES.length:"")+nb("📖","Glossary","glossary","Every term you can hover over, A to Z")+nb("🗂️",T("Saved"),"saved","Everything you made: notes, sticky notes, highlights, cards, MCQs, files, lessons. Plus backups")+nb("🔄","Sync & share","sync","Keep your devices in step and share decks with friends")+nb("📈","Progress","stats","Stats, streak and quiz history")+nb("⚙️","Settings & themes","settings","Name, prof date, colours, dark mode, AI and backups")+nb("📲","Install & offline","install","Use ProfRev as an app on phone, tablet and laptop");
+  h+='<div class="lbl">You</div>'+nb("📂","My files","files","Upload past papers, syllabus, marking schemes, notes or photos. Rev reads them for you",FILES.length?FILES.length:"")+nb("📖","Glossary","glossary","Every term you can hover over, A to Z")+nb("🗂️",T("Saved"),"saved","Everything you made, with a 🗑️ to delete any of it. Plus backups")+nb("🔄","Sync & share","sync","Keep your devices in step and share decks with friends")+nb("📈","Progress","stats","Stats, streak and quiz history")+nb("⚙️","Settings & themes","settings","Name, prof date, colours, dark mode, AI and backups")+nb("📲","Install & offline","install","Use ProfRev as an app on phone, tablet and laptop");
   h+='</nav><div class="foot">'+(dl!=null?(dl>0?"⏳ "+plural(dl,"day")+" to profs":dl===0?"🍀 Prof day. You've got this.":"🎉 Profs done!"):"Set your prof date in Settings")+' · 🔥 '+streak()+'</div>';
   $("#side").innerHTML=h; translateSide();
 }
@@ -2615,7 +2640,7 @@ function renderTeach(){
   var t=TEACH; setCrumbs([["Home","home"],["Teach me","teach"],[t.topic]]);
   app.innerHTML='<div class="teach"><aside class="glass tc-out" id="tc-out"></aside><section class="glass tc-main"><div class="tc-head"><b>🎓 '+esc(t.topic)+'</b><span class="spacer"></span><button type="button" class="chip" data-tq="voice" aria-pressed="'+!!S.voiceOn+'" data-tip="Rev speaks with a natural Google voice (needs Gemini key)">'+(S.voiceOn?"🔊 Voice on":"🔇 Voice off")+'</button><button type="button" class="chip" data-tq="video" data-tip="Watch a video while you learn">▶️ Video</button></div>'+
     '<div class="tc-body" id="tc-body" aria-live="polite"></div>'+
-    '<div class="row tc-quick">'+[["next","Next part ▶"],["simpler","Explain simpler"],["deeper","Go deeper"],["case","Give me a case"],["quiz","Quiz me"],["diagram","Draw it as a diagram/table"],["summary","Summarise"]].map(function(q){ return '<button type="button" class="chip" data-tq="'+q[0]+'">'+q[1]+'</button>'; }).join("")+'</div>'+
+    '<div class="row tc-quick">'+[["next","Next part ▶"],["simpler","Explain simpler"],["deeper","Go deeper"],["case","Give me a case"],["quiz","Quiz me"],["diagram","🎨 Draw it live"],["summary","Summarise"]].map(function(q){ return '<button type="button" class="chip" data-tq="'+q[0]+'">'+q[1]+'</button>'; }).join("")+'</div>'+
     '<form class="tc-f" id="tc-form"><textarea id="tc-in" rows="1" placeholder="Answer or ask… (or tap 🎤 and just talk)" data-ph="Answer or ask… (or tap 🎤 and just talk)" aria-label="Your answer"></textarea><button type="button" class="micbtn" id="tc-mic" aria-label="Speak" title="Speak">🎤</button><button class="btn" id="tc-send">Send</button></form></section></div>';
   drawTeach();
   var inp=$("#tc-in");
@@ -2624,7 +2649,7 @@ function renderTeach(){
   $("#tc-mic").addEventListener("click",function(){ stopSpeaking(); listen(inp,function(txt){ if(!t.busy) teachSend(t,txt); },$("#tc-mic")); });
   app.querySelector(".tc-head").addEventListener("click",function(e){ var b=e.target.closest("[data-tq]"); if(!b) return; if(b.dataset.tq==="voice"){ S.voiceOn=!S.voiceOn; saveAll(); if(S.voiceOn&&!S.gemKey){ toast("Natural voice needs a Gemini key in Settings → AI tutor"); } if(!S.voiceOn) stopSpeaking(); b.setAttribute("aria-pressed",!!S.voiceOn); b.textContent=S.voiceOn?"🔊 Voice on":"🔇 Voice off"; } else if(b.dataset.tq==="video") videoPrompt(); });
   app.querySelector(".tc-quick").addEventListener("click",function(e){ var b=e.target.closest("[data-tq]"); if(!b||t.busy) return; stopSpeaking();
-    teachSend(t,{next:"Continue to the next part.",simpler:"I didn't fully get that. Explain it again more simply, with an analogy.",deeper:"Go deeper on this part — mechanisms, details examiners love, and exceptions.",case:"Give me a clinical case on this and let me work through it step by step.",quiz:"Quiz me now: ask me 3 exam-style questions one at a time.",diagram:"Show this as a clear diagram (ASCII or flowchart) or a comparison table.",summary:"Summarise everything so far as crisp revision notes."}[b.dataset.tq]); });
+    teachSend(t,{next:"Continue to the next part.",simpler:"I didn't fully get that. Explain it again more simply, with an analogy.",deeper:"Go deeper on this part — mechanisms, details examiners love, and exceptions.",case:"Give me a clinical case on this and let me work through it step by step.",quiz:"Quiz me now: ask me 3 exam-style questions one at a time.",diagram:"Draw this as a live diagram (a diagram code block) so I can watch it being drawn, then explain it step by step.",summary:"Summarise everything so far as crisp revision notes."}[b.dataset.tq]); });
 }
 function drawTeach(){
   var t=TEACH; if(!t||!$("#tc-body")) return;
@@ -2729,7 +2754,7 @@ function puncFix(l){ if(/https?:|www\./i.test(l)) return l;
   return l.replace(/([^\s|])[ \t]{2,}(?=\S)/g,"$1 ").replace(/(\S)\s+([,;!?])(?=\s|$|[A-Za-z])/g,"$1$2").replace(/(\S)\s+:(?=\s|$)/g,"$1:").replace(/(\w|\*\*)\s+\.(?=\s|$)/g,"$1.")
     .replace(/([A-Za-z]{2,}|\)),(?=[A-Za-z(])/g,"$1, ").replace(/;(?=[A-Za-z])/g,"; ").replace(/\b([A-Za-z]{3,})\.([A-Za-z]{2,})\b/g,function(a,x,y){ return /^(g|e)$/i.test(y)?a:x+". "+y; })
     .replace(/\b([a-z]{3,})\.(e\.g\.|i\.e\.)/gi,"$1. $2"); }
-function tidyMd(t){ t=String(t||"").replace(/\r/g,"").replace(/^```(?:markdown|md)?\s*\n?|\n?```\s*$/g,"");
+function tidyMd(t){ t=String(t||"").replace(/\r/g,""); if(/^\s*```(?:markdown|md)?\s*\n/.test(t)) t=t.replace(/^\s*```(?:markdown|md)?\s*\n/,"").replace(/\n?```\s*$/,"");
   var inCode=false;
   return t.split("\n").map(function(l){ if(/^\s*```/.test(l)){ inCode=!inCode; return l; } if(inCode) return l;
     l=l.replace(/\s+$/,"").replace(/^(\s*)[*+•●▪◦]\s+/,"$1- ").replace(/^(\s*)(\d+)\)\s+/,"$1$2. ").replace(/^(#{1,6})([^#\s])/,"$1 $2").replace(/^(#{1,6}\s.*?)\s*:\s*$/,"$1");
@@ -3257,7 +3282,7 @@ PLUS.sync=function(){
     else if(a==="deck") deckExport($("#sh-m").value,$("#sh-s").value,$("#sh-t").value.trim());
     else if(a==="auto") window.showSaveFilePicker({suggestedName:"ProfRev sync.profrev",types:[{description:"ProfRev sync",accept:{"application/json":[".profrev"]}}]}).then(function(hd){ SYNCH=hd; return kvSet("synchandle",hd); }).then(syncWrite).then(function(ok){ toast(ok?"Automatic sync is on ✓":"Couldn't write the sync file"); PLUS.sync(); }).catch(function(){}); }); });
   $("#sy-in").addEventListener("change",function(){ var f=this.files[0]; this.value=""; if(f) restoreAll(f); });
-  $("#sh-in").addEventListener("change",function(){ var f=this.files[0]; this.value=""; if(!f) return; f.text().then(function(t){ var o=JSON.parse(t); if(o.kind==="deck"||o.kind==="pack") return deckImport(o); if(o.app==="profrev") return restoreAll(f); throw new Error("Not a ProfRev deck"); }).then(function(){ render(); }).catch(function(e){ toast(String(e.message||e)); }); });
+  $("#sh-in").addEventListener("change",function(){ var f=this.files[0]; this.value=""; if(!f) return; f.text().then(function(t){ var o=JSON.parse(t); if(o.kind==="deck"||o.kind==="pack"||o.kind==="challenge") return deckImport(o); if(o.app==="profrev") return restoreAll(f); throw new Error("Not a ProfRev deck"); }).then(function(){ render(); }).catch(function(e){ toast(String(e.message||e)); }); });
 };
 
 /* ---------- ✅ Completed pack: freeze the finished version, publish to GitHub ---------- */
@@ -3278,7 +3303,7 @@ var PACKED=false;
 if(/^https?:$/.test(location.protocol)) fetch("pack.json?d="+today(),{cache:"no-cache"}).then(function(r){ return r.ok?r.json():null; }).then(function(o){ if(o){ loadPack(o); render(); } }).catch(function(){});
 /* desktop apps: pack.json next to the app or embedded */
 try{ var EP=document.getElementById("packdata"); if(EP&&EP.textContent.trim().length>2) loadPack(JSON.parse(EP.textContent)); }catch(e){}
-TOOLS.push({name:"open_exam_tool",description:"Open one of the exam-prep tools: plan (study planner), weak (weak topics), mock (mock prof exam), papers (past papers), rapid (rapid review / mnemonics), spot (picture spots), sync (sync & share).",inputSchema:{type:"object",properties:{tool:{type:"string",enum:["plan","weak","mock","papers","rapid","spot","sync"]}},required:["tool"]},execute:function(i){ go(i.tool); return {opened:i.tool}; }});
+TOOLS.push({name:"open_exam_tool",description:"Open one of the exam-prep tools: plan (study planner), weak (weak topics), mock (mock prof exam), papers (past papers), rapid (rapid review / mnemonics), spot (picture spots), sync (sync & share), results (my real exam results), group (study-group challenges).",inputSchema:{type:"object",properties:{tool:{type:"string",enum:["plan","weak","mock","papers","rapid","spot","sync","results","group"]}},required:["tool"]},execute:function(i){ go(i.tool); return {opened:i.tool}; }});
 TOOLS.push({name:"weak_topics",description:"List the student's weakest topics with accuracy, to target revision.",inputSchema:{type:"object",properties:{limit:{type:"number"}}},execute:function(i){ return topicIndex().filter(function(t){ return topicScore(t)!=null; }).sort(function(a,b){ return topicScore(a)-topicScore(b); }).slice(0,i.limit||10).map(function(t){ return {topic:t.topic,module:t.mod,subject:t.subj,accuracy:Math.round(100*topicScore(t))+"%",known:t.known,seen:t.seen}; }); }});
 
 /* ===== "What next?" after finishing anything: Revise / Reuse / Make new ===== */
@@ -3329,6 +3354,630 @@ function revMakeFor(scope,kind){ if(!aiReady()){ toast("Add your Gemini or OpenR
     reuse:{label:"Start over: clears the 'done' marks, keeps your stats",fn:function(){ BSEEN={}; LS.set("bseen",BSEEN); render(); }},
     make:{label:"Rev writes new BCQs for your weakest topics",fn:function(){ var w=topicIndex().filter(function(t){ return topicScore(t)!=null; }).sort(function(a,b){ return topicScore(a)-topicScore(b); }).slice(0,6); var L=[]; w.forEach(function(t){ L=L.concat(jobMcqs(t.mod,t.subj,t.topic,25)); }); jobAdd(L); }}});
   var hero=app.querySelector(".hero"); if(hero) hero.parentNode.insertBefore(card,hero.nextSibling); }; })();
+
+/* ===== Delete anything you made · My results tracker · Study group challenges · spot answer editing ===== */
+/* Two-tap delete: first tap arms the button, second tap within 3 s confirms. */
+function armDel(b,label){ if(b.dataset.sure) return true; b.dataset.sure="1"; var old=b.innerHTML; b.textContent=label||"Tap again to delete"; b.classList.add("armed");
+  setTimeout(function(){ if(b.isConnected&&b.dataset.sure){ delete b.dataset.sure; b.innerHTML=old; b.classList.remove("armed"); } },3000); return false; }
+function bkp(){ try{ backupLater(); }catch(e){} }
+function kvAll(prefix){ return kvKeys(prefix).then(function(ks){ return Promise.all(ks.map(function(k){ return kvGet(k).then(function(v){ return v?Object.assign({_k:k},v):null; }); })); }).then(function(a){ return a.filter(Boolean); }); }
+function kvDelAll(prefix){ return kvKeys(prefix).then(function(ks){ return Promise.all(ks.map(kvDel)); }); }
+
+/* ---------- delete helpers for every kind of thing you can make ---------- */
+function delMyCard(id){ var dc=BYID[id]; if(dc){ var arr=MOD[dc.mod].subjects[dc.subj].cards, i=arr.indexOf(dc); if(i>=0) arr.splice(i,1); i=CARDS.indexOf(dc); if(i>=0) CARDS.splice(i,1); delete BYID[id]; }
+  MYCARDS=MYCARDS.filter(function(x){ return x.id!==id; }); delete SRS[id]; delete BM[id]; delete NOTES[id]; LS.set("mycards",MYCARDS); saveAll(); }
+function delPage(id){ return kvGet("page:"+id).then(function(p){ var m=p&&String(p.html||"").match(/data-orig="([^"]+)"/g)||[];
+  return kvDel("page:"+id).then(function(){ if(!m.length) return; return kvAll("page:").then(function(rest){ return Promise.all(m.map(function(x){ var oid=x.slice(11,-1); var used=rest.some(function(r){ return String(r.html||"").indexOf('data-orig="'+oid+'"')>=0; }); return used?null:kvDel("orig:"+oid); })); }); }); }); }
+function delSticky(id){ STICKIES=STICKIES.filter(function(s){ return s.id!==id; }); saveStickies(); placeStickies(); }
+function isRevQ(q){ return q&&!q.pb&&!/^pq\|/.test(String(q.id)); }
+function delBankQ(id){ Object.keys(BANK).forEach(function(k){ BANK[k]=BANK[k].filter(function(q){ return q.id!==id||q.pb; }); }); delete BW[id]; saveBank(); }
+var MANAGE={
+  page:function(id){ return delPage(id); },
+  sticky:function(id){ delSticky(id); },
+  ann:function(id){ return kvDel("ann:"+id); },
+  bm:function(id){ delete BM[id]; saveAll(); },
+  cnote:function(id){ delete NOTES[id]; saveAll(); },
+  card:function(id){ delMyCard(id); },
+  ainote:function(id){ return delAiNote(id); },
+  teach:function(id){ return kvDel("teach:"+id); },
+  file:function(id){ return fileDel(id); },
+  paper:function(id){ return kvDel("paper:"+id); },
+  spot:function(id){ return kvDel("spot:"+id); },
+  rapid:function(id){ return kvDel("rapid:"+id); },
+  mock:function(i){ MOCKS.splice(+i,1); LS.set("mocks",MOCKS); },
+  quiz:function(i){ QH.splice(+i,1); saveAll(); },
+  result:function(id){ RESULTS=RESULTS.filter(function(r){ return r.id!==id; }); LS.set("results",RESULTS); },
+  challenge:function(id){ return kvDel("group:"+id); },
+  bankq:function(id){ delBankQ(id); }
+};
+var MANAGE_ALL={
+  page:function(){ return kvDelAll("page:").then(function(){ return kvDelAll("orig:"); }); },
+  sticky:function(){ STICKIES=[]; saveStickies(); placeStickies(); },
+  ann:function(){ return kvDelAll("ann:"); },
+  bm:function(){ BM={}; saveAll(); },
+  cnote:function(){ NOTES={}; saveAll(); },
+  card:function(){ MYCARDS.slice().forEach(function(c){ delMyCard(c.id); }); },
+  revcard:function(){ MYCARDS.filter(function(c){ return c.ai; }).forEach(function(c){ delMyCard(c.id); }); },
+  ainote:function(){ return kvKeys("ainote:").then(function(ks){ return Promise.all(ks.map(function(k){ return delAiNote(k.slice(7)); })); }); },
+  revbcq:function(){ Object.keys(BANK).forEach(function(k){ BANK[k]=BANK[k].filter(function(q){ return q.pb; }); }); saveBank(); },
+  teach:function(){ return kvDelAll("teach:"); },
+  file:function(){ return Promise.all(FILES.map(function(f){ return fileDel(f.id); })); },
+  paper:function(){ return kvDelAll("paper:"); },
+  spot:function(){ return kvDelAll("spot:"); },
+  rapid:function(){ return kvDelAll("rapid:"); },
+  mock:function(){ MOCKS=[]; LS.set("mocks",MOCKS); },
+  quiz:function(){ QH=[]; saveAll(); },
+  result:function(){ RESULTS=[]; LS.set("results",RESULTS); },
+  challenge:function(){ return kvDelAll("group:"); },
+  chat:function(){ if(AI.ctrl) AI.ctrl.abort(); AI.msgs=[]; LS.set("chat",[]); try{ drawChat(); }catch(e){} },
+  plan:function(){ PLAN={done:{},hours:4,rest:"",mockEvery:7}; savePlan(); },
+  progress:function(){ SRS={}; BW={}; MISS={}; DAYS={}; NDONE={}; LS.set("notesdone",NDONE); LS.set("bseen",{}); saveAll(); },
+  jobs:function(){ JOBS.q=[]; JOBS.stop=true; try{ drawJobs(); }catch(e){} }
+};
+function factoryReset(){ try{ Object.keys(localStorage).forEach(function(k){ if(/^hippo-/.test(k)) localStorage.removeItem(k); }); }catch(e){}
+  var dbs=["profrev-kv","profrev-files"]; return Promise.all(dbs.map(function(n){ return new Promise(function(res){ try{ var r=indexedDB.deleteDatabase(n); r.onsuccess=r.onerror=r.onblocked=function(){ res(); }; }catch(e){ res(); } }); })).then(function(){ location.hash=""; location.reload(); }); }
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-mdel],[data-mall],[data-mreset]"); if(!b) return; e.preventDefault(); e.stopPropagation();
+  if(b.dataset.mreset!=null){ if(!armDel(b,"⚠️ Tap again: erase EVERYTHING")) return; toast("Erasing everything…"); factoryReset(); return; }
+  if(!armDel(b,b.dataset.mall?"Tap again to delete all":"Delete?")) return;
+  var p=b.dataset.mdel?Promise.resolve(MANAGE[b.dataset.mdel.split(":")[0]](b.dataset.mdel.split(":").slice(1).join(":"))):Promise.resolve(MANAGE_ALL[b.dataset.mall]());
+  p.then(function(){ bkp(); toast(b.dataset.mall?"🗑️ All deleted":"🗑️ Deleted"); var row=b.closest(".svrow"); if(row&&!b.dataset.mall&&!b.dataset.rerender){ row.remove(); return; } render(); }).catch(function(err){ toast("Couldn't delete: "+(err&&err.message||err)); });
+},true);
+function delBtn(kind,id,extra){ return '<button type="button" class="chip delbtn" data-mdel="'+kind+":"+esc(String(id))+'"'+(extra||"")+' aria-label="Delete" data-tip="Delete">🗑️</button>'; }
+function allBtn(kind,label){ return '<button type="button" class="btn sm ghost warn" data-mall="'+kind+'">🗑️ '+(label||"Delete all")+'</button>'; }
+
+/* ---------- 🗂️ Saved: everything you made, each with its own delete ---------- */
+viewSavedHub=function(){
+  setCrumbs([["Home","home"],["Saved"]]);
+  app.innerHTML='<section class="hero glass"><span class="wave">🗂️</span><h1>Saved</h1><p>Everything you have made, in one place, and you can <b>delete any of it</b> with the 🗑️ next to it (tap twice to confirm). It all <b>saves automatically</b> on this device; use <b>Back up everything</b> to keep a copy somewhere safe.</p>'+
+    '<div class="row" style="margin-top:12px"><button type="button" class="btn" data-sv="backup">💾 Back up everything</button><label class="btn ghost" style="cursor:pointer">📥 Restore from a backup<input type="file" id="sv-restore" accept=".profrev,.json,application/json" hidden></label><button type="button" class="btn ghost" data-sv="newsticky">🗒️ New sticky note</button><button type="button" class="btn ghost" data-go="mynotes">✍️ My notes</button></div></section><div id="sv-body" class="glass" style="padding:18px"><p class="hint">Loading…</p></div>';
+  $("#sv-restore").addEventListener("change",function(){ if(this.files[0]) restoreAll(this.files[0]); this.value=""; });
+  app.querySelector('[data-sv="backup"]').addEventListener("click",backupAll);
+  app.querySelector('[data-sv="newsticky"]').addEventListener("click",function(){ newSticky(); });
+  Promise.all([collectAll(),kvAll("ainote:"),kvAll("paper:"),kvAll("spot:"),kvAll("rapid:"),kvAll("group:"),kvAll("gimg:")]).then(function(r){
+    var all=r[0], ains=r[1], papers=r[2], spots=r[3], rapids=r[4], groups=r[5], gimgs=r[6];
+    var bm=Object.keys(BM).filter(function(id){ return BYID[id]; }), cn=Object.keys(NOTES).filter(function(id){ return BYID[id] && NOTES[id]; });
+    var ann=all.annotations.filter(function(a){ return a.v && NBYID[a.id] && ((a.v.hl&&a.v.hl.length)||(a.v.ink&&a.v.ink.strokes&&a.v.ink.strokes.length)); });
+    var mine=MYCARDS.filter(function(c){ return !c.ai; }), revc=MYCARDS.filter(function(c){ return c.ai; });
+    var revq=[]; Object.keys(BANK).forEach(function(k){ BANK[k].forEach(function(q){ if(isRevQ(q)) revq.push(q); }); });
+    function sec(icon,title,count,inner,kind,allLabel){ return '<details class="svsec"'+(count&&count<=40?" open":"")+'><summary><b>'+icon+' '+title+'</b> <span class="hint">'+count+'</span></summary><div class="svlist">'+(count?inner+(kind?'<div class="row" style="margin-top:8px"><span class="spacer"></span>'+allBtn(kind,allLabel)+'</div>':''):'<p class="hint">Nothing yet.</p>')+'</div></details>'; }
+    function row(go,title,sub,date,kind,id,dot){ return '<div class="svrow">'+'<button type="button" class="nrow" '+(go==="PIN"?'data-pin="1"':go?'data-go="'+go+'"':'')+'>'+(dot||"")+'<span class="nt"><b>'+title+'</b><small>'+(sub||"")+'</small></span>'+(date?'<span class="hint">'+date+'</span>':'')+'</button>'+delBtn(kind,id,(kind==="mock"||kind==="quiz")?' data-rerender="1"':'')+'</div>'; }
+    function dt(t){ return t?new Date(t).toLocaleDateString():""; }
+    function cap(list,n){ return list.slice(0,n||300); }
+    var h=sec("✍️","My notes",all.pages.length,cap(all.pages.sort(function(a,b){ return b.t-a.t; })).map(function(p){ return row("mypage-"+p.id,esc(p.title||"Untitled"),esc(plainText(p.html||"").slice(0,90)),dt(p.t),"page",p.id); }).join(""),"page")+
+      sec("🗒️","Sticky notes",STICKIES.length,STICKIES.slice().sort(function(a,b){ return b.t-a.t; }).map(function(s){ return row(s.pin?"PIN":s.route,esc((s.text||"").split("\n")[0].slice(0,70)||(s.ink&&s.ink.strokes.length?"✏️ Handwritten sticky":"Empty sticky")),s.pin?"📌 Pinned to screen":"On: "+esc(s.title||s.route),dt(s.t),"sticky",s.id,'<span class="stdot" style="--st:'+s.c+'"></span>'); }).join(""),"sticky")+
+      sec("🖍️","Highlights & pen annotations",ann.length,ann.map(function(a){ var n=NBYID[a.id]; return row("note-"+n.id,esc(n.title),((a.v.hl||[]).length)+' highlights'+(a.v.ink&&a.v.ink.strokes.length?' · pen notes':'')+((a.v.hl||[])[0]?' · “'+esc(a.v.hl[0].t||"").slice(0,60)+'”':''),"","ann",a.id); }).join(""),"ann")+
+      sec("⭐","Bookmarked cards",bm.length,bm.map(function(id){ var c=BYID[id]; return row("card-"+id,esc(c.q.slice(0,110)),esc(MOD[c.mod].name)+' · '+SUBJ[c.subj].short,"","bm",id); }).join(""),"bm","Remove all bookmarks")+
+      sec("📝","Notes on cards",cn.length,cn.map(function(id){ var c=BYID[id]; return row("card-"+id,esc(NOTES[id].slice(0,110)),esc(c.q.slice(0,80)),"","cnote",id); }).join(""),"cnote")+
+      sec("🃏","Flashcards you made",mine.length,cap(mine).map(function(c){ return row("card-"+c.id,esc(c.q.slice(0,110)),esc(c.topic),"","card",c.id); }).join(""),"card")+
+      sec("✨","Rev's notes",ains.length,ains.sort(function(a,b){ return b.t-a.t; }).map(function(n){ return row("note-"+n.id,esc(n.title),MOD[n.mod]?esc(MOD[n.mod].name)+' · '+SUBJ[n.subj].short:"",dt(n.t),"ainote",n.id); }).join(""),"ainote")+
+      sec("✨","Rev's flashcards & vivas",revc.length,cap(revc).map(function(c){ return row("card-"+c.id,esc(c.q.replace(/\*\*/g,"").slice(0,110)),esc(c.topic)+' · '+c.type,"","card",c.id); }).join("")+(revc.length>300?'<p class="hint">Showing 300 of '+revc.length+'.</p>':''),"revcard")+
+      sec("✨","Rev's BCQs",revq.length,cap(revq).map(function(q){ return row("",esc(String(q.stem).replace(/\*\*/g,"").slice(0,110)),esc(q.topic||"")+(MOD[q.mod]?' · '+esc(MOD[q.mod].name):''),"","bankq",q.id); }).join("")+(revq.length>300?'<p class="hint">Showing 300 of '+revq.length+'.</p>':''),"revbcq")+
+      sec("🎓","Teach-me lessons",all.teach.length,all.teach.sort(function(a,b){ return b.t-a.t; }).map(function(s){ return row("teach-resume-"+s.id,esc(s.topic),s.msgs.length+' messages',dt(s.t),"teach",s.id); }).join(""),"teach")+
+      sec("🏁","Mock exam results",MOCKS.length,MOCKS.map(function(m,i){ return {m:m,i:i}; }).reverse().map(function(x){ return row("mock",x.m.pct+'%',x.m.total+' BCQs',esc(x.m.date),"mock",x.i); }).join(""),"mock")+
+      sec("📊","Quiz history",QH.length,QH.map(function(q,i){ return {q:q,i:i}; }).reverse().slice(0,200).map(function(x){ return row("stats",esc(x.q.title),x.q.correct+' / '+x.q.total,esc(x.q.date),"quiz",x.i); }).join(""),"quiz")+
+      sec("🏆","My real exam results",RESULTS.length,RESULTS.slice().reverse().map(function(x){ return row("results",esc(x.exam)+' · '+Math.round(100*x.got/x.of)+'%',x.got+' / '+x.of+(x.subj?' · '+SUBJ[x.subj].short:'')+(x.mod&&MOD[x.mod]?' · '+esc(MOD[x.mod].name):''),esc(x.date),"result",x.id); }).join(""),"result")+
+      sec("👥","Study-group challenges",groups.length,groups.map(function(g){ return row("group",esc(g.title),g.qs.length+' BCQs · '+(g.scores||[]).length+' scores',dt(g.t),"challenge",g.id); }).join(""),"challenge")+
+      sec("📜","Past papers",papers.length,papers.map(function(p){ return row("papers",esc(p.name||p.title||"Paper"),(p.qs?p.qs.length+' questions':''),dt(p.t),"paper",p.id||p._k.slice(6)); }).join(""),"paper")+
+      sec("🖼️","Picture spots",spots.length,spots.map(function(x){ return row("spot",esc((x.ans||"(no answer yet)").slice(0,90)),MOD[x.mod]?esc(MOD[x.mod].name)+' · '+SUBJ[x.subj].short:"","","spot",x.id,'<img class="svthumb" src="'+x.src+'" alt="">'); }).join(""),"spot")+
+      sec("⚡","Rev's mnemonics & pearls",rapids.length,rapids.map(function(x){ var k=x._k.slice(6), p=k.split("-"); return row("rapid",(MOD[p[0]]?esc(MOD[p[0]].name)+' · '+SUBJ[p[1]].short:esc(k)),Object.keys(x).filter(function(z){ return /^\d+$/.test(z); }).length+' pearls',"","rapid",k); }).join(""),"rapid")+
+      sec("🎨","Generated images",gimgs.length,gimgs.sort(function(a,b){ return b.t-a.t; }).map(function(g){ return row("",esc(g.prompt.slice(0,100)),"",dt(g.t),"gimg",g.id,'<img class="svthumb" src="'+g.src+'" alt="">'); }).join(""),"gimg")+
+      sec("📂","Uploaded files",FILES.length,FILES.map(function(f){ return row("files",fileIcon(f)+' '+esc(f.name),(f.pages||1)+' page(s)',"","file",f.id); }).join(""),"file");
+    h+='<details class="svsec"><summary><b>🧹 Clear other things</b></summary><div class="svlist" style="display:grid;gap:10px">'+
+      [["chat","💬 Chat with Rev",AI.msgs.length+" messages"],["plan","🗓️ Study plan","Ticks and settings go back to default"],["progress","📈 Progress","Flashcard memory, streak, mistakes and read marks (your notes and cards stay)"],["jobs","✨ Rev's job queue","Cancels jobs that haven't run yet"]].map(function(x){ return '<div class="row"><span><b>'+x[1]+'</b><br><small class="hint">'+x[2]+'</small></span><span class="spacer"></span>'+allBtn(x[0],"Clear")+'</div>'; }).join("")+
+      '<hr style="border:none;border-top:1px solid var(--line);width:100%"><div class="row"><span><b>⚠️ Erase everything</b><br><small class="hint">Deletes all your notes, cards, drawings, files, results and settings on this device and starts fresh. Back up first if you might want them.</small></span><span class="spacer"></span><button type="button" class="btn sm warn" data-mreset>Erase everything</button></div></div></details>';
+    $("#sv-body").innerHTML=h;
+    $("#sv-body").querySelectorAll('.nrow[data-pin]').forEach(function(b){ b.addEventListener("click",function(){ toast("Pinned stickies show on every page"); }); });
+  });
+};
+
+/* ---------- 🎓 delete lessons right where you see them ---------- */
+(function(){ var vt=viewTeach; viewTeach=function(p){ var r=vt(p); if(p&&p[0]==="resume") return r;
+  var box=$("#tc-past"); if(!box) return r; var mo=new MutationObserver(function(){ if(box.querySelector(".svrow")||!box.querySelector(".nrow")) return; mo.disconnect();
+    box.querySelectorAll('.nrow[data-go^="teach-resume-"]').forEach(function(n){ var id=n.dataset.go.slice(13), w=document.createElement("div"); w.className="svrow"; n.parentNode.insertBefore(w,n); w.appendChild(n); w.insertAdjacentHTML("beforeend",delBtn("teach",id)); });
+    if(box.querySelectorAll(".svrow").length>1) box.insertAdjacentHTML("beforeend",'<div class="row" style="margin-top:8px"><span class="spacer"></span>'+allBtn("teach","Delete all lessons")+'</div>'); });
+  mo.observe(box,{childList:true,subtree:true}); return r; }; })();
+(function(){ var dt=drawTeach; drawTeach=function(){ dt(); var out=$("#tc-out"); if(!out||!TEACH||out.querySelector("[data-tdel]")) return;
+  var b=document.createElement("button"); b.type="button"; b.className="btn sm ghost warn"; b.setAttribute("data-tdel",TEACH.id); b.textContent="🗑️ Delete lesson"; b.style.marginTop="6px";
+  b.addEventListener("click",function(){ if(!armDel(b)) return; stopSpeaking(); kvDel("teach:"+b.dataset.tdel).then(function(){ TEACH=null; bkp(); toast("🗑️ Lesson deleted"); go("teach"); }); }); out.appendChild(b); }; })();
+
+/* ---------- 🏁 delete single mock results ---------- */
+(function(){ var pm=PLUS.mock; PLUS.mock=function(p){ var r=pm(p); var sec=[].slice.call(app.querySelectorAll("section h2")).filter(function(h){ return h.textContent==="Past mocks"; })[0];
+  if(sec){ var rows=sec.parentNode.querySelectorAll(".nrow"), n=MOCKS.length; rows.forEach(function(rw,j){ var i=n-1-j; var w=document.createElement("div"); w.className="svrow"; rw.parentNode.insertBefore(w,rw); w.appendChild(rw); w.insertAdjacentHTML("beforeend",delBtn("mock",i,' data-rerender="1"')); });
+sec.parentNode.insertAdjacentHTML("beforeend",'<div class="row" style="padding:0 18px 14px"><span class="spacer"></span>'+allBtn("mock","Clear mock history")+'</div>'); }
+  return r; }; })();
+
+/* ---------- ⚡ delete Rev's pearls ---------- */
+(function(){ var pr=PLUS.rapid; PLUS.rapid=function(){ pr(); var m=RR.m||DATA[0].id, s=RR.s||"forensic";
+  var t=setInterval(function(){ var h=[].slice.call(app.querySelectorAll(".rapid h2")).filter(function(x){ return /Mnemonics/.test(x.textContent); })[0]; if(!h) return; clearInterval(t); if(h.querySelector("[data-mdel]")) return;
+    h.insertAdjacentHTML("beforeend",' <span style="float:right">'+delBtn("rapid",m+"-"+s,' data-rerender="1"')+'</span>'); },120); setTimeout(function(){ clearInterval(t); },4000); }; })();
+
+/* ---------- 🖼️ edit a spot's answer ---------- */
+(function(){ var ps=PLUS.spot; PLUS.spot=function(p){ ps(p); if(p&&p[0]==="run") return;
+  var t=setInterval(function(){ var figs=app.querySelectorAll("figure.spot"); if(!figs.length&&!app.querySelector(".spot-grid")) return; clearInterval(t);
+    figs.forEach(function(f){ var del=f.querySelector("[data-spdel]"); if(!del||f.querySelector("[data-spedit]")) return; var id=del.dataset.spdel;
+      var e=document.createElement("button"); e.type="button"; e.className="chip"; e.textContent="✏️"; e.setAttribute("data-spedit",id); e.setAttribute("data-tip","Edit the answer"); del.parentNode.insertBefore(e,del);
+      e.addEventListener("click",function(){ kvGet("spot:"+id).then(function(x){ if(!x) return; var cap=f.querySelector("figcaption b"); var ta=document.createElement("textarea"); ta.className="input"; ta.rows=4; ta.value=x.ans||""; cap.replaceWith(ta); ta.focus();
+        e.textContent="💾"; e.onclick=function(ev){ ev.stopImmediatePropagation(); x.ans=tidyMd(ta.value.trim()); kvSet("spot:"+id,x).then(function(){ bkp(); toast("Saved ✓"); PLUS.spot([]); }); }; }); }, {once:true}); }); },120); setTimeout(function(){ clearInterval(t); },4000); }; })();
+
+/* ---------- 🗑️ remove one of Rev's BCQs while practising ---------- */
+(function(){ var vq=viewQuizRun; viewQuizRun=function(){ vq.apply(this,arguments); if(!QZ||QZ.done) return; var q=QZ.items[QZ.idx]; if(!q||!q.bk) return; var src=null;
+  Object.keys(BANK).some(function(k){ return (BANK[k]||[]).some(function(x){ if(x.id===q.id){ src=x; return true; } }); }); if(!isRevQ(src)) return;
+  var row=app.querySelector('[data-act="qprev"]'); if(!row) return; var b=document.createElement("button"); b.type="button"; b.className="btn sm ghost warn"; b.textContent="🗑️ Remove this BCQ"; b.setAttribute("data-tip","Delete this Rev-written question from your bank");
+  b.addEventListener("click",function(){ if(!armDel(b,"Tap again to remove")) return; delBankQ(q.id); QZ.items.splice(QZ.idx,1); QZ.picks.splice(QZ.idx,1); bkp(); toast("🗑️ Removed from your bank"); if(!QZ.items.length){ go("bank"); return; } if(QZ.idx>=QZ.items.length) QZ.idx=QZ.items.length-1; render(); });
+  row.parentNode.appendChild(b); }; })();
+
+/* ---------- 🏆 My results: real exam marks vs mock scores ---------- */
+var RESULTS=LS.get("results",[]);
+var EXAMS=["Third prof (final)","Send-up exam","Module test","Block exam","Ward test","Class test","Viva","OSPE","Other"];
+function avg(a){ return a.length?Math.round(a.reduce(function(x,y){ return x+y; },0)/a.length):null; }
+PLUS.results=function(){
+  var mockAvg=avg(MOCKS.map(function(m){ return m.pct; })), quizAvg=quizAcc();
+  var bySub={}; ORDER.forEach(function(s){ bySub[s]={real:[],mock:[]}; });
+  RESULTS.forEach(function(r){ var p=Math.round(100*r.got/r.of); if(r.subj&&bySub[r.subj]) bySub[r.subj].real.push(p); else ORDER.forEach(function(s){ bySub[s].real.push(p); }); });
+  MOCKS.forEach(function(m){ Object.keys(m.subj||{}).forEach(function(s){ if(bySub[s]) bySub[s].mock.push(m.subj[s]); }); });
+  var realAll=avg(RESULTS.map(function(r){ return Math.round(100*r.got/r.of); }));
+  var h=head("🏆","My results","Log your real marks (tests, send-ups, the prof itself) and see how they compare with your mock and quiz scores, so you know whether your practice predicts the real thing.")+
+  '<section class="glass" style="padding:18px;display:grid;gap:12px"><h2 style="margin:0">➕ Add a result</h2><div class="row">'+
+    '<select class="input" id="rs-exam">'+EXAMS.map(function(x){ return '<option>'+x+'</option>'; }).join("")+'</select>'+
+    '<select class="input" id="rs-m"><option value="">All modules</option>'+DATA.map(function(m){ return '<option value="'+m.id+'">'+m.icon+' '+esc(m.name)+'</option>'; }).join("")+'</select>'+
+    '<select class="input" id="rs-s"><option value="">All subjects</option>'+ORDER.map(function(s){ return '<option value="'+s+'">'+SUBJ[s].icon+' '+SUBJ[s].name+'</option>'; }).join("")+'</select></div>'+
+    '<div class="row"><label class="hint">Marks <input type="number" class="input" id="rs-got" min="0" step="0.5" style="width:90px"></label><label class="hint">out of <input type="number" class="input" id="rs-of" min="1" step="0.5" value="100" style="width:90px"></label><label class="hint">Date <input type="date" class="input" id="rs-date" value="'+today()+'"></label><input class="input" id="rs-note" placeholder="Note (optional)" style="flex:1;min-width:160px"><button type="button" class="btn" id="rs-add">💾 Save</button></div></section>'+
+  '<section class="glass" style="padding:18px;display:grid;gap:12px"><h2 style="margin:0">📊 Real vs practice</h2>'+
+    '<div class="row" style="gap:18px"><div class="stat"><b>'+(realAll==null?"–":realAll+"%")+'</b><small>Real exams</small></div><div class="stat"><b>'+(mockAvg==null?"–":mockAvg+"%")+'</b><small>Mock prof average</small></div><div class="stat"><b>'+(quizAvg==null?"–":quizAvg+"%")+'</b><small>Quiz average</small></div></div>'+
+    (realAll!=null&&mockAvg!=null?'<p>'+(Math.abs(realAll-mockAvg)<=5?"🎯 Your mocks predict your real marks well (within 5%). Trust them.":realAll<mockAvg?"⚠️ You score <b>"+(mockAvg-realAll)+"% lower</b> in real exams than in mocks. Practise in ⏱ Exam mode under time pressure and do more Hard BCQs.":"💪 You do <b>"+(realAll-mockAvg)+"% better</b> in real exams than in mocks. Your mocks are a safe, tough benchmark.")+'</p>':'<p class="hint">Add a real result and take a 🏁 mock prof exam to see how they compare.</p>')+
+    '<div class="scroll"><table style="min-width:420px"><thead><tr><th>Subject</th><th>Real</th><th>Mocks</th><th></th></tr></thead><tbody>'+ORDER.map(function(s){ var a=avg(bySub[s].real), b=avg(bySub[s].mock); return '<tr><td>'+SUBJ[s].icon+' '+SUBJ[s].name+'</td><td>'+(a==null?"–":a+"%")+'</td><td>'+(b==null?"–":b+"%")+'</td><td style="min-width:140px"><div class="bar"><i style="width:'+(a||0)+'%"></i></div><div class="bar alt"><i style="width:'+(b||0)+'%"></i></div></td></tr>'; }).join("")+'</tbody></table></div></section>'+
+  '<section class="glass" style="padding:6px 0"><h2 style="margin:12px 18px">🗒️ All results</h2>'+(RESULTS.length?RESULTS.slice().sort(function(a,b){ return a.date<b.date?1:-1; }).map(function(r){ var p=Math.round(100*r.got/r.of); return '<div class="svrow"><div class="nrow"><span class="nt"><b>'+(p>=70?"🌟 ":p>=50?"✅ ":"📚 ")+esc(r.exam)+' · '+p+'%</b><small>'+r.got+' / '+r.of+(r.mod&&MOD[r.mod]?' · '+esc(MOD[r.mod].name):'')+(r.subj?' · '+SUBJ[r.subj].name:'')+(r.note?' · '+esc(r.note):'')+'</small></span><span class="hint">'+esc(r.date)+'</span></div>'+delBtn("result",r.id,' data-rerender="1"')+'</div>'; }).join("")+'<div class="row" style="padding:8px 18px 14px"><span class="spacer"></span>'+allBtn("result","Delete all results")+'</div>':'<p class="hint" style="margin:0 18px 16px">No results yet.</p>')+'</section>';
+  app.innerHTML=h;
+  $("#rs-add").addEventListener("click",function(){ var got=parseFloat($("#rs-got").value), of=parseFloat($("#rs-of").value); if(!(of>0)||isNaN(got)||got<0||got>of){ toast("Enter your marks and the total"); return; }
+    RESULTS.push({id:uid("r"),exam:$("#rs-exam").value,mod:$("#rs-m").value,subj:$("#rs-s").value,got:got,of:of,date:$("#rs-date").value||today(),note:$("#rs-note").value.trim()}); LS.set("results",RESULTS); bkp(); toast("🏆 Saved"); PLUS.results(); });
+};
+
+/* ---------- 👥 Study group: challenge friends on the same BCQs ---------- */
+var CHAL=null;
+function chalScoreboard(g){ var sc=(g.scores||[]).slice().sort(function(a,b){ return b.pct-a.pct||a.secs-b.secs; });
+  return sc.length?'<ol class="board">'+sc.map(function(x,i){ return '<li><span>'+(i===0?"🥇":i===1?"🥈":i===2?"🥉":"🎗️")+' <b>'+esc(x.name)+'</b></span><span>'+x.pct+'%'+(x.secs?' · '+fmtT(x.secs):'')+'</span></li>'; }).join("")+'</ol>':'<p class="hint">No scores yet: be the first.</p>'; }
+function chalExport(g){ downloadBlob(new Blob([JSON.stringify({app:"profrev",kind:"challenge",v:1,id:g.id,title:g.title,from:g.from,t:g.t,qs:g.qs,scores:g.scores||[]})],{type:"application/json"}),"ProfRev challenge - "+g.title.replace(/[\\/:*?"<>|]/g," ")+".profrev"); toast("📤 Challenge saved: send the file to your group (WhatsApp, email…)"); }
+function chalImport(o){ return kvGet("group:"+o.id).then(function(g){ if(!g){ g={id:o.id,title:o.title,from:o.from,t:o.t||Date.now(),qs:o.qs,scores:[]}; }
+  (o.scores||[]).forEach(function(s){ var i=g.scores.findIndex(function(x){ return x.name===s.name; }); if(i<0) g.scores.push(s); else if(s.pct>g.scores[i].pct) g.scores[i]=s; });
+  return kvSet("group:"+g.id,g).then(function(){ toast("👥 Challenge “"+g.title+"” added ("+g.scores.length+" scores)"); return g; }); }); }
+function chalStart(g){ CHAL={id:g.id,t0:Date.now()}; startQuiz(g.qs.map(function(q){ return Object.assign({},q); }),"👥 "+g.title,"exam"); }
+(function(){ var vr=viewQuizResults; viewQuizResults=function(){ vr.apply(this,arguments); if(!CHAL||!QZ||!QZ.done||QZ.chLogged) return; QZ.chLogged=1; var id=CHAL.id, secs=Math.round((Date.now()-CHAL.t0)/1000); CHAL=null;
+  kvGet("group:"+id).then(function(g){ if(!g) return; var me=S.name||"Me", pct=Math.round(100*QZ.correct/QZ.items.length); var i=g.scores.findIndex(function(x){ return x.name===me; }); var s={name:me,pct:pct,secs:secs,date:today()}; if(i<0) g.scores.push(s); else if(pct>=g.scores[i].pct) g.scores[i]=s;
+    return kvSet("group:"+id,g).then(function(){ bkp(); var box=document.createElement("section"); box.className="glass"; box.style.padding="18px"; box.innerHTML='<h2 style="margin:0 0 8px">👥 '+esc(g.title)+': leaderboard</h2>'+chalScoreboard(g)+'<div class="row"><button type="button" class="btn" id="ch-send">📤 Send my score to the group</button><button type="button" class="btn ghost" data-go="group">👥 Study group</button></div>';
+      app.insertBefore(box,app.children[1]||null); $("#ch-send").addEventListener("click",function(){ chalExport(g); }); }); }); }; })();
+PLUS.group=function(){
+  kvAll("group:").then(function(gs){ gs.sort(function(a,b){ return b.t-a.t; });
+    var h=head("👥","Study group","Challenge your friends: everyone takes the same timed BCQs and you see a leaderboard. Works without accounts: you just send each other a small file on WhatsApp or email.")+
+    '<section class="glass" style="padding:18px;display:grid;gap:12px"><h2 style="margin:0">🆕 Make a challenge</h2><div class="row">'+
+      '<select class="input" id="ch-m"><option value="">All modules</option>'+DATA.map(function(m){ return '<option value="'+m.id+'">'+m.icon+' '+esc(m.name)+'</option>'; }).join("")+'</select>'+
+      '<select class="input" id="ch-s"><option value="">All subjects</option>'+ORDER.map(function(s){ return '<option value="'+s+'">'+SUBJ[s].icon+' '+SUBJ[s].name+'</option>'; }).join("")+'</select>'+
+      '<select class="input" id="ch-d">'+["Mixed","Easy","Medium","Hard"].map(function(d){ return '<option>'+d+'</option>'; }).join("")+'</select>'+
+      '<select class="input" id="ch-n">'+[10,20,30,50].map(function(n){ return '<option'+(n===20?" selected":"")+'>'+n+'</option>'; }).join("")+'</select><span class="hint">BCQs</span></div>'+
+      '<div class="row"><input class="input" id="ch-t" placeholder="Name it, e.g. CVS pharma showdown" style="flex:1;min-width:200px"><button type="button" class="btn" id="ch-go">⚔️ Create & take it</button><label class="btn ghost" style="cursor:pointer">📥 Open a challenge file<input type="file" id="ch-in" accept=".profrev,.json,application/json" hidden></label></div>'+
+      '<p class="hint">How it works: make a challenge, take it, then tap 📤 Send. Friends open the file here, take it, and send theirs back; open their files to update the leaderboard.</p></section>'+
+    (gs.length?gs.map(function(g){ var mine=(g.scores||[]).filter(function(x){ return x.name===(S.name||"Me"); })[0];
+      return '<section class="glass" style="padding:18px;display:grid;gap:10px"><div class="row"><h2 style="margin:0">⚔️ '+esc(g.title)+'</h2><span class="spacer"></span><span class="hint">'+g.qs.length+' BCQs'+(g.from?' · from '+esc(g.from):'')+'</span></div>'+chalScoreboard(g)+
+        '<div class="row"><button type="button" class="btn sm" data-ch="take" data-id="'+g.id+'">'+(mine?"🔁 Try again":"▶ Take it")+'</button><button type="button" class="btn sm ghost" data-ch="send" data-id="'+g.id+'">📤 Send</button><span class="spacer"></span>'+delBtn("challenge",g.id,' data-rerender="1"')+'</div></section>'; }).join(""):'<section class="glass" style="padding:18px"><p class="hint" style="margin:0">No challenges yet. Make one above or open a file a friend sent you.</p></section>');
+    app.innerHTML=h;
+    $("#ch-go").addEventListener("click",function(){ var m=$("#ch-m").value, s=$("#ch-s").value, d=$("#ch-d").value, n=+$("#ch-n").value;
+      var pool=bankFor(m?[m]:null,s?[s]:null); if(d!=="Mixed") pool=pool.filter(function(q){ return q.difficulty===d; }); if(pool.length<5){ toast("Not enough BCQs for that choice"); return; }
+      var qs=shuffle(pool).slice(0,n).map(function(q){ var b=bankItem(q); return {id:b.id,bk:true,stem:b.stem,options:b.options,why:b.why,correct:b.correct,difficulty:b.difficulty,topic:b.topic,mod:b.mod,subj:b.subj}; });
+      var title=$("#ch-t").value.trim()||((m?MOD[m].name+" ":"")+(s?SUBJ[s].name+" ":"")+"challenge").replace(/^challenge$/,"Mixed challenge");
+      var g={id:uid("g"),title:title,from:S.name||"",t:Date.now(),qs:qs,scores:[]}; kvSet("group:"+g.id,g).then(function(){ bkp(); chalStart(g); }); });
+    $("#ch-in").addEventListener("change",function(){ var f=this.files[0]; this.value=""; if(!f) return; f.text().then(function(t){ var o=JSON.parse(t); if(o.kind!=="challenge") throw new Error("That isn't a ProfRev challenge file"); return chalImport(o); }).then(function(){ PLUS.group(); }).catch(function(e){ toast(String(e.message||e)); }); });
+    app.querySelectorAll("[data-ch]").forEach(function(b){ b.addEventListener("click",function(){ kvGet("group:"+b.dataset.id).then(function(g){ if(!g) return; if(b.dataset.ch==="take") chalStart(g); else chalExport(g); }); }); });
+  });
+};
+/* challenge files can also be opened from Sync & share → Import */
+(function(){ var di=deckImport; deckImport=function(o){ if(o&&o.kind==="challenge") return chalImport(o); return di(o); }; })();
+TOOLS.push({name:"open_results_or_group",description:"Open My results (real exam marks vs mock scores) or Study group (BCQ challenges with friends).",inputSchema:{type:"object",properties:{page:{type:"string",enum:["results","group","saved"]}},required:["page"]},execute:function(i){ go(i.page); return {opened:i.page}; }});
+
+/* ===== 🔑 One universal key box: paste any AI key, ProfRev works out which service it belongs to ===== */
+var XPROV={
+  openai:{name:"OpenAI (ChatGPT)",icon:"🟢",base:"https://api.openai.com/v1",pref:[/^gpt-5(\.\d+)?-mini$/,/^gpt-5(\.\d+)?$/,/^gpt-4\.1-mini$/,/^gpt-4o-mini$/,/^gpt-4o$/],fallback:"gpt-4o-mini"},
+  groq:{name:"Groq",icon:"⚡",base:"https://api.groq.com/openai/v1",pref:[/llama-4.*maverick/i,/llama-3\.3-70b/i,/gpt-oss-120b/i,/qwen/i,/llama/i],fallback:"llama-3.3-70b-versatile"},
+  xai:{name:"xAI (Grok)",icon:"✖️",base:"https://api.x.ai/v1",pref:[/^grok-4.*fast/i,/^grok-4/i,/^grok-3-mini/i,/^grok/i],fallback:"grok-3-mini"},
+  deepseek:{name:"DeepSeek",icon:"🐋",base:"https://api.deepseek.com/v1",pref:[/^deepseek-chat$/,/deepseek/],fallback:"deepseek-chat"},
+  mistral:{name:"Mistral",icon:"🌬️",base:"https://api.mistral.ai/v1",pref:[/^mistral-large-latest$/,/^mistral-medium-latest$/,/^mistral-small-latest$/,/mistral/],fallback:"mistral-small-latest"},
+  together:{name:"Together AI",icon:"🤝",base:"https://api.together.xyz/v1",pref:[/Llama-3\.3-70B-Instruct-Turbo/i,/Qwen.*Instruct/i,/Llama/i],fallback:"meta-llama/Llama-3.3-70B-Instruct-Turbo"},
+  cerebras:{name:"Cerebras",icon:"🧩",base:"https://api.cerebras.ai/v1",pref:[/gpt-oss-120b/i,/llama-3\.3-70b/i,/qwen/i,/llama/i],fallback:"llama-3.3-70b"},
+  huggingface:{name:"Hugging Face",icon:"🤗",base:"https://router.huggingface.co/v1",pref:[/Llama-3\.3-70B/i,/Qwen.*Instruct/i],fallback:"meta-llama/Llama-3.3-70B-Instruct"},
+  fireworks:{name:"Fireworks",icon:"🎆",base:"https://api.fireworks.ai/inference/v1",pref:[/llama-v3p3-70b/i,/qwen/i],fallback:"accounts/fireworks/models/llama-v3p3-70b-instruct"},
+  perplexity:{name:"Perplexity",icon:"🔎",base:"https://api.perplexity.ai",pref:[],fallback:"sonar",nomodels:1}
+};
+function keyGuess(k){ k=String(k||"").trim();
+  if(/^sk-or-/.test(k)) return ["openrouter"]; if(/^sk-ant-/.test(k)) return ["anthropic"]; if(/^(AIza|AQ\.)/.test(k)) return ["gemini"];
+  if(/^gsk_/.test(k)) return ["groq"]; if(/^xai-/.test(k)) return ["xai"]; if(/^pplx-/.test(k)) return ["perplexity"]; if(/^csk-/.test(k)) return ["cerebras"]; if(/^hf_/.test(k)) return ["huggingface"]; if(/^fw_/.test(k)) return ["fireworks"];
+  if(/^sk-(proj|svcacct|admin)-/.test(k)) return ["openai"]; if(/^sk-[a-f0-9]{32}$/.test(k)) return ["deepseek","openai"]; if(/^sk-/.test(k)) return ["openai","deepseek"];
+  if(/^[a-f0-9]{64}$/i.test(k)) return ["together","fireworks"]; if(/^[A-Za-z0-9]{32}$/.test(k)) return ["mistral","together"];
+  return ["openai","groq","mistral","together","deepseek","xai"]; }
+function xModels(p,k){ var P=XPROV[p]; if(P.nomodels) return Promise.resolve([P.fallback]);
+  return fetch(P.base+"/models",{headers:{authorization:"Bearer "+k}}).then(function(r){ if(r.status===401||r.status===403) throw Object.assign(new Error("rejected"),{bad:1}); if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(j){ return (j.data||j.models||j||[]).map(function(m){ return m.id||m.name||m; }).filter(function(x){ return typeof x==="string"; }); }); }
+function xPick(p,ids){ var P=XPROV[p]; for(var i=0;i<P.pref.length;i++){ var hit=ids.filter(function(id){ return P.pref[i].test(id); }).sort()[0]; if(hit) return hit; } return ids.indexOf(P.fallback)>=0||!ids.length?P.fallback:ids[0]; }
+function maskKey(k){ k=String(k||""); return k.length>12?k.slice(0,6)+"…"+k.slice(-4):"••••"; }
+/* add one key: detect → verify → save */
+function addAnyKey(k){ k=String(k||"").trim().replace(/^["'`]|["'`]$/g,""); if(k.length<12) return Promise.resolve({ok:false,msg:"That doesn't look like an API key"});
+  var g=keyGuess(k);
+  if(g[0]==="gemini"){ S.gemKey=k; if(!isOR()) S.provider="gemini"; saveAll(); aiInit(); return Promise.resolve({ok:true,msg:"🆓 Gemini key added"}); }
+  if(g[0]==="openrouter"){ S.apiKey=k; if(!S.gemKey) S.provider="openrouter"; saveAll(); aiInit(); return Promise.resolve({ok:true,msg:"🧠 OpenRouter key added (Claude and every other model)"}); }
+  if(g[0]==="anthropic"){ if(!isOR()){ S.apiKey=k; saveAll(); aiInit(); return Promise.resolve({ok:true,msg:"🧠 Anthropic (Claude) key added"}); } S.antKey=k; saveAll(); aiInit(); return Promise.resolve({ok:true,msg:"🧠 Anthropic (Claude) key added as a backup"}); }
+  var i=0, lastErr=null;
+  function tryNext(){ if(i>=g.length){ var p0=g[0]; return saveX(p0,k,XPROV[p0].fallback,true).then(function(){ return {ok:true,msg:XPROV[p0].icon+" Saved as a "+XPROV[p0].name+" key (couldn't check it online right now"+(lastErr?": "+lastErr:"")+")"}; }); }
+    var p=g[i++]; return xModels(p,k).then(function(ids){ return saveX(p,k,xPick(p,ids)).then(function(x){ return {ok:true,msg:XPROV[p].icon+" "+XPROV[p].name+" key added ✓ (model "+x.model+")"}; }); })
+      .catch(function(e){ if(e.bad&&g.length===1) return {ok:false,msg:XPROV[p].name+" rejected that key. Check you copied all of it."}; lastErr=e.message; return tryNext(); }); }
+  return tryNext(); }
+function saveX(p,k,model,unverified){ S.xkeys=(S.xkeys||[]).filter(function(x){ return x.key!==k; }); var x={prov:p,key:k,model:model,unverified:!!unverified}; S.xkeys.push(x); saveAll(); aiInit(); return Promise.resolve(x); }
+/* OpenAI-compatible call for every extra provider */
+function xFetch(x,body,signal){ var P=XPROV[x.prov]||{base:x.base}; var b=JSON.parse(JSON.stringify(body)); b.model=x.model; delete b.reasoning; delete b.provider; delete b.transforms;
+  if(x.prov==="perplexity"||x.prov==="deepseek"&&/reasoner/.test(x.model)) delete b.tools;
+  if(b.max_tokens>16000&&x.prov!=="openai") b.max_tokens=16000;
+  if(x.prov==="openai"&&/^gpt-5|^o\d/.test(x.model)){ b.max_completion_tokens=b.max_tokens; delete b.max_tokens; }
+  return fetch(P.base+"/chat/completions",{method:"POST",signal:signal,headers:Object.assign({"content-type":"application/json",authorization:"Bearer "+x.key},x.prov==="anthropic"?{"x-api-key":x.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"}:{}),body:JSON.stringify(b)})
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ if(!r.ok||j.error){ var e=new Error(((j.error&&(j.error.message||j.error))||("HTTP "+r.status))+""); e.status=r.status; throw e; } return j; }); }); }
+function antCompat(body,signal){ return xFetch({prov:"anthropic",key:S.antKey,model:"claude-sonnet-5-5"},body,signal); }
+XPROV.anthropic={name:"Anthropic",icon:"🧠",base:"https://api.anthropic.com/v1",pref:[],fallback:"claude-sonnet-5-5",nomodels:1};
+/* everything joins the silent fallback chain */
+(function(){ var lf=llmFetch; llmFetch=function(body,signal){
+  var xs=(S.xkeys||[]).slice(); if(S.antKey) xs.push({prov:"anthropic",key:S.antKey,model:"claude-sonnet-5-5"});
+  var core=!!(S.gemKey||S.apiKey);
+  function viaX(i,errs){ if(i>=xs.length){ var e=new Error(errs.join(" | ")||"No AI key works right now"); e.shown=true; try{ var el=$("#llm-err"); if(el&&errs.length){ el.hidden=false; var sp=el.querySelector("span")||el; if(sp.textContent.indexOf(XPROV[xs[0].prov].name)<0) sp.insertAdjacentText("beforeend"," "+errs.join(" | ")); } }catch(x){} throw e; }
+    var x=xs[i]; return xFetch(x,body,signal).then(function(j){ try{ var el=$("#llm-err"); if(el) el.hidden=true; }catch(e){} return j; }).catch(function(e){ if(e&&e.name==="AbortError") throw e; return viaX(i+1,errs.concat([(XPROV[x.prov]||{name:x.prov}).name+": "+String(e.message||e).slice(0,140)])); }); }
+  if(!core) return xs.length?viaX(0,[]):lf(body,signal);
+  return lf(body,signal).catch(function(e){ if(!xs.length||(e&&e.name==="AbortError")) throw e; return viaX(0,[]); }); }; })();
+anyKey=function(){ return !!(S.apiKey||S.gemKey||S.antKey||(S.xkeys||[]).length); };
+(function(){ var as=aiStatusText; aiStatusText=function(){ var t=as(); var n=(S.xkeys||[]).length+(S.antKey?1:0); if(AI.mode!=="key") return t; if(!S.gemKey&&!S.apiKey&&n){ var x=(S.xkeys||[])[0]; return x?"Using your "+XPROV[x.prov].name+" key ✓ ("+x.model+")":"Using your Anthropic key ✓"; } return n?t+" + "+n+" backup key"+(n>1?"s":""):t; }; })();
+/* the box itself, at the top of Settings → AI tutor */
+function keyListHTML(){ var rows=[];
+  if(S.gemKey) rows.push(['🆓','Gemini',maskKey(S.gemKey),S.gemModel,'gem']);
+  if(S.apiKey) rows.push(['🧠',isOR()?'OpenRouter':'Anthropic',maskKey(S.apiKey),isOR()?S.orModel:'Claude','or']);
+  if(S.antKey) rows.push(['🧠','Anthropic (backup)',maskKey(S.antKey),'Claude','ant']);
+  (S.xkeys||[]).forEach(function(x,i){ var P=XPROV[x.prov]; rows.push([P.icon,P.name,maskKey(x.key),x.model+(x.unverified?' (unchecked)':''),'x'+i]); });
+  return rows.length?rows.map(function(r,i){ return '<div class="svrow keyrow"><div class="nrow"><span class="nt"><b>'+r[0]+' '+esc(r[1])+(i===0?' <span class="tag">main</span>':'')+'</b><small>'+esc(r[2])+' · '+esc(r[3])+'</small></span></div><button type="button" class="chip delbtn" data-kdel="'+r[4]+'" aria-label="Remove key">🗑️</button></div>'; }).join(""):'<p class="hint" style="margin:0">No keys yet. Paste one above: a free Gemini key from aistudio.google.com is the easiest start.</p>'; }
+(function(){ var vs=viewSettings; viewSettings=function(){ vs.apply(this,arguments); var st=$("#ai-status-txt"); if(!st) return; var sec=st.closest("section"), para=st.closest("p");
+  var box=document.createElement("div"); box.className="keybox"; box.innerHTML='<label for="anykey"><b>🔑 Paste any AI key</b></label><div class="row"><input class="input" id="anykey" type="password" autocomplete="off" spellcheck="false" placeholder="Gemini, OpenRouter, Claude, ChatGPT, Groq, Grok, DeepSeek, Mistral… any key" style="flex:1;min-width:220px"><button type="button" class="btn" id="anykey-go">✨ Add</button></div>'+
+    '<p class="hint" style="margin:0">ProfRev works out which service the key is for, checks it, picks the best model, and adds it. Add as many as you like: if one runs out, Rev silently switches to the next. Keys stay on this device and go only to their own service.</p><div id="keylist" style="display:grid;gap:6px">'+keyListHTML()+'</div>';
+  para.insertAdjacentElement("afterend",box);
+  var adv=document.createElement("details"); adv.className="keyadv"; adv.innerHTML='<summary>⚙️ Advanced: choose the main AI and models</summary>'; var n=box.nextSibling; while(n){ var nx=n.nextSibling; adv.appendChild(n); n=nx; } sec.appendChild(adv);
+  var inp=$("#anykey"), go=$("#anykey-go");
+  function add(){ var ks=inp.value.split(/[\s,;]+/).filter(function(x){ return x.length>=12; }); if(!ks.length){ toast("Paste a key first"); return; } go.disabled=true; go.textContent="Checking…";
+    ks.reduce(function(p,k){ return p.then(function(out){ return addAnyKey(k).then(function(r){ out.push(r); return out; }); }); },Promise.resolve([])).then(function(rs){ go.disabled=false; go.textContent="✨ Add"; inp.value=""; rs.forEach(function(r){ toast(r.msg); }); $("#keylist").innerHTML=keyListHTML(); st.textContent=aiStatusText(); try{ aiRefresh(); }catch(e){} }); }
+  go.addEventListener("click",add); inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); add(); } }); inp.addEventListener("paste",function(){ setTimeout(add,60); });
+  box.addEventListener("click",function(e){ var b=e.target.closest("[data-kdel]"); if(!b) return; if(!armDel(b,"Remove?")) return; var k=b.dataset.kdel;
+    if(k==="gem") S.gemKey=""; else if(k==="or") S.apiKey=""; else if(k==="ant") S.antKey=""; else S.xkeys.splice(+k.slice(1),1); saveAll(); aiInit(); toast("🗑️ Key removed"); render(); }); }; })();
+/* the "Rev needs a key" note points at the box */
+(function(){ var dc=drawChat; drawChat=function(){ dc(); var n=document.querySelector("#ai-body .ai-note"); if(n&&AI.mode==="none") n.innerHTML='✨ Rev needs an AI key to chat. <a href="#settings" data-go="settings">Paste any key in Settings</a> (Gemini is free; OpenRouter, Claude, ChatGPT, Groq, DeepSeek, Mistral and more all work).'; }; })();
+
+/* ===== 🎨 Live diagrams: Rev draws flowcharts, mechanisms and sketches stroke by stroke while you watch ===== */
+var DIAG_RULE="\nPICK THE RIGHT TOOL: use a Markdown table for comparisons, classifications and differences; a numbered list for steps or doses; **bold** for key terms; and a LIVE DIAGRAM when a picture teaches better (mechanism, pathway, flowchart, cycle, classification tree, timeline, graph or curve, anatomy, injury or wound sketch, specimen outline). Never draw ASCII art.\nLIVE DIAGRAMS: write a fenced code block marked diagram containing only JSON; ProfRev animates it stroke by stroke so the student watches you draw. Example:\n```diagram\n{\"title\":\"Organophosphate poisoning\",\"w\":900,\"h\":560,\"items\":[\n{\"t\":\"box\",\"id\":\"a\",\"x\":40,\"y\":40,\"w\":200,\"h\":70,\"text\":\"Organophosphate\",\"color\":\"purple\"},\n{\"t\":\"box\",\"id\":\"b\",\"x\":330,\"y\":40,\"w\":230,\"h\":70,\"text\":\"Inhibits acetylcholinesterase\",\"color\":\"red\"},\n{\"t\":\"arrow\",\"from\":\"a\",\"to\":\"b\",\"text\":\"binds\"},\n{\"t\":\"circle\",\"id\":\"c\",\"x\":445,\"y\":270,\"r\":65,\"text\":\"ACh builds up\",\"color\":\"orange\"},\n{\"t\":\"arrow\",\"from\":\"b\",\"to\":\"c\"},\n{\"t\":\"curve\",\"pts\":[[600,420],[680,380],[760,450],[840,400]],\"color\":\"teal\"},\n{\"t\":\"text\",\"x\":40,\"y\":520,\"text\":\"Remember: SLUDGE + miosis\",\"hand\":true,\"color\":\"green\"}]}\n```\nShapes (x,y are top-left unless noted): box (x,y,w,h,text), circle (x,y = centre, r or rx+ry for an oval, text), diamond (x,y,w,h,text: decisions), polygon (pts:[[x,y],...], closed shape, optional text at its centre), arrow (from,to = an id or [x,y]; optional text, dashed:true, curve:<bend in px, e.g. 60 or -60>, width:5 with head:\"block\" for bold flow arrows such as blood flow), line (pts, straight segments), curve (pts: a smooth curve through the points; closed:true to make a blob, an organ outline or a cell), path (d: any SVG path with C/Q/A curves for complex outlines), text (x,y,text, size, bold, anchor start/middle/end; add to:[x,y] to make it a callout label with a pointer line to that exact spot, the way textbook diagrams label parts), highlight (x,y,w,h: translucent marker band), axes (x,y,w,h,xlabel,ylabel: graph axes for a curve such as an oxygen-dissociation or dose-response curve). Any shape can have fill:true. Colours: red, orange, yellow, green, teal, blue, purple, pink, grey, black, brown, maroon, beige, skin, cream, navy, cyan, lime, gold, or any #hex. USE THE RIGHT COLOURS (standard medical and textbook conventions): arteries and oxygenated blood red; veins and deoxygenated blood blue; mixed or pulmonary circulation purple; nerves yellow; lymphatics green; bile and biliary tree green; muscle maroon; bone, cartilage and tendon cream or beige; fat yellow; skin skin; Gram-positive organisms purple; Gram-negative pink; acid-fast red; fungi and parasites brown; inflammation, haemorrhage, injury and bruises red or purple (old bruises green or yellow); necrosis and dead tissue grey or black; poisons, toxins and danger red or orange; drugs, antidotes and treatment green; inhibition and blocks red with dashed:true; stimulation and activation green; normal or physiological green or blue, pathological red; decisions blue; legal points navy; and keep one colour per meaning within a diagram, using a legend (small boxes with text) when colours carry meaning. Items are drawn in the order you list them, so order them the way you would teach (outline first, then details, then labels). For an anatomical or notebook-style drawing set \"style\":\"sketch\" (pencil look, handwritten labels) and optionally \"paper\":true (ruled notebook page); build organs from curve/path outlines (closed:true with fill:true and the right colour), then vessels and chambers, then flow arrows, then callout labels around the outside. Canvas up to 1400×1000; anything outside is auto-fitted, but keep 20px margins and avoid overlaps. Up to 120 items, so large detailed diagrams are fine. PLAN BEFORE DRAWING: decide the layout (left-to-right flow, top-down tree, cycle around a centre, central organ with labels around it), give every shape enough room (boxes at least 140×56, 40px gaps), keep arrows from crossing text, and make anatomy realistic with smooth curve or path outlines of 10–30 points rather than boxes. Any subject works: pathways, cycles, life cycles of parasites, graphs, ECG traces (line/curve), wound shapes, skull or bone outlines, lab apparatus, family trees, maps of transmission. Keep box text short (use \\n for a new line). Outside sketch style, use \"hand\":true only occasionally, for one note or label that should look handwritten. Put your explanation in normal text around the block.";
+var DCOL={red:"#e5484d",orange:"#f76b15",yellow:"#e2a336",green:"#30a46c",teal:"#12a594",blue:"#3e63dd",purple:"#8e4ec6",pink:"#d6409f",grey:"#8b8d98",gray:"#8b8d98",brown:"#8d5a3b",maroon:"#9b2335",beige:"#d9c3a0",skin:"#e8b48f",cream:"#efe6d2",navy:"#2c3e91",cyan:"#05a2c2",lime:"#7cb518",gold:"#c99a2e",black:"var(--ink)"};
+var HANDFONT="'Segoe Print','Bradley Hand','Chalkboard SE','Comic Sans MS','Marker Felt',cursive";
+function dcol(c){ return DCOL[String(c||"").toLowerCase()]||(/^#[0-9a-f]{3,8}$/i.test(c||"")?c:"#7c5cff"); }
+/* pull ```diagram blocks out before markdown, put placeholders back after */
+function diagSplit(text){ var specs=[]; text=String(text||"").replace(/```\s*diagram\s*\n([\s\S]*?)```/gi,function(a,j){ specs.push(j.trim()); return "\n\n@@DIAG"+(specs.length-1)+"@@\n\n"; }); text=text.replace(/```\s*diagram\s*\n[\s\S]*$/i,"\n\n✏️ Rev is drawing a diagram…\n"); return {text:text,specs:specs}; }
+function diagJoin(html,specs){ return specs.length?html.replace(/(?:<p>\s*)?@@DIAG(\d+)@@(?:\s*<\/p>)?/g,function(a,i){ return '<div class="livediag" data-spec="'+encodeURIComponent(specs[+i]||"")+'"></div>'; }):html; }
+(function(){ var m0=md; md=function(t){ var s=diagSplit(t); return diagJoin(m0(s.text),s.specs); };
+  var f0=mdFull; mdFull=function(t){ var s=diagSplit(t); return diagJoin(f0(s.text),s.specs); }; })();
+
+function svgEl(n,a){ var e=document.createElementNS("http://www.w3.org/2000/svg",n); for(var k in a) if(a[k]!=null) e.setAttribute(k,a[k]); return e; }
+function wrapText(t,max){ var out=[]; String(t||"").split(/\n|\\n/).forEach(function(par){ var line=""; par.split(/\s+/).forEach(function(w){ if(!w) return; if(line&&(line+" "+w).length>max){ out.push(line); line=w; } else line=line?line+" "+w:w; }); out.push(line); }); return out.filter(function(x,i){ return x||i<out.length-1; }); }
+function jitter(seed){ var s=seed||1; return function(){ s=(s*9301+49297)%233280; return s/233280-0.5; }; }
+function rectPath(x,y,w,h,hand,rnd){ if(!hand){ var r=Math.min(14,h/4); return "M"+(x+r)+","+y+" H"+(x+w-r)+" Q"+(x+w)+","+y+" "+(x+w)+","+(y+r)+" V"+(y+h-r)+" Q"+(x+w)+","+(y+h)+" "+(x+w-r)+","+(y+h)+" H"+(x+r)+" Q"+x+","+(y+h)+" "+x+","+(y+h-r)+" V"+(y+r)+" Q"+x+","+y+" "+(x+r)+","+y+" Z"; }
+  var j=function(){ return rnd()*4; }; return "M"+(x+j())+","+(y+j())+" L"+(x+w+j())+","+(y+j())+" L"+(x+w+j())+","+(y+h+j())+" L"+(x+j())+","+(y+h+j())+" Z"; }
+function edgePoint(it,tx,ty){ if(!it) return null; var cx,cy; if(it.pts){ var c0=centroid(it.pts), r0=0; it.pts.forEach(function(q){ r0=Math.max(r0,Math.hypot(q[0]-c0[0],q[1]-c0[1])); }); var dx0=tx-c0[0], dy0=ty-c0[1], d0=Math.hypot(dx0,dy0)||1; return [c0[0]+dx0/d0*(r0*0.8+4),c0[1]+dy0/d0*(r0*0.8+4)]; } if(it.t==="text") return [it.x,it.y];
+  if(it.t==="circle"){ cx=it.x; cy=it.y; var dx=tx-cx, dy=ty-cy, ang=Math.atan2(dy,dx), rx=(it.rx||it.r)+4, ry=(it.ry||it.r)+4; var rr=rx*ry/Math.sqrt(Math.pow(ry*Math.cos(ang),2)+Math.pow(rx*Math.sin(ang),2)); return [cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr]; }
+  cx=it.x+it.w/2; cy=it.y+it.h/2; var ddx=tx-cx, ddy=ty-cy; if(!ddx&&!ddy) return [cx,cy]; var sx=(it.w/2+4)/Math.abs(ddx||1e-9), sy=(it.h/2+4)/Math.abs(ddy||1e-9), s=Math.min(sx,sy); return [cx+ddx*s,cy+ddy*s]; }
+function smoothPath(pts,closed){ pts=pts.map(function(q){ return [+q[0],+q[1]]; }); var n=pts.length; if(n<3) return "M"+pts.map(function(q){ return q.join(","); }).join(" L");
+  var P=function(i){ return closed?pts[(i+n)%n]:pts[Math.max(0,Math.min(n-1,i))]; }, d="M"+pts[0].join(","), last=closed?n:n-1;
+  for(var i=0;i<last;i++){ var p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2); d+=" C"+(p1[0]+(p2[0]-p0[0])/6)+","+(p1[1]+(p2[1]-p0[1])/6)+" "+(p2[0]-(p3[0]-p1[0])/6)+","+(p2[1]-(p3[1]-p1[1])/6)+" "+p2[0]+","+p2[1]; } return d+(closed?" Z":""); }
+function centroid(pts){ var x=0,y=0; pts.forEach(function(q){ x+=+q[0]; y+=+q[1]; }); return [x/pts.length,y/pts.length]; }
+function centre(it){ if(it.pts) return centroid(it.pts); return it.t==="circle"?[it.x,it.y]:[it.x+(it.w||0)/2,it.y+(it.h||0)/2]; }
+
+function buildDiagram(holder){
+  var raw=decodeURIComponent(holder.dataset.spec||""), spec=holder._spec;
+  if(!spec){ try{ spec=JSON.parse(raw); }catch(e){ try{ spec=JSON.parse(raw.replace(/,\s*([}\]])/g,"$1").replace(/[“”]/g,'"').replace(/\/\/[^\n]*/g,"")); }catch(e2){ holder.innerHTML='<pre class="diagraw">'+esc(raw)+'</pre>'; return; } } }
+  var imgIt=(spec.items||[]).filter(function(it){ return it&&it.t==="image"; })[0];
+  if(imgIt&&!spec._imgReady){ holder.innerHTML='<div class="gi-ph">🖼️ Loading the picture…</div>';
+    refSrc(imgIt.src).then(function(src){ if(!src){ holder.innerHTML='<div class="gi-ph">The picture for this diagram isn\'t on this device any more.</div>'; return; } var im=new Image(); im.onload=function(){ var nw=im.naturalWidth||1000, nh=im.naturalHeight||1000, H=Math.round(1000*nh/nw), k=H/1000;
+      (spec.items||[]).forEach(function(it){ if(it===imgIt) return; if(it.text&&!it._sz){ it.size=Math.round((+it.size||(it.t==="text"?18:15))*1.5); it._sz=1; } if(it.y!=null) it.y=+it.y*k; if(it.h!=null) it.h=+it.h*k; if(it.ry!=null) it.ry=+it.ry*k; if(it.pts) it.pts=it.pts.map(function(q){ return [+q[0],+q[1]*k]; }); ["from","to"].forEach(function(z){ if(Array.isArray(it[z])) it[z]=[+it[z][0],+it[z][1]*k]; }); });
+      imgIt.x=0; imgIt.y=0; imgIt.w=1000; imgIt.h=H; imgIt._src=src; spec.w=1000; spec.h=H; spec._imgReady=1; holder._spec=spec; buildDiagram(holder); }; im.onerror=function(){ holder.innerHTML='<div class="gi-ph">Couldn\'t open the picture.</div>'; }; im.src=src; }); return; }
+  var sketch=spec.style==="sketch"||!!spec.paper, W=+spec.w||800, H=+spec.h||480, items=(Array.isArray(spec)?spec:(spec.items||spec.shapes||[])).slice(0,120), byId={}, rnd=jitter(raw.length);
+  items.forEach(function(it){ if(it.id) byId[it.id]=it; ["x","y","w","h","r"].forEach(function(k){ if(it[k]!=null) it[k]=+it[k]; }); if(it.t==="box"||it.t==="diamond"){ it.w=it.w||180; it.h=it.h||60; } if(it.t==="circle") it.r=it.r||it.rx||50; if(it.t==="rect"||it.t==="rectangle") it.t="box"; if(it.t==="ellipse"||it.t==="oval"){ it.t="circle"; it.r=it.r||it.rx||50; } if(it.t==="label"||it.t==="callout") it.t="text"; if(it.t==="spline"||it.t==="bezier") it.t="curve"; if(it.t==="arrow"&&it.pts&&!it.from){ it.from=it.pts[0]; it.to=it.pts[it.pts.length-1]; } });
+  var bx=[1e9,1e9,-1e9,-1e9]; function ext(x,y){ if(isFinite(x)&&isFinite(y)){ bx[0]=Math.min(bx[0],x); bx[1]=Math.min(bx[1],y); bx[2]=Math.max(bx[2],x); bx[3]=Math.max(bx[3],y); } }
+  items.forEach(function(it){ if(it.t==="circle"){ ext(it.x-(it.rx||it.r),it.y-(it.ry||it.r)); ext(it.x+(it.rx||it.r),it.y+(it.ry||it.r)); } else if(it.t==="image"){ ext(0,0); ext(W,H); } else if(it.w!=null&&it.x!=null){ ext(it.x,it.y); ext(it.x+it.w,it.y+(it.h||24)); } else if(it.pts) it.pts.forEach(function(q){ ext(+q[0],+q[1]); }); else if(it.x!=null){ var tw=String(it.text||"").split(/\n|\\n/).reduce(function(m,l){ return Math.max(m,l.length); },0)*(+it.size||18)*0.56, an=it.anchor||(it.to&&+it.to[0]<+it.x?"end":"start"), nl=String(it.text||"").split(/\n|\\n/).length*(+it.size||18)*0.7;
+      if(an==="end"){ ext(it.x-tw,it.y-nl); ext(it.x,it.y+nl); } else if(an==="middle"){ ext(it.x-tw/2,it.y-nl); ext(it.x+tw/2,it.y+nl); } else { ext(it.x,it.y-nl); ext(it.x+tw,it.y+nl); } if(it.to) ext(+it.to[0],+it.to[1]); } ["from","to"].forEach(function(k){ if(Array.isArray(it[k])) ext(+it[k][0],+it[k][1]); }); });
+  if(bx[0]<1e9){ var vx=Math.min(0,bx[0]-20), vy=Math.min(0,bx[1]-20), vw=Math.max(W,bx[2]+20)-vx, vh=Math.max(H,bx[3]+20)-vy; spec._vb=vx+" "+vy+" "+vw+" "+vh; }
+  holder.innerHTML='<div class="ld-head"><b>🎨 '+esc(spec.title||"Diagram")+'</b><span class="spacer"></span><button type="button" class="chip" data-ld="play">▶ Replay</button><button type="button" class="chip" data-ld="speed">1×</button><button type="button" class="chip" data-ld="skip">⏭ Show all</button></div>';
+  var svg=svgEl("svg",{viewBox:spec._vb||("0 0 "+W+" "+H),class:"ld-svg",role:"img","aria-label":spec.title||"Diagram"}); holder.appendChild(svg);
+  var defs=svgEl("defs",{}); svg.appendChild(defs);
+  if(sketch){ var vbf=(spec._vb||("0 0 "+W+" "+H)).split(" ").map(Number), fl=svgEl("filter",{id:"ldpencil",filterUnits:"userSpaceOnUse",x:vbf[0]-50,y:vbf[1]-50,width:vbf[2]+100,height:vbf[3]+100}); fl.appendChild(svgEl("feTurbulence",{type:"fractalNoise",baseFrequency:"0.9",numOctaves:"2",result:"n"})); fl.appendChild(svgEl("feDisplacementMap",{in:"SourceGraphic",in2:"n",scale:"1.6"})); defs.appendChild(fl); }
+  if(spec.paper){ var vb=(spec._vb||("0 0 "+W+" "+H)).split(" ").map(Number), pg=svgEl("g",{class:"ld-paper"}); pg.appendChild(svgEl("rect",{x:vb[0],y:vb[1],width:vb[2],height:vb[3],fill:"#fbf7ec",rx:14})); for(var ly=vb[1]+34;ly<vb[1]+vb[3];ly+=30) pg.appendChild(svgEl("line",{x1:vb[0],x2:vb[0]+vb[2],y1:ly,y2:ly,stroke:"#9fc3e6","stroke-width":0.8,opacity:.55})); pg.appendChild(svgEl("line",{x1:vb[0]+46,x2:vb[0]+46,y1:vb[1],y2:vb[1]+vb[3],stroke:"#e58b8b","stroke-width":1.2,opacity:.7})); svg.appendChild(pg); holder.classList.add("ld-onpaper"); }
+  var layer=svgEl("g",{class:sketch?"ld-sketch":""}); svg.appendChild(layer);
+  var pen=svgEl("g",{class:"ld-pen",opacity:0}); pen.appendChild(svgEl("circle",{r:6,fill:"var(--accent,#7c5cff)"})); var pt=svgEl("text",{x:4,y:-6,"font-size":22}); pt.textContent="✏️"; pen.appendChild(pt); svg.appendChild(pen);
+  var speed=1, run=0, steps=[];
+  function txt(x,y,text,o){ var size=+o.size||(o.inBox?15:17), max=o.maxc||60, lines=wrapText(text,max), g=svgEl("g",{}), lh=size*1.25, y0=y-(lines.length-1)*lh/2;
+    lines.forEach(function(l,i){ var te=svgEl("text",{x:x,y:y0+i*lh,"text-anchor":o.anchor||"middle","dominant-baseline":"middle","font-size":size,"font-weight":o.bold?700:o.inBox?600:500,fill:o.color||"var(--ink)","font-family":o.hand?HANDFONT:"var(--body)"}); te.dataset.full=l; te.textContent=""; g.appendChild(te); }); return g; }
+  function strokeStep(el,colr){ return {kind:"stroke",el:el,c:colr}; }
+  items.forEach(function(it){ var c=dcol(it.color), hand=!!it.hand||!!spec.hand;
+    if(it.t==="box"||it.t==="diamond"){ var d=it.t==="box"?rectPath(it.x,it.y,it.w,it.h,hand,rnd):"M"+(it.x+it.w/2)+","+it.y+" L"+(it.x+it.w)+","+(it.y+it.h/2)+" L"+(it.x+it.w/2)+","+(it.y+it.h)+" L"+it.x+","+(it.y+it.h/2)+" Z";
+      var p=svgEl("path",{d:d,fill:c,"fill-opacity":0,stroke:c,"stroke-width":hand?2.6:2.4,"stroke-linejoin":"round"}); steps.push({kind:"stroke",el:p,fill:0.13});
+      steps.push({kind:"text",el:txt(it.x+it.w/2,it.y+it.h/2,it.text,{inBox:1,size:it.size,hand:hand,bold:it.bold,maxc:Math.max(6,Math.floor((it.w-(it.t==="diamond"?it.w*0.35:16))/((+it.size||15)*0.55)))})}); }
+    else if(it.t==="circle"){ var e=svgEl("ellipse",{cx:it.x,cy:it.y,rx:it.rx||it.r,ry:it.ry||it.r,fill:c,"fill-opacity":0,stroke:c,"stroke-width":2.4}); steps.push({kind:"stroke",el:e,fill:0.13});
+      steps.push({kind:"text",el:txt(it.x,it.y,it.text,{inBox:1,size:it.size,hand:hand,bold:it.bold,maxc:Math.max(5,Math.floor((it.r*1.6)/((+it.size||15)*0.55)))})}); }
+    else if(it.t==="arrow"){ var A=typeof it.from==="string"?byId[it.from]:null, B=typeof it.to==="string"?byId[it.to]:null;
+      var a=A?centre(A):(it.from||[0,0]), b=B?centre(B):(it.to||[0,0]); var a2=A?edgePoint(A,b[0],b[1]):a, b2=B?edgePoint(B,a[0],a[1]):b; if(!a2||!b2) return;
+      var mx=(a2[0]+b2[0])/2, my=(a2[1]+b2[1])/2, dd=it.curve?"M"+a2+" Q"+(mx+(+it.curve||0))+","+(my-(+it.curve||0))+" "+b2:"M"+a2+" L"+b2;
+      steps.push({kind:"stroke",el:svgEl("path",{d:dd,fill:"none",stroke:it.color?c:"var(--muted)","stroke-width":+it.width||2.4,"stroke-linecap":"round","stroke-dasharray":it.dashed?"7 6":null}),dashed:!!it.dashed});
+      var ang=Math.atan2(b2[1]-(it.curve?my-(+it.curve||0):a2[1]),b2[0]-(it.curve?mx+(+it.curve||0):a2[0])), L=12, h1=[b2[0]-L*Math.cos(ang-0.45),b2[1]-L*Math.sin(ang-0.45)], h2=[b2[0]-L*Math.cos(ang+0.45),b2[1]-L*Math.sin(ang+0.45)];
+      var blk=it.head==="block"||+it.width>=4; if(blk){ L=8+(+it.width||5)*2; h1=[b2[0]-L*Math.cos(ang-0.5),b2[1]-L*Math.sin(ang-0.5)]; h2=[b2[0]-L*Math.cos(ang+0.5),b2[1]-L*Math.sin(ang+0.5)]; }
+      steps.push({kind:"stroke",el:svgEl("path",{d:"M"+h1+" L"+b2+" L"+h2+(blk?" Z":""),fill:blk?(it.color?c:"var(--muted)"):"none","fill-opacity":blk?0:null,stroke:it.color?c:"var(--muted)","stroke-width":2.4,"stroke-linecap":"round","stroke-linejoin":"round"}),fast:1,fill:blk?1:0});
+      if(it.text) steps.push({kind:"text",el:txt(mx,my-12,it.text,{size:it.size||13,hand:hand,color:it.color?c:"var(--muted)",maxc:24,bgpad:1})}); }
+    else if(it.t==="line"&&it.pts&&it.pts.length>1){ steps.push({kind:"stroke",el:svgEl("path",{d:"M"+it.pts.map(function(q){ return q.join(","); }).join(" L"),fill:"none",stroke:c,"stroke-width":+it.width||2.4,"stroke-linecap":"round","stroke-linejoin":"round","stroke-dasharray":it.dashed?"7 6":null}),dashed:!!it.dashed}); }
+    else if(it.t==="curve"&&it.pts&&it.pts.length>1){ steps.push({kind:"stroke",el:svgEl("path",{d:smoothPath(it.pts,!!it.closed),fill:it.fill||it.closed?c:"none","fill-opacity":0,stroke:c,"stroke-width":+it.width||2.6,"stroke-linecap":"round","stroke-linejoin":"round","stroke-dasharray":it.dashed?"7 6":null}),fill:(it.fill||it.closed)?(it.fill===false?0:0.12):0,dashed:!!it.dashed}); if(it.text){ var cc=centroid(it.pts); steps.push({kind:"text",el:txt(cc[0],cc[1],it.text,{inBox:1,size:it.size,hand:hand,maxc:18})}); } }
+    else if(it.t==="polygon"&&it.pts&&it.pts.length>2){ steps.push({kind:"stroke",el:svgEl("path",{d:"M"+it.pts.map(function(q){ return q.join(","); }).join(" L")+" Z",fill:c,"fill-opacity":0,stroke:c,"stroke-width":2.4,"stroke-linejoin":"round"}),fill:it.fill===false?0:0.12}); if(it.text){ var pc=centroid(it.pts); steps.push({kind:"text",el:txt(pc[0],pc[1],it.text,{inBox:1,size:it.size,hand:hand,maxc:18})}); } }
+    else if(it.t==="axes"){ var ax=+it.x||60, ay=+it.y||40, aw=+it.w||400, ah=+it.h||260;
+      steps.push({kind:"stroke",el:svgEl("path",{d:"M"+ax+","+ay+" L"+ax+","+(ay+ah)+" L"+(ax+aw)+","+(ay+ah),fill:"none",stroke:"var(--ink)","stroke-width":2.2,"stroke-linecap":"round"})});
+      steps.push({kind:"stroke",el:svgEl("path",{d:"M"+(ax-6)+","+(ay+10)+" L"+ax+","+ay+" L"+(ax+6)+","+(ay+10)+" M"+(ax+aw-10)+","+(ay+ah-6)+" L"+(ax+aw)+","+(ay+ah)+" L"+(ax+aw-10)+","+(ay+ah+6),fill:"none",stroke:"var(--ink)","stroke-width":2.2}),fast:1});
+      if(it.xlabel) steps.push({kind:"text",el:txt(ax+aw/2,ay+ah+26,it.xlabel,{size:14,maxc:60})}); if(it.ylabel){ var yl=txt(ax-30,ay+ah/2,it.ylabel,{size:14,maxc:60}); yl.setAttribute("transform","rotate(-90 "+(ax-30)+" "+(ay+ah/2)+")"); steps.push({kind:"text",el:yl}); } }
+    else if(it.t==="path"&&it.d){ steps.push({kind:"stroke",el:svgEl("path",{d:it.d,fill:it.fill?c:"none","fill-opacity":0,stroke:c,"stroke-width":+it.width||2.4,"stroke-linecap":"round"}),fill:it.fill?0.15:0}); }
+    else if(it.t==="image"&&it._src){ steps.push({kind:"img",el:svgEl("image",{href:it._src,x:it.x,y:it.y,width:it.w,height:it.h,preserveAspectRatio:"none",opacity:0})}); }
+    else if(it.t==="highlight"){ steps.push({kind:"hl",el:svgEl("rect",{x:it.x,y:it.y,width:0,height:it.h||24,rx:6,fill:it.color?c:"#ffd60a","fill-opacity":0.35}),w:it.w||120}); }
+    else if(it.t==="text"){ var anc=it.anchor||(it.to&&+it.to[0]<it.x?"end":"start"); var tg=txt(it.x,it.y,it.text,{size:it.size||(sketch?19:17),hand:hand||sketch,bold:it.bold,color:it.color?c:null,anchor:anc,maxc:it.maxc||Math.max(12,Math.floor((anc==="end"?it.x-10:anc==="middle"?2*Math.min(it.x,W-it.x)-20:W-it.x-20)/((+it.size||18)*0.55)))}); steps.push({kind:"text",el:tg});
+      if(it.to){ var tl=String(it.text||"").split(/\n|\\n/).reduce(function(m,l){ return Math.max(m,l.length); },0)*(+it.size||(sketch?19:17))*0.52, sx=anc==="end"?it.x+6:anc==="middle"?it.x:it.x-6, sy=it.y; if(anc==="start"&&+it.to[0]>it.x) sx=it.x+tl+6; if(anc==="end"&&+it.to[0]<it.x) sx=it.x-tl-6; if(anc==="middle") sy=it.y+(+it.to[1]>it.y?14:-14);
+        steps.push({kind:"stroke",el:svgEl("path",{d:"M"+sx+","+sy+" L"+(+it.to[0])+","+(+it.to[1]),fill:"none",stroke:it.color?c:"var(--ink)","stroke-width":1.4,"stroke-linecap":"round",opacity:.85}),fast:1});
+        steps.push({kind:"stroke",el:svgEl("circle",{cx:+it.to[0],cy:+it.to[1],r:2.6,fill:it.color?c:"var(--ink)",stroke:"none"}),fast:1,pop:1}); } } });
+
+  function showAll(){ run++; pen.setAttribute("opacity",0); while(layer.firstChild) layer.removeChild(layer.firstChild);
+    steps.forEach(function(s){ layer.appendChild(s.el); if(s.kind==="stroke"){ s.el.style.strokeDasharray=s.dashed?"7 6":""; s.el.style.strokeDashoffset=""; if(s.fill) s.el.setAttribute("fill-opacity",s.fill); }
+      else if(s.kind==="text") s.el.querySelectorAll("text").forEach(function(t){ t.textContent=t.dataset.full; }); else if(s.kind==="hl") s.el.setAttribute("width",s.w); else if(s.kind==="img") s.el.setAttribute("opacity",1); }); holder.classList.add("ld-done"); }
+  function play(){ var my=++run; holder.classList.remove("ld-done"); while(layer.firstChild) layer.removeChild(layer.firstChild); var i=0;
+    function movePen(x,y){ pen.setAttribute("opacity",1); pen.setAttribute("transform","translate("+x+","+y+")"); }
+    function next(){ if(my!==run) return; if(i>=steps.length){ pen.setAttribute("opacity",0); holder.classList.add("ld-done"); return; } var s=steps[i++]; layer.appendChild(s.el);
+      if(s.kind==="stroke"){ var len=0; try{ len=s.el.getTotalLength(); }catch(e){} if(!len){ next(); return; } s.el.style.strokeDasharray=len; s.el.style.strokeDashoffset=len;
+        var dur=(s.fast?120:Math.max(260,Math.min(1400,len*2.2)))/speed, t0=performance.now();
+        (function f(now){ if(my!==run) return; var k=Math.min(1,(now-t0)/dur), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; s.el.style.strokeDashoffset=len*(1-e); try{ var q=s.el.getPointAtLength(len*e); movePen(q.x,q.y); }catch(x){}
+          if(k<1) requestAnimationFrame(f); else { s.el.style.strokeDasharray=s.dashed?"7 6":""; s.el.style.strokeDashoffset=""; if(s.fill){ s.el.style.transition="fill-opacity .35s"; s.el.setAttribute("fill-opacity",s.fill); } setTimeout(next,90/speed); } })(t0); }
+      else if(s.kind==="img"){ var t2=performance.now(); (function fi(now){ if(my!==run) return; var k=Math.min(1,(now-t2)/(450/speed)); s.el.setAttribute("opacity",k); if(k<1) requestAnimationFrame(fi); else setTimeout(next,150/speed); })(t2); }
+      else if(s.kind==="hl"){ var t1=performance.now(), d1=500/speed; (function g(now){ if(my!==run) return; var k=Math.min(1,(now-t1)/d1); s.el.setAttribute("width",s.w*k); movePen(+s.el.getAttribute("x")+s.w*k,+s.el.getAttribute("y")+(+s.el.getAttribute("height"))/2); if(k<1) requestAnimationFrame(g); else setTimeout(next,80/speed); })(t1); }
+      else { var ts=[].slice.call(s.el.querySelectorAll("text")), li=0, ci=0;
+        (function type(){ if(my!==run) return; if(li>=ts.length){ setTimeout(next,120/speed); return; } var t=ts[li], full=t.dataset.full; ci+=Math.max(1,Math.round(speed)); t.textContent=full.slice(0,ci);
+          try{ var bb=t.getBBox(); movePen(bb.x+bb.width,bb.y+bb.height/2); }catch(x){} if(ci>=full.length){ li++; ci=0; } setTimeout(type,28/speed); })(); } }
+    next(); }
+  holder.querySelector(".ld-head").addEventListener("click",function(e){ var b=e.target.closest("[data-ld]"); if(!b) return; var a=b.dataset.ld;
+    if(a==="play") play(); else if(a==="skip") showAll(); else { speed=speed>=4?1:speed>=2?4:2; b.textContent=speed+"×"; } });
+  if(steps.length>45){ speed=steps.length>90?3:2; var sb=holder.querySelector('[data-ld="speed"]'); if(sb) sb.textContent=speed+"×"; }
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches||S.motion==="off";
+  if(reduce){ showAll(); return; }
+  if("IntersectionObserver" in window){ var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ io.disconnect(); play(); } },{threshold:0.35}); io.observe(holder); } else play();
+}
+function initDiagrams(root){ (root||document).querySelectorAll(".livediag:not([data-ready])").forEach(function(h){ h.setAttribute("data-ready","1"); try{ buildDiagram(h); }catch(e){ h.textContent="(Diagram couldn't be drawn)"; } }); }
+new MutationObserver(function(ms){ for(var i=0;i<ms.length;i++){ if(ms[i].addedNodes.length){ initDiagrams(); return; } } }).observe(document.body,{childList:true,subtree:true});
+/* teach Rev to draw: chat, Teach me and notes */
+(function(){ var i0=instr; instr=function(){ return i0()+DIAG_RULE; }; var t0=teachSystem; teachSystem=function(t){ return t0(t)+DIAG_RULE; }; })();
+REV_SYS+=DIAG_RULE.replace("include ONE diagram","include one or two diagrams");
+window.__diag=function(t,full){ return full?mdFull(t):md(t); };
+
+/* ===== 🖼️ Image generation + labelling your own pictures live ===== */
+var GIMG_GEM=["gemini-3-pro-image-preview","gemini-3-flash-image","gemini-2.5-flash-image","gemini-2.5-flash-image-preview","gemini-2.0-flash-preview-image-generation"];
+var GIMG_OR=["google/gemini-3-pro-image-preview","google/gemini-2.5-flash-image","google/gemini-2.5-flash-image-preview","openai/gpt-5-image-mini","openai/gpt-image-1"];
+function refSrc(ref){ ref=String(ref||""); var m=ref.match(/^file:([^:]+)(?::(\d+))?$/); if(m){ var f=fileById(m[1]); var im=f&&f.images&&f.images[+(m[2]||1)-1||0]; return Promise.resolve(im?im.src:null); }
+  m=ref.match(/^gimg:(.+)$/); if(m) return kvGet("gimg:"+m[1]).then(function(x){ return x&&x.src; }); if(/^data:image\//.test(ref)) return Promise.resolve(ref); return Promise.resolve(null); }
+function dataParts(src){ var m=String(src).match(/^data:([^;]+);base64,(.*)$/); return m?{mime:m[1],data:m[2]}:null; }
+function genGemini(prompt,base){ var i=0, errs=[]; function next(){ if(i>=GIMG_GEM.length) throw new Error("Gemini: "+(errs[errs.length-1]||"no image model available"));
+    var model=GIMG_GEM[i++], parts=[{text:prompt}]; if(base){ var d=dataParts(base); if(d) parts.push({inline_data:{mime_type:d.mime,data:d.data}}); }
+    return fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent",{method:"POST",headers:{"content-type":"application/json","x-goog-api-key":S.gemKey},body:JSON.stringify({contents:[{role:"user",parts:parts}],generationConfig:{responseModalities:["TEXT","IMAGE"]}})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok||j.error){ throw new Error((j.error&&j.error.message)||("HTTP "+r.status)); } var ps=(j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]; var im=ps.filter(function(p){ return p.inlineData||p.inline_data; })[0]; if(!im) throw new Error("no image returned"); var d=im.inlineData||im.inline_data; return "data:"+(d.mimeType||d.mime_type||"image/png")+";base64,"+d.data; }); })
+      .catch(function(e){ errs.push(String(e.message||e).slice(0,160)); return next(); }); } return next(); }
+function genOR(prompt,base){ var i=0, errs=[]; function next(){ if(i>=GIMG_OR.length) throw new Error("OpenRouter: "+(errs[errs.length-1]||"no image model available"));
+    var model=GIMG_OR[i++], content=base?[{type:"text",text:prompt},{type:"image_url",image_url:{url:base}}]:prompt;
+    return fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+S.apiKey,"x-title":"ProfRev"},body:JSON.stringify({model:model,modalities:["image","text"],messages:[{role:"user",content:content}]})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok||j.error) throw new Error((j.error&&j.error.message)||("HTTP "+r.status)); var m=j.choices&&j.choices[0]&&j.choices[0].message||{}; var u=m.images&&m.images[0]&&(m.images[0].image_url&&m.images[0].image_url.url||m.images[0].url); if(!u) throw new Error("no image returned"); return u; }); })
+      .catch(function(e){ errs.push(String(e.message||e).slice(0,160)); return next(); }); } return next(); }
+function genOpenAI(x,prompt,base){ if(base){ var d=dataParts(base); var fd=new FormData(); fd.append("model","gpt-image-1"); fd.append("prompt",prompt); var bin=atob(d.data), u8=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i); fd.append("image",new Blob([u8],{type:d.mime}),"image.png");
+    return fetch(XPROV.openai.base+"/images/edits",{method:"POST",headers:{authorization:"Bearer "+x.key},body:fd}).then(oaImg); }
+  return fetch(XPROV.openai.base+"/images/generations",{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+x.key},body:JSON.stringify({model:"gpt-image-1",prompt:prompt,size:"1024x1024"})}).then(oaImg); }
+function oaImg(r){ return r.json().then(function(j){ if(!r.ok||j.error) throw new Error("OpenAI: "+((j.error&&j.error.message)||("HTTP "+r.status))); var d=j.data&&j.data[0]; if(!d) throw new Error("OpenAI: no image returned"); return d.b64_json?"data:image/png;base64,"+d.b64_json:d.url; }); }
+function generateImage(prompt,baseRef){ return (baseRef?refSrc(baseRef):Promise.resolve(null)).then(function(base){
+  var tries=[]; if(S.gemKey) tries.push(function(){ return genGemini(prompt,base); }); if(isOR()) tries.push(function(){ return genOR(prompt,base); });
+  (S.xkeys||[]).forEach(function(x){ if(x.prov==="openai") tries.push(function(){ return genOpenAI(x,prompt,base); }); });
+  if(!tries.length) return Promise.reject(new Error("Image generation needs a Gemini, OpenRouter or OpenAI key (paste one in Settings → AI tutor)."));
+  var errs=[], i=0; function next(){ if(i>=tries.length){ var e=new Error("Couldn't make the image. "+errs.join(" | ")); throw e; } return tries[i++]().catch(function(e){ errs.push(String(e.message||e)); return next(); }); }
+  return next(); }).then(function(src){ return (/^data:/.test(src)?Promise.resolve(src):fetch(src).then(function(r){ return r.blob(); }).then(function(b){ return new Promise(function(res){ var fr=new FileReader(); fr.onload=function(){ res(fr.result); }; fr.readAsDataURL(b); }); }))
+  .then(function(d){ return shrinkImage(d,1600).catch(function(){ return d; }); }).then(function(d){ var g={id:uid("gi"),src:d,prompt:prompt,base:baseRef||"",t:Date.now()}; return kvSet("gimg:"+g.id,g).then(function(){ bkp(); return g; }); }); }); }
+/* show generated images anywhere markdown is rendered: @@GIMG:id@@ */
+(function(){ var m0=md; md=function(t){ return gimgJoin(m0(String(t||""))); }; var f0=mdFull; mdFull=function(t){ return gimgJoin(f0(String(t||""))); }; })();
+function gimgJoin(h){ return String(h).replace(/(?:<p>\s*)?@@GIMG:([a-z0-9]+)@@(?:\s*<\/p>)?/gi,function(a,id){ return '<figure class="genimg" data-gimg="'+id+'"><div class="gi-ph">🎨 Loading image…</div></figure>'; }); }
+function initGimgs(){ document.querySelectorAll("figure.genimg:not([data-ready])").forEach(function(f){ f.setAttribute("data-ready","1"); kvGet("gimg:"+f.dataset.gimg).then(function(g){ if(!g){ f.innerHTML='<div class="gi-ph">Image deleted</div>'; return; }
+  f.innerHTML='<img src="'+g.src+'" alt="'+esc(g.prompt)+'" loading="lazy"><figcaption><span>'+esc(g.prompt.slice(0,140))+'</span><span class="row"><button type="button" class="chip" data-gi="dl">⬇️ Save</button><button type="button" class="chip" data-gi="label">🏷️ Label it</button><button type="button" class="chip" data-gi="spot">🖼️ Add to spots</button>'+delBtn("gimg",g.id,' data-rerender="1"')+'</span></figcaption>';
+  f.querySelector("figcaption").addEventListener("click",function(e){ var b=e.target.closest("[data-gi]"); if(!b) return; var a=b.dataset.gi;
+    if(a==="dl") downloadBlob(dataURLtoBlob(g.src),"ProfRev image.png");
+    else if(a==="label"){ openAI(); aiSend("Label this image (gimg:"+g.id+") with every important structure, drawn live over the exact same picture."); }
+    else if(a==="spot"){ var x={id:uid("sp"),src:g.src,ans:g.prompt,mod:DATA[0].id,subj:"patho"}; kvSet("spot:"+x.id,x).then(function(){ bkp(); toast("Added to Picture spots ✓"); }); } }); }); }); }
+function dataURLtoBlob(d){ var p=dataParts(d); if(!p) return new Blob([d]); var bin=atob(p.data), u8=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i); return new Blob([u8],{type:p.mime}); }
+new MutationObserver(function(){ if(document.querySelector("figure.genimg:not([data-ready])")) initGimgs(); }).observe(document.body,{childList:true,subtree:true});
+MANAGE.gimg=function(id){ return kvDel("gimg:"+id); }; MANAGE_ALL.gimg=function(){ return kvDelAll("gimg:"); };
+/* Rev's tool */
+TOOLS.push({name:"generate_image",description:"Create a picture with an AI image model and show it in the chat: medical illustrations, specimen or slide look-alikes, labelled-style artwork, mnemonics as pictures, revision posters. Pass base_image (file:<id> for a picture the student uploaded, or gimg:<id> for one made earlier) to EDIT that picture (e.g. recolour, restyle). For adding exact labels to an existing picture prefer a live diagram with an image item instead, because that keeps the original pixels exactly.",inputSchema:{type:"object",properties:{prompt:{type:"string",description:"Detailed description of the image"},base_image:{type:"string"}},required:["prompt"]},
+  execute:function(i){ toast("🎨 Rev is making an image…"); return generateImage(i.prompt,i.base_image).then(function(g){ AI.msgs.push({role:"assistant",text:"@@GIMG:"+g.id+"@@"}); LS.set("chat",AI.msgs.filter(function(m){ return m.role!=="tool"; }).slice(-40)); return {ok:true,image:"gimg:"+g.id,note:"The image is already shown to the student. You can label it live with a diagram whose first item is {\"t\":\"image\",\"src\":\"gimg:"+g.id+"\"}."}; }).catch(function(e){ return {ok:false,error:String(e.message||e)}; }); }});
+/* tell Rev which pictures it can draw on */
+(function(){ var i0=instr; instr=function(){ var refs=[]; for(var k=AI.msgs.length-1;k>=0&&refs.length<8;k--){ var m=AI.msgs[k]; (m.files||[]).forEach(function(x){ var f=fileById(x.id); if(f&&f.images&&f.images.length) f.images.slice(0,4).forEach(function(im,j){ refs.push("file:"+f.id+(f.images.length>1?":"+(j+1):"")+" ("+f.name+(f.images.length>1?", page "+(im.page||j+1):"")+")"); }); }); var g=String(m.text||"").match(/@@GIMG:([a-z0-9]+)@@/gi); if(g) g.forEach(function(x){ refs.push("gimg:"+x.slice(7,-2)+" (image you generated)"); }); }
+  return i0()+IMG_RULE+(refs.length?"\nPictures available right now: "+refs.join("; ")+".":""); }; })();
+var IMG_RULE="\nLABELLING OR ANNOTATING A PICTURE: when the student sends a picture and asks you to label, mark, annotate, trace, highlight or explain parts of it, reply with a live diagram whose FIRST item is {\"t\":\"image\",\"src\":\"file:<id>\"} (or gimg:<id>), then add callout labels (text with to:[x,y]), arrows, highlights, circles and curves on top. With an image item, ALL coordinates are 0–1000 across the picture's width and 0–1000 down its height (so [500,500] is the centre), whatever its real size. Look carefully and point exactly at each structure; put label text in the margins (x below 60 or above 940 is fine, the canvas extends automatically) so nothing covers the picture. The original picture is shown exactly as it is, unchanged, with your additions drawn live on top. To CREATE a new picture use the generate_image tool.";
+window.__gen=function(p,b){ return generateImage(p,b); };
+
+/* ===== 🪟 Floating windows: in-app browser + pin anything to the screen (drag, resize, minimise, full screen, back to small) ===== */
+var PINS=LS.get("pins",[]), PANEZ=200;
+function savePins(){ LS.set("pins",PINS.map(function(p){ var c=Object.assign({},p); if(c.html&&c.html.length>400000) c.html=c.html.slice(0,400000); return c; })); }
+function paneLayout(w,p){ w.classList.remove("pn-float","pn-mini","pn-max"); w.classList.add("pn-"+(p.mode||"float"));
+  if(p.mode==="max"){ w.style.left="8px"; w.style.top="8px"; w.style.width=(innerWidth-16)+"px"; w.style.height=(innerHeight-16)+"px"; }
+  else if(p.mode==="mini"){ var mw=Math.min(280,innerWidth-16); w.style.width=mw+"px"; w.style.height="44px"; w.style.left=Math.max(8,Math.min(innerWidth-mw-8,p.x==null?innerWidth-mw-16:p.x))+"px"; w.style.top=Math.max(8,Math.min(innerHeight-52,p.y==null?innerHeight-60:p.y))+"px"; }
+  else { var ww=Math.min(p.w||420,innerWidth-16), hh=Math.min(p.h||360,innerHeight-16); w.style.width=ww+"px"; w.style.height=hh+"px"; w.style.left=Math.max(8,Math.min(innerWidth-ww-8,p.x==null?innerWidth-ww-24:p.x))+"px"; w.style.top=Math.max(8,Math.min(innerHeight-hh-8,p.y==null?90:p.y))+"px"; }
+  var mb=w.querySelector('[data-pn="max"]'); if(mb){ mb.textContent=p.mode==="max"?"🗗":"⛶"; mb.title=p.mode==="max"?"Back to a small window":"Full screen"; } }
+/* make any element a draggable, resizable window with ▁ ⛶ ✕ */
+function makePane(o){ var p=o.state, w=document.createElement("div"); w.className="vplayer glass pane"+(o.cls?" "+o.cls:""); w.dataset.pane=p.id;
+  w.innerHTML='<div class="vp-h"><span class="st-grip">⠿</span><b>'+esc(o.icon||"📌")+' '+esc(o.title||"")+'</b><span class="spacer"></span>'+(o.extraBtns||"")+'<button type="button" data-pn="mini" title="Minimise">▁</button><button type="button" data-pn="max" title="Full screen">⛶</button><button type="button" data-pn="close" title="Close">✕</button></div><div class="pane-b"></div><span class="st-rs" title="Resize"></span>';
+  var body=w.querySelector(".pane-b"); if(o.node) body.appendChild(o.node); else body.innerHTML=o.html||"";
+  document.body.appendChild(w); w.style.zIndex=++PANEZ; paneLayout(w,p);
+  function front(){ w.style.zIndex=++PANEZ; }
+  w.addEventListener("pointerdown",front,true);
+  var hd=w.querySelector(".vp-h"); hd.style.touchAction="none";
+  hd.addEventListener("pointerdown",function(ev){ if(ev.target.closest("button,a,input")) return; ev.preventDefault(); var sx=ev.clientX, sy=ev.clientY, r=w.getBoundingClientRect(); w.classList.add("moving");
+    if(p.mode==="max"){ p.mode="float"; p.x=ev.clientX-(p.w||420)/2; p.y=ev.clientY-20; paneLayout(w,p); r=w.getBoundingClientRect(); }
+    function mv(e){ p.x=Math.max(0,Math.min(innerWidth-80,r.left+e.clientX-sx)); p.y=Math.max(0,Math.min(innerHeight-40,r.top+e.clientY-sy)); paneLayout(w,p); }
+    function up(){ document.removeEventListener("pointermove",mv); document.removeEventListener("pointerup",up); w.classList.remove("moving"); o.save&&o.save(); }
+    document.addEventListener("pointermove",mv); document.addEventListener("pointerup",up); });
+  hd.addEventListener("dblclick",function(ev){ if(ev.target.closest("button,a,input")) return; p.mode=p.mode==="max"?"float":"max"; paneLayout(w,p); o.save&&o.save(); });
+  var rs=w.querySelector(".st-rs"); rs.style.touchAction="none";
+  rs.addEventListener("pointerdown",function(ev){ ev.preventDefault(); var sx=ev.clientX, sy=ev.clientY, ow=w.offsetWidth, oh=w.offsetHeight; w.classList.add("moving"); p.mode="float";
+    function mv(e){ p.w=Math.max(240,Math.min(innerWidth-10,ow+e.clientX-sx)); p.h=Math.max(140,Math.min(innerHeight-10,oh+e.clientY-sy)); paneLayout(w,p); }
+    function up(){ document.removeEventListener("pointermove",mv); document.removeEventListener("pointerup",up); w.classList.remove("moving"); o.save&&o.save(); }
+    document.addEventListener("pointermove",mv); document.addEventListener("pointerup",up); });
+  hd.addEventListener("click",function(ev){ var b=ev.target.closest("[data-pn]"); if(!b) return; var a=b.dataset.pn;
+    if(a==="close"){ w.remove(); o.onClose&&o.onClose(); return; }
+    if(a==="mini") p.mode=p.mode==="mini"?"float":"mini"; else if(a==="max") p.mode=p.mode==="max"?"float":"max"; paneLayout(w,p); o.save&&o.save(); });
+  return w; }
+addEventListener("resize",debounce(function(){ document.querySelectorAll(".pane").forEach(function(w){ var id=w.dataset.pane, p=id==="browser"?BRZ:PINS.filter(function(x){ return x.id===id; })[0]; if(p) paneLayout(w,p); }); },150));
+addEventListener("keydown",function(e){ if(e.key!=="Escape") return; var top=null, z=-1; document.querySelectorAll(".pane.pn-max").forEach(function(w){ if(+w.style.zIndex>z){ z=+w.style.zIndex; top=w; } }); if(top){ var b=top.querySelector('[data-pn="max"]'); if(b) b.click(); e.stopPropagation(); } },true);
+
+/* ---------- 🌐 in-app browser ---------- */
+var BRZ=LS.get("browser",{id:"browser",x:null,y:null,w:560,h:520,mode:"float",url:"",hist:[],hi:-1,recent:[]});
+function brUrl(q){ q=String(q||"").trim(); if(!q) return ""; if(/^https?:\/\//i.test(q)) return q; if(/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(q)) return "https://"+q; return "https://www.google.com/search?igu=1&q="+encodeURIComponent(q); }
+var BR_QUICK=[["🔎 Google","https://www.google.com/webhp?igu=1"],["📚 Wikipedia","https://en.m.wikipedia.org/wiki/Main_Page"],["🧪 PubMed","https://pubmed.ncbi.nlm.nih.gov/"],["🩻 Radiopaedia","https://radiopaedia.org/"],["🔬 Pathology Outlines","https://www.pathologyoutlines.com/"],["🌍 WHO","https://www.who.int/"]];
+function openBrowser(url){ var old=document.querySelector('.pane[data-pane="browser"]'); if(old){ old.style.zIndex=++PANEZ; if(url) brGo(url); return; }
+  var node=document.createElement("div"); node.className="br";
+  node.innerHTML='<form class="br-bar"><button type="button" data-br="back" title="Back">←</button><button type="button" data-br="fwd" title="Forward">→</button><button type="button" data-br="reload" title="Reload">⟳</button><button type="button" data-br="home" title="Start page">🏠</button><input class="input br-url" placeholder="Search Google or type a web address" aria-label="Address" autocomplete="off"><button type="submit" class="btn sm">Go</button><a class="br-open" target="_blank" rel="noopener" title="Open in your normal browser">↗</a></form>'+
+    '<div class="br-view"><div class="br-home"><h3>🔬 ProfScope: look anything up without leaving ProfRev</h3><div class="row">'+BR_QUICK.map(function(q){ return '<button type="button" class="chip" data-brgo="'+esc(q[1])+'">'+q[0]+'</button>'; }).join("")+'</div><div class="br-recent"></div><p class="hint">Some sites (YouTube, Medscape, banks, social media) don\'t allow being shown inside other apps. If a page stays blank, tap ↗ to open it in your normal browser. Videos play best with ▶️.</p></div><iframe class="br-frame" hidden referrerpolicy="no-referrer-when-downgrade" allow="fullscreen; clipboard-write; autoplay" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-downloads"></iframe></div>';
+  var w=makePane({state:BRZ,node:node,title:"ProfScope",icon:"🔬",cls:"pane-br",save:function(){ LS.set("browser",BRZ); }});
+  var inp=node.querySelector(".br-url"), fr=node.querySelector(".br-frame"), home=node.querySelector(".br-home"), op=node.querySelector(".br-open");
+  function recent(){ node.querySelector(".br-recent").innerHTML=(BRZ.recent||[]).length?'<b class="hint">Recent</b><div class="row">'+BRZ.recent.slice(0,8).map(function(u){ return '<button type="button" class="chip" data-brgo="'+esc(u)+'">'+esc(u.replace(/^https?:\/\/(www\.)?/,"").replace(/[?#].*$/,"").slice(0,40))+'</button>'; }).join("")+'</div>':""; }
+  window.brGo=function(u,noHist){ u=brUrl(u); if(!u) return; if(!noHist){ BRZ.hist=(BRZ.hist||[]).slice(0,BRZ.hi+1).concat([u]).slice(-50); BRZ.hi=BRZ.hist.length-1; } BRZ.url=u; inp.value=/google\.com\/search/.test(u)?decodeURIComponent((u.match(/[?&]q=([^&]*)/)||["",""])[1].replace(/\+/g," ")):u; op.href=u.replace("igu=1&","").replace("?igu=1",""); home.hidden=true; fr.hidden=false; fr.src=u;
+    if(!/google\.com/.test(u)){ BRZ.recent=[u].concat((BRZ.recent||[]).filter(function(x){ return x!==u; })).slice(0,10); } LS.set("browser",BRZ); };
+  function goHome(){ fr.hidden=true; fr.removeAttribute("src"); home.hidden=false; inp.value=""; recent(); }
+  node.querySelector(".br-bar").addEventListener("submit",function(e){ e.preventDefault(); brGo(inp.value); });
+  node.addEventListener("click",function(e){ var g=e.target.closest("[data-brgo]"); if(g){ brGo(g.dataset.brgo); return; } var b=e.target.closest("[data-br]"); if(!b) return; var a=b.dataset.br;
+    if(a==="back"&&BRZ.hi>0){ BRZ.hi--; brGo(BRZ.hist[BRZ.hi],true); } else if(a==="fwd"&&BRZ.hi<(BRZ.hist||[]).length-1){ BRZ.hi++; brGo(BRZ.hist[BRZ.hi],true); } else if(a==="reload"&&BRZ.url){ fr.src="about:blank"; setTimeout(function(){ fr.src=BRZ.url; },30); } else if(a==="home") goHome(); });
+  if(url) brGo(url); else goHome(); setTimeout(function(){ if(!url) inp.focus(); },50); return w; }
+
+/* ---------- 📌 pin anything ---------- */
+function pinContent(kind,title,html,extra){ var p=Object.assign({id:uid("pin"),kind:kind,title:String(title||"Pinned").slice(0,80),html:html,x:null,y:null,w:kind==="diagram"||kind==="image"?520:400,h:kind==="diagram"||kind==="image"?440:380,mode:"float"},extra||{});
+  PINS.push(p); savePins(); showPin(p); toast("📌 Pinned to your screen: drag it anywhere, ⛶ for full screen"); return p; }
+function showPin(p){ var node=document.createElement("div"); node.className="pin-body nhtml"+(p.kind==="card"?" pin-card":""); node.innerHTML=p.html||"";
+  if(p.kind==="diagram"){ node.innerHTML=""; var d=document.createElement("div"); d.className="livediag"; d.dataset.spec=p.spec||""; node.appendChild(d); }
+  if(p.kind==="image"){ node.innerHTML='<div class="gi-ph">Loading…</div>'; refSrc(p.ref).then(function(src){ node.innerHTML=src?'<img src="'+src+'" alt="" class="pin-img">':'<div class="gi-ph">Image not on this device</div>'; }); }
+  node.querySelectorAll("[id]").forEach(function(x){ x.removeAttribute("id"); });
+  node.querySelectorAll(".pinbtn,[data-ld='pin'],.delbtn").forEach(function(x){ x.remove(); });
+  var icon={note:"📒",card:"🃏",table:"📊",diagram:"🎨",image:"🖼️",answer:"✨",spot:"🖼️"}[p.kind]||"📌";
+  return makePane({state:p,node:node,title:p.title,icon:icon,cls:"pane-pin",save:savePins,onClose:function(){ PINS=PINS.filter(function(x){ return x.id!==p.id; }); savePins(); },
+    extraBtns:p.go?'<button type="button" data-pingo="'+esc(p.go)+'" title="Open it in the app">↗</button>':''}); }
+document.addEventListener("click",function(e){ var g=e.target.closest("[data-pingo]"); if(g){ go(g.dataset.pingo); } });
+setTimeout(function(){ PINS.forEach(function(p){ try{ showPin(p); }catch(e){} }); },600);
+/* pin buttons everywhere */
+function pinBtn(attrs,label){ return '<button type="button" class="chip pinbtn" '+attrs+' title="Pin to your screen">📌'+(label?' '+label:'')+'</button>'; }
+document.addEventListener("click",function(e){ var b=e.target.closest("[data-pinit]"); if(!b) return; e.preventDefault(); e.stopPropagation(); var k=b.dataset.pinit;
+  if(k==="note"){ var n=NBYID[b.dataset.id]; if(n) pinContent("note",n.title,'<h2>'+esc(n.title)+'</h2>'+emojiHeads(n.html),{go:"note-"+n.id}); }
+  else if(k==="card"){ var c=BYID[b.dataset.id]; if(c) pinContent("card",c.q.replace(/\*\*/g,"").slice(0,60),'<div class="pc-q">'+md(c.q)+'</div><details open><summary>Answer</summary>'+md(c.a)+'</details>',{go:"card-"+c.id}); }
+  else if(k==="table"){ var t=b.closest(".tblock"); if(t){ var cl=t.cloneNode(true); cl.querySelectorAll("button,.pinbtn").forEach(function(x){ x.remove(); }); pinContent("table",(t.querySelector("h3")||{}).textContent||"Table",cl.innerHTML); } }
+  else if(k==="diagram"){ var h=b.closest(".livediag"); if(h) pinContent("diagram",((h.querySelector(".ld-head b")||{}).textContent||"Diagram").replace(/^🎨\s*/,""),"",{spec:h.dataset.spec||""}); }
+  else if(k==="image"){ pinContent("image","Image",'',{ref:"gimg:"+b.dataset.id}); }
+  else if(k==="answer"){ var m=b.closest(".msg"); if(m){ var cl2=m.cloneNode(true); cl2.querySelectorAll(".pinbtn").forEach(function(x){ x.remove(); }); cl2.querySelectorAll(".livediag").forEach(function(d){ d.removeAttribute("data-ready"); d.innerHTML=""; }); pinContent("answer","Rev's answer",cl2.innerHTML); } }
+},true);
+function toggleFocus(force){ var nb=document.getElementById("notebody"); if(!nb) return; var on=force!=null?force:!nb.classList.contains("focusmode"); nb.classList.toggle("focusmode",on); var ex=nb.querySelector(".exitf"); if(on&&!ex){ nb.insertAdjacentHTML("afterbegin",'<button type="button" class="chip exitf">🗗 Back to normal</button>'); nb.querySelector(".exitf").addEventListener("click",function(){ toggleFocus(false); }); } if(!on&&ex) ex.remove(); }
+addEventListener("keydown",function(e){ if(e.key==="Escape"){ var nb=document.getElementById("notebody"); if(nb&&nb.classList.contains("focusmode")) toggleFocus(false); var st=document.querySelector(".sticky.st-max [data-st='max']"); if(st) st.click(); } });
+/* add the buttons where things are shown */
+function decoratePins(){
+  document.querySelectorAll(".notebar:not([data-pinb])").forEach(function(bar){ bar.setAttribute("data-pinb","1"); var id=(ROUTE.raw||"").replace(/^note-/,""); if(!NBYID[id]) return; bar.insertAdjacentHTML("beforeend",pinBtn('data-pinit="note" data-id="'+esc(id)+'"',"Pin"));
+    var fb=document.createElement("button"); fb.type="button"; fb.className="chip"; fb.textContent="⛶ Focus"; fb.title="Read this note full screen"; fb.addEventListener("click",function(){ toggleFocus(); }); bar.appendChild(fb); });
+  document.querySelectorAll(".tblock:not([data-pinb])").forEach(function(t){ t.setAttribute("data-pinb","1"); var h=t.querySelector("h3"); if(h) h.insertAdjacentHTML("beforeend",' '+pinBtn('data-pinit="table"')); });
+  document.querySelectorAll(".livediag[data-ready] .ld-head:not([data-pinb])").forEach(function(h){ if(h.closest(".pane-pin")) return; h.setAttribute("data-pinb","1"); h.insertAdjacentHTML("beforeend",pinBtn('data-pinit="diagram"')); });
+  document.querySelectorAll("figure.genimg figcaption .row:not([data-pinb])").forEach(function(r){ r.setAttribute("data-pinb","1"); var id=r.closest("figure").dataset.gimg; r.insertAdjacentHTML("afterbegin",pinBtn('data-pinit="image" data-id="'+esc(id)+'"')); });
+  document.querySelectorAll("#ai-body .msg.bot:not([data-pinb]),#tc-body .msg.bot:not([data-pinb])").forEach(function(m){ m.setAttribute("data-pinb","1"); if((m.textContent||"").length<40||/Thinking…/.test(m.textContent)) return; m.insertAdjacentHTML("beforeend",pinBtn('data-pinit="answer"')); });
+  var fc=document.getElementById("fc"); if(fc&&!fc.hasAttribute("data-pinb")){ fc.setAttribute("data-pinb","1"); var cc=typeof currentCard==="function"&&currentCard(); if(cc){ var tg=fc.querySelector(".tags")||fc; tg.insertAdjacentHTML("beforeend",pinBtn('data-pinit="card" data-id="'+esc(cc.id)+'"')); } }
+}
+new MutationObserver(debounce(decoratePins,120)).observe(document.body,{childList:true,subtree:true});
+/* sticky notes: full screen and back */
+document.addEventListener("click",function(e){ var b=e.target.closest('[data-st="max"]'); if(!b) return; e.stopPropagation(); var el=b.closest(".sticky"); el.classList.toggle("st-max"); b.textContent=el.classList.contains("st-max")?"🗗":"⛶"; b.title=el.classList.contains("st-max")?"Back to small":"Full screen"; if(el._ink&&el._ink.resize) setTimeout(function(){ el._ink.resize(); },50); },true);
+(function(){ var ps=placeStickies; placeStickies=function(){ ps.apply(this,arguments); document.querySelectorAll(".sticky .st-h:not([data-maxb])").forEach(function(h){ h.setAttribute("data-maxb","1"); var del=h.querySelector('[data-st="min"]'); var b=document.createElement("button"); b.type="button"; b.setAttribute("data-st","max"); b.title="Full screen"; b.textContent="⛶"; h.insertBefore(b,del); }); }; })();
+/* video player: leaving full screen always returns to the small floating player */
+document.addEventListener("fullscreenchange",function(){ if(!document.fullscreenElement){ var w=$("#vplayer"); if(w&&typeof VID!=="undefined"){ VID.mode="float"; layoutVideo(w); } } });
+/* top bar: 🌐 next to ▶️ and 🗒️ */
+(function(){ function add(){ var s=$("#stk-btn"); if(!s){ setTimeout(add,300); return; } if($("#br-btn")) return; var b=document.createElement("button"); b.type="button"; b.id="br-btn"; b.className="iconbtn"; b.title="Open ProfScope, the built-in browser"; b.setAttribute("aria-label","Open the browser"); b.setAttribute("data-tip","ProfScope: browse Google, Wikipedia, PubMed and more in a floating window"); b.textContent="🔬"; s.parentNode.insertBefore(b,s.nextSibling); b.addEventListener("click",function(){ openBrowser(); }); } add(); })();
+TOOLS.push({name:"open_browser",description:"Open ProfScope, the in-app browser, in a floating window, optionally at a URL or with a Google search.",inputSchema:{type:"object",properties:{url_or_search:{type:"string"}}},execute:function(i){ openBrowser(i.url_or_search||""); return {opened:true}; }});
+MANAGE.pin=function(id){ PINS=PINS.filter(function(x){ return x.id!==id; }); savePins(); var w=document.querySelector('.pane[data-pane="'+id+'"]'); if(w) w.remove(); };
+
+/* ===== 🗂️ Sticklets (flip-through stacks of sticky notes) + 📚 notebooks / merging for My notes ===== */
+function stackOf(s){ return s&&s.stack?STICKIES.filter(function(x){ return x.stack===s.stack; }).sort(function(a,b){ return (a.si||0)-(b.si||0); }):[s]; }
+function stackTop(st){ return st.filter(function(x){ return x.stop; })[0]||st[0]; }
+function copyPlace(from,to){ ["x","y","w","h","px","py","pin","route","title","min"].forEach(function(k){ to[k]=from[k]; }); }
+function flipStack(s,dir){ var st=stackOf(s), cur=stackTop(st), i=st.indexOf(cur), nx=st[(i+dir+st.length)%st.length]; if(nx===cur) return; copyPlace(cur,nx); cur.stop=false; nx.stop=true; saveStickies(); placeStickies(); }
+function addToStack(s){ var st=stackOf(s); if(!s.stack){ s.stack=uid("sk"); s.si=0; s.stop=true; st=[s]; } var top=stackTop(st), n={id:uid("st"),text:"",c:top.c,t:Date.now(),stack:s.stack,si:Math.max.apply(null,st.map(function(x){ return x.si||0; }))+1,stop:true};
+  copyPlace(top,n); top.stop=false; STICKIES.push(n); saveStickies(); placeStickies(); setTimeout(function(){ var ta=document.querySelector('.sticky[data-id="'+n.id+'"] textarea'); if(ta) ta.focus(); },60); }
+function unstack(s){ var st=stackOf(s); if(st.length<2) return; var i=st.indexOf(s), nx=st[(i+1)%st.length]; copyPlace(s,nx); nx.stop=true; delete s.stack; delete s.si; s.stop=false; if(s.pin) s.px=(s.px||40)+30; else s.y=(s.y||0)+40; if(st.length===2){ delete nx.stack; delete nx.si; nx.stop=false; } saveStickies(); placeStickies(); toast("Taken out of the sticklet"); }
+function mergeStickies(a,b){ /* put b (and its stack) into a's sticklet */ var sa=stackOf(a); if(!a.stack){ a.stack=uid("sk"); a.si=0; a.stop=true; sa=[a]; } var base=Math.max.apply(null,sa.map(function(x){ return x.si||0; }))+1; var top=stackTop(sa);
+  stackOf(b).forEach(function(x,i){ x.stack=a.stack; x.si=base+i; x.stop=false; copyPlace(top,x); }); saveStickies(); placeStickies(); toast("🗂️ Added to the sticklet: flip with ‹ ›"); }
+(function(){ var ps=placeStickies; placeStickies=function(){ ps.apply(this,arguments);
+  document.querySelectorAll(".sticky[data-id]").forEach(function(el){ var s=STICKIES.filter(function(x){ return x.id===el.dataset.id; })[0]; if(!s) return; var h=el.querySelector(".st-h"); if(!h||h.querySelector("[data-sk]")) return;
+    if(s.stack){ var st=stackOf(s), top=stackTop(st); if(top!==s){ el.style.display="none"; return; } el.classList.add("sticklet"); el.style.setProperty("--n",Math.min(3,st.length-1));
+      var bar=document.createElement("div"); bar.className="sk-bar"; bar.innerHTML='<button type="button" data-sk="prev" title="Previous note">‹</button><b>'+(st.indexOf(s)+1)+' / '+st.length+'</b><button type="button" data-sk="next" title="Next note">›</button><span class="spacer"></span><button type="button" data-sk="add" title="Add a note to this sticklet">＋</button><button type="button" data-sk="out" title="Take this note out of the sticklet">⤴</button>';
+      el.insertBefore(bar,el.querySelector(".st-b")); }
+    var pb=h.querySelector('[data-st="pin"]'); if(pb){ pb.textContent=s.pin?"📌":"📎"; pb.title=s.pin?"Floating on every page. Tap to stick it to this page, right here":"Stuck to this page, right here. Tap to float it on every page"; }
+    var sb=document.createElement("button"); sb.type="button"; sb.setAttribute("data-sk","menu"); sb.title=s.stack?"Sticklet options":"Make a sticklet (a stack you flip through)"; sb.textContent="🗂️"; h.insertBefore(sb,h.querySelector('[data-st="pin"]')); }); }; })();
+document.addEventListener("click",function(e){ var b=e.target.closest("[data-sk]"); if(!b) return; e.stopPropagation(); var el=b.closest(".sticky"), s=STICKIES.filter(function(x){ return x.id===el.dataset.id; })[0]; if(!s) return; var a=b.dataset.sk;
+  if(a==="prev") flipStack(s,-1); else if(a==="next") flipStack(s,1); else if(a==="add") addToStack(s); else if(a==="out") unstack(s);
+  else if(a==="menu"){ var old=document.querySelector(".sk-pop"); if(old){ old.remove(); return; } var others=STICKIES.filter(function(x){ return x!==s&&(!s.stack||x.stack!==s.stack)&&(!x.stack||x.stop); });
+    var pop=document.createElement("div"); pop.className="sk-pop glass"; pop.innerHTML='<b>🗂️ Sticklet & placement</b>'+(s.pin?'<button type="button" data-skm="stick">📎 Stick to this page, right here</button>':'<button type="button" data-skm="float">📌 Float on every page instead</button>')+'<button type="button" data-skm="add">＋ Add a new note to flip to</button>'+(others.length?'<small class="hint">Put another sticky into this sticklet:</small>'+others.slice(0,12).map(function(x){ return '<button type="button" data-skm="merge" data-id="'+x.id+'">'+(x.stack?"🗂️ ":"🗒️ ")+esc((x.text||"").split("\n")[0].slice(0,40)||"(empty sticky)")+'<small> · '+esc(x.pin?"pinned":(x.title||x.route||""))+'</small></button>'; }).join(""):'')+(s.stack?'<button type="button" data-skm="split">↔️ Split the sticklet back into separate notes</button>':'');
+    el.appendChild(pop); pop.addEventListener("click",function(ev){ var c=ev.target.closest("[data-skm]"); if(!c) return; ev.stopPropagation(); pop.remove(); var m=c.dataset.skm;
+      if(m==="stick"||m==="float"){ var pb2=el.querySelector('[data-st="pin"]'); if(pb2) pb2.click(); return; }
+      if(m==="add") addToStack(s); else if(m==="merge"){ var o=STICKIES.filter(function(x){ return x.id===c.dataset.id; })[0]; if(o) mergeStickies(s,o); }
+      else if(m==="split"){ stackOf(s).forEach(function(x,i){ var top=x; delete top.stack; delete top.si; top.stop=false; if(i){ if(top.pin) top.px=(top.px||40)+i*28; else top.y=(top.y||0)+i*36; } }); saveStickies(); placeStickies(); toast("Split into separate stickies"); } }); } },true);
+
+/* ---------- 📚 My notes: notebooks you flip through + merge pages ---------- */
+var MNSEL=null;
+(function(){ var vm=viewMyNotes; viewMyNotes=function(){ vm.apply(this,arguments); var hero=app.querySelector(".hero .row"); if(!hero) return;
+  hero.insertAdjacentHTML("beforeend",'<button type="button" class="btn ghost" id="mn-sel">☑️ Select pages</button>');
+  var list=$("#mn-list"); var bar=document.createElement("div"); bar.className="glass mn-selbar"; bar.hidden=true; bar.innerHTML='<b id="mn-cnt">0 selected</b><span class="spacer"></span><button type="button" class="btn sm" data-mns="bind">📚 Bind into a notebook</button><button type="button" class="btn sm ghost" data-mns="merge">🔗 Merge into one page</button><button type="button" class="btn sm ghost" data-mns="unbind">📄 Take out of notebook</button><button type="button" class="btn sm ghost warn" data-mns="del">🗑️ Delete</button><button type="button" class="btn sm ghost" data-mns="done">Done</button>';
+  list.parentNode.insertBefore(bar,list);
+  function decorate(){ kvAll("page:").then(function(ps){ var byId={}; ps.forEach(function(p){ byId[p.id]=p; }); var books={};
+    list.querySelectorAll('.nrow[data-go^="mypage-"]').forEach(function(r){ var id=r.dataset.go.slice(7), p=byId[id]; if(!p) return;
+      if(p.book){ var bk=books[p.book]; if(bk){ r.style.display="none"; bk.n++; bk.el.querySelector(".bkn").textContent=bk.n+" pages"; return; } books[p.book]={n:1,el:r}; var first=ps.filter(function(x){ return x.book===p.book; }).sort(function(a,b){ return (a.bi||0)-(b.bi||0); })[0]; r.dataset.go="mypage-"+first.id; r.querySelector("b").innerHTML="📚 "+esc(p.bookTitle||"Notebook")+' <small class="tag bkn">1 page</small>'; r.dataset.book=p.book; }
+      if(MNSEL&&!r.querySelector(".mn-ck")){ r.insertAdjacentHTML("afterbegin",'<input type="checkbox" class="mn-ck" aria-label="Select">'); var ck=r.querySelector(".mn-ck"); var ids=p.book?ps.filter(function(x){ return x.book===p.book; }).map(function(x){ return x.id; }):[id]; ck.checked=ids.every(function(x){ return MNSEL[x]; }); ck.addEventListener("click",function(ev){ ev.stopPropagation(); ids.forEach(function(x){ if(ck.checked) MNSEL[x]=1; else delete MNSEL[x]; }); $("#mn-cnt").textContent=Object.keys(MNSEL).length+" selected"; }); } });
+    list.querySelectorAll(".nrow").forEach(function(r){ r.onclick=MNSEL?function(ev){ ev.preventDefault(); ev.stopImmediatePropagation(); var ck=r.querySelector(".mn-ck"); if(ck) ck.click(); }:null; if(MNSEL) r.removeAttribute("data-go-x"); });
+    if(MNSEL) list.querySelectorAll(".nrow[data-go]").forEach(function(r){ r.dataset.goX=r.dataset.go; r.removeAttribute("data-go"); }); }); }
+  new MutationObserver(function(){ if(!list.querySelector(".nrow[data-decor]")){ var f=list.querySelector(".nrow"); if(f){ f.setAttribute("data-decor","1"); decorate(); } } }).observe(list,{childList:true});
+  $("#mn-sel").addEventListener("click",function(){ MNSEL=MNSEL?null:{}; bar.hidden=!MNSEL; this.textContent=MNSEL?"✖ Stop selecting":"☑️ Select pages"; if(!MNSEL){ viewMyNotes(); return; } $("#mn-cnt").textContent="0 selected"; decorate(); });
+  bar.addEventListener("click",function(e){ var b=e.target.closest("[data-mns]"); if(!b) return; var a=b.dataset.mns, ids=Object.keys(MNSEL||{});
+    if(a==="done"){ MNSEL=null; viewMyNotes(); return; } if(!ids.length){ toast("Tick some pages first"); return; }
+    Promise.all(ids.map(function(id){ return kvGet("page:"+id); })).then(function(ps){ ps=ps.filter(Boolean).sort(function(x,y){ return (x.book===y.book?(x.bi||0)-(y.bi||0):x.c-y.c); });
+      if(a==="bind"){ if(ps.length<2){ toast("Pick at least 2 pages"); return; } var name=prompt("Name this notebook","Notebook")||"Notebook", bk=uid("bk");
+        return Promise.all(ps.map(function(p,i){ p.book=bk; p.bookTitle=name; p.bi=i; return kvSet("page:"+p.id,p); })).then(function(){ bkp(); MNSEL=null; toast("📚 Notebook made: flip pages with ‹ ›"); go("mypage-"+ps[0].id); }); }
+      if(a==="unbind") return Promise.all(ps.map(function(p){ delete p.book; delete p.bookTitle; delete p.bi; return kvSet("page:"+p.id,p); })).then(function(){ bkp(); MNSEL=null; toast("Taken out of the notebook"); viewMyNotes(); });
+      if(a==="merge"){ if(ps.length<2){ toast("Pick at least 2 pages"); return; } var html=ps.map(function(p){ return '<h2>'+esc(p.title||"Untitled")+'</h2>'+(p.html||"")+(p.ink&&p.ink.strokes&&p.ink.strokes.length?'<p class="hint">✏️ This page\'s drawing stays on the original page "'+esc(p.title||"Untitled")+'".</p>':''); }).join('<hr>');
+        var np={id:uid("p"),title:"Merged: "+ps.map(function(p){ return p.title||"Untitled"; }).join(" + ").slice(0,80),html:html,ink:null,space:0,t:Date.now(),c:Date.now()}; return kvSet("page:"+np.id,np).then(function(){ bkp(); MNSEL=null; toast("🔗 Merged into a new page (your originals are kept)"); go("mypage-"+np.id); }); }
+      if(a==="del"){ if(!armDel(b,"Tap again to delete "+ps.length)) return; return Promise.all(ps.map(function(p){ return delPage(p.id); })).then(function(){ bkp(); MNSEL=null; toast("🗑️ Deleted"); viewMyNotes(); }); } }); }); }; })();
+/* inside a notebook: flip bar */
+(function(){ var vp=viewMyPage; viewMyPage=function(id,startDraw){ var r=vp.apply(this,arguments); kvGet("page:"+id).then(function(p){ if(!p) return; var t=setInterval(function(){ var tools=app.querySelector(".mytools"); if(!tools) return; clearInterval(t); if(app.querySelector(".nb-bar")) return;
+    var bar=document.createElement("div"); bar.className="glass nb-bar";
+    if(p.book){ kvAll("page:").then(function(all){ var pg=all.filter(function(x){ return x.book===p.book; }).sort(function(a,b){ return (a.bi||0)-(b.bi||0); }), i=pg.findIndex(function(x){ return x.id===p.id; });
+      bar.innerHTML='<b>📚 '+esc(p.bookTitle||"Notebook")+'</b><span class="spacer"></span><button type="button" class="btn sm ghost" data-nb="prev"'+(i<=0?" disabled":"")+'>‹ Prev</button><span class="hint">Page '+(i+1)+' / '+pg.length+'</span><button type="button" class="btn sm ghost" data-nb="next"'+(i>=pg.length-1?" disabled":"")+'>Next ›</button><button type="button" class="btn sm" data-nb="add">＋ Page</button><button type="button" class="btn sm ghost" data-nb="out">📄 Take out</button><button type="button" class="btn sm ghost" data-nb="rename">✏️ Rename</button>';
+      bar.addEventListener("click",function(e){ var b=e.target.closest("[data-nb]"); if(!b) return; var a=b.dataset.nb;
+        if(a==="prev"&&i>0) go("mypage-"+pg[i-1].id); else if(a==="next"&&i<pg.length-1) go("mypage-"+pg[i+1].id);
+        else if(a==="add"){ var np={id:uid("p"),title:"",html:"",ink:null,space:0,t:Date.now(),c:Date.now(),book:p.book,bookTitle:p.bookTitle,bi:(pg[pg.length-1].bi||0)+1}; kvSet("page:"+np.id,np).then(function(){ bkp(); go("mypage-"+np.id); }); }
+        else if(a==="out"){ delete p.book; delete p.bookTitle; delete p.bi; kvSet("page:"+p.id,p).then(function(){ bkp(); toast("Taken out of the notebook"); viewMyPage(p.id); }); }
+        else if(a==="rename"){ var nm=prompt("Notebook name",p.bookTitle||"Notebook"); if(nm) Promise.all(pg.map(function(x){ x.bookTitle=nm; return kvSet("page:"+x.id,x); })).then(function(){ bkp(); viewMyPage(p.id); }); } }); }); }
+    else { bar.innerHTML='<span class="hint">📄 Single page</span><span class="spacer"></span><button type="button" class="btn sm ghost" data-nb="newbook">📚 Start a notebook from this page</button>'; bar.addEventListener("click",function(e){ if(!e.target.closest('[data-nb="newbook"]')) return; var nm=prompt("Name the notebook",p.title||"Notebook"); if(!nm) return; p.book=uid("bk"); p.bookTitle=nm; p.bi=0; kvSet("page:"+p.id,p).then(function(){ bkp(); toast("📚 Notebook started: tap ＋ Page to add pages"); viewMyPage(p.id); }); }); }
+    tools.parentNode.insertBefore(bar,tools); },80); setTimeout(function(){ clearInterval(t); },4000); }); return r; }; })();
+
+/* 🗒️ "Add sticky" buttons on everything you read */
+function stickyBtn(){ return '<button type="button" class="chip stkhere" title="Stick a sticky note on this page. It stays right here every time you open it">🗒️ Sticky</button>'; }
+document.addEventListener("click",function(e){ var b=e.target.closest(".stkhere"); if(!b) return; e.preventDefault(); e.stopPropagation(); var r=b.getBoundingClientRect(); newSticky({x:Math.min(innerWidth-260,Math.max(10,r.left)),y:Math.max(70,r.bottom+8)}); toast("📎 Stuck to this page: it'll be right here whenever you open it"); },true);
+function decorateStk(){
+  document.querySelectorAll(".nb-bar:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); x.insertAdjacentHTML("beforeend",stickyBtn()); });
+  document.querySelectorAll(".mytools:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); var sp=x.querySelector(".spacer"); if(sp) sp.insertAdjacentHTML("beforebegin",stickyBtn()); });
+  var fc=document.getElementById("fc"); if(fc&&!fc.hasAttribute("data-stkb")){ fc.setAttribute("data-stkb","1"); var tg=fc.querySelector(".tags"); if(tg) tg.insertAdjacentHTML("beforeend",stickyBtn()); }
+  document.querySelectorAll(".tblock h3:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); x.insertAdjacentHTML("beforeend",' '+stickyBtn()); });
+  document.querySelectorAll(".tc-head:not([data-stkb])").forEach(function(x){ x.setAttribute("data-stkb","1"); x.insertAdjacentHTML("beforeend",stickyBtn()); });
+}
+new MutationObserver(debounce(decorateStk,140)).observe(document.body,{childList:true,subtree:true});
 
 /* ---------- start ---------- */
 applyTheme();
