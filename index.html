@@ -436,6 +436,7 @@ body.lang-ar{font-family:"Noto Sans Arabic","Segoe UI",var(--body,system-ui),san
 .imp-apps div{display:grid;gap:3px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.45)}.imp-apps span{font-size:13px;opacity:.8}
 [data-theme=dark] .imp-apps div{background:rgba(255,255,255,.06)}
 [hidden]{display:none!important}
+.llm-err{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:300;max-width:min(560px,calc(100vw - 24px));display:grid;gap:4px;padding:14px 44px 14px 18px;border-radius:16px;background:#d92d3a;color:#fff;box-shadow:0 14px 40px rgba(217,45,58,.45);font-size:.92rem}.llm-err b{font-size:1rem}.llm-err button{position:absolute;top:8px;right:10px;border:0;background:transparent;color:#fff;font-size:1.1rem;cursor:pointer}
 .plan-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--c,#8c5aff) 7%,transparent);border-left:4px solid var(--c,#8c5aff)}
 .plan-item label{display:flex;gap:8px;align-items:center;cursor:pointer}.plan-day{padding:10px 18px;border-top:1px solid var(--line)}.plan-day summary{cursor:pointer}.plan-day ul{margin:8px 0 0}
 .bar-row{display:grid;grid-template-columns:minmax(120px,240px) 1fr 52px;gap:12px;align-items:center}.bar-row .progress{margin:0}.bar-row b{text-align:right}
@@ -1611,10 +1612,28 @@ function gemFetch(body,signal){
       throw e; }); }
   return once();
 }
+var LLM_PREF=null, LLM_PREF_T=0;
+function llmWhy(e){ var st=e&&e.status, m=String((e&&e.message)||e||"");
+  if(st===401||st===403||/api key|invalid key|unauthor|permission/i.test(m)) return "the key was rejected (check it in Settings)";
+  if(st===402||/credit|afford|billing|payment/i.test(m)) return "the account is out of credit";
+  if(st===429||(e&&e.quota)||/quota|rate limit|exhaust|too many/i.test(m)) return "the usage limit has been reached for now";
+  if(st>=500) return "the service is down at the moment";
+  if(!navigator.onLine||/failed to fetch|network|load failed|timeout/i.test(m)) return "there's no internet connection";
+  return m.slice(0,140)||"an unknown error"; }
+function llmError(list){ var el=$("#llm-err"); if(!el){ el=document.createElement("div"); el.id="llm-err"; el.className="llm-err"; el.setAttribute("role","alert"); document.body.appendChild(el); }
+  el.innerHTML='<b>⚠️ Rev can\'t reach any AI right now</b>'+list.map(function(x){ return '<span>'+esc(x[0])+': '+esc(x[1])+'.</span>'; }).join("")+'<span>Your notes, cards and quizzes still work. Rev will try again on your next request; queued jobs resume automatically.</span><button type="button" aria-label="Dismiss">✕</button>';
+  el.hidden=false; el.querySelector("button").onclick=function(){ el.hidden=true; }; clearTimeout(el._t); el._t=setTimeout(function(){ el.hidden=true; },20000); }
 function llmFetch(body,signal){
-  var p=prov(), copy=JSON.parse(JSON.stringify(body));
-  if(p==="gemini") return gemFetch(body,signal).catch(function(e){ if(e.name!=="AbortError" && isOR() && (e.quota||e.status>=500)){ toast("Gemini is out for now, so Rev is using Claude via OpenRouter"); return orFetch(copy,signal); } throw e; });
-  return orFetch(body,signal).catch(function(e){ var m=String(e.message||""); if(e.name!=="AbortError" && S.gemKey && (e.status===402||/credit|afford/i.test(m))){ toast("OpenRouter credit is out, so Rev is using Gemini (free)"); return gemFetch(copy,signal); } throw e; });
+  var p=prov(), copy=JSON.parse(JSON.stringify(body)), alt=null;
+  if(p==="gemini"&&isOR()) alt="other"; else if(p!=="gemini"&&S.gemKey) alt="gemini";
+  var first=p, order=[p];
+  if(alt) order.push(p==="gemini"?"openrouter":"gemini");
+  if(LLM_PREF&&Date.now()-LLM_PREF_T<10*60000&&order.indexOf(LLM_PREF)>0) order.reverse();
+  var errs=[];
+  function call(which,b){ return which==="gemini"?gemFetch(b,signal):orFetch(b,signal); }
+  function name(w){ return w==="gemini"?"Gemini":"Claude via OpenRouter"; }
+  function tryAt(i){ var w=order[i]; return call(w,i?JSON.parse(JSON.stringify(copy)):body).then(function(r){ if(i>0){ LLM_PREF=w; LLM_PREF_T=Date.now(); } else if(LLM_PREF&&LLM_PREF!==w){ LLM_PREF=null; } var el=$("#llm-err"); if(el) el.hidden=true; return r; },function(e){ if(e&&e.name==="AbortError") throw e; errs.push([name(w),llmWhy(e)]); if(i+1<order.length) return tryAt(i+1); llmError(errs); var err=new Error(errs.map(function(x){ return x[0]+": "+x[1]; }).join("; ")); err.shown=true; throw err; }); }
+  return tryAt(0);
 }
 function aiStatusText(){ var p=prov(); return AI.mode==="claude"?"Connected through claude.ai ✓":AI.mode==="key"?(p==="gemini"?"Using your Gemini key ✓ (free, "+(GEM_OK||S.gemModel)+")":p==="openrouter"?"Using your OpenRouter key ✓ ("+S.orModel+")":"Using your Anthropic API key ✓"):"No key yet. Paste a Gemini (free) or OpenRouter key below."; }
 var aiTries=0;
@@ -1627,7 +1646,7 @@ function aiInit(){
     if(!AI.sample && aiTries++<6) setTimeout(aiInit, 800*aiTries);
   }
 }
-function aiRefresh(){ var st=$("#ai-status-txt"); if(st) st.textContent=aiStatusText(); $("#ai-model").textContent=AI.mode==="key"?(prov()==="gemini"?(GEM_OK||S.gemModel)+" · Gemini · free":prov()==="openrouter"?S.orModel.replace("anthropic/","")+" · OpenRouter · medium":"Claude Sonnet 5.5 · your API key"):AI.model; drawChat(); }
+function aiRefresh(){ var st=$("#ai-status-txt"); if(st) st.textContent=aiStatusText(); $("#ai-model").textContent=AI.mode==="key"?(S.gemKey&&isOR()?"Gemini + Claude (switches automatically)":prov()==="gemini"?"Gemini":prov()==="openrouter"?"Claude via OpenRouter":"Claude"):AI.model; drawChat(); }
 function openAI(){ $("#ai").classList.add("open"); if(innerWidth<900) $("#scrim").classList.add("show"); drawChat(); setTimeout(function(){ $("#ai-in").focus(); },300); }
 function closeAI(){ $("#ai").classList.remove("open"); if(!$("#side").classList.contains("open")) $("#scrim").classList.remove("show"); }
 function closeAIOnMobile(){ if(innerWidth<900) closeAI(); }
@@ -1666,7 +1685,7 @@ function aiSend(text){
   var ctxText=(VCUR?"[Video open: "+JSON.stringify(videoStatus())+"]\n":"")+filesSummary()+"[App context: "+JSON.stringify(describeView()).slice(0,2500)+"]\n\n"+text+(fparts.length?"\n\n"+fparts.map(function(f){ return fileForModel(f,0); }).join("\n\n"):"");
   var p = AI.mode==="claude" ? aiViaClaude(ctxText) : AI.mode==="key" ? (prov()!=="anthropic"?aiViaOpenRouter(ctxText):aiViaKey(ctxText)) : Promise.reject({code:"none"});
   p.then(function(ans){ AI.msgs.push({role:"assistant",text:ans||"Done."}); speakText(ans||""); })
-   .catch(function(err){ var m = err && err.name==="AbortError" ? "Stopped." : err && err.quota ? err.message : err && err.code==="none" ? "Rev needs a key. Paste a free Gemini key (or an OpenRouter key) in Settings → AI tutor." : err && err.code==="not_granted" ? "AI access wasn't granted. You can allow it when asked, then try again." : err && err.code==="rate_limited" ? "Too many requests right now. Wait a minute and try again." : "Sorry, something went wrong"+(err&&err.message?": "+err.message:"")+"."; if(err && err.text) m=err.text+"\n\n_"+m+"_"; AI.msgs.push({role:"assistant",text:m}); })
+   .catch(function(err){ var m = err && err.name==="AbortError" ? "Stopped." : err && err.shown ? "I couldn't reach any AI just now (details in the red box). Ask again in a moment." : err && err.quota ? err.message : err && err.code==="none" ? "Rev needs a key. Paste a free Gemini key (or an OpenRouter key) in Settings → AI tutor." : err && err.code==="not_granted" ? "AI access wasn't granted. You can allow it when asked, then try again." : err && err.code==="rate_limited" ? "Too many requests right now. Wait a minute and try again." : "Sorry, something went wrong"+(err&&err.message?": "+err.message:"")+"."; if(err && err.text) m=err.text+"\n\n_"+m+"_"; AI.msgs.push({role:"assistant",text:m}); })
    .then(function(){ AI.busy=false; AI.ctrl=null; liveBubble=null; AI.msgs=AI.msgs.slice(-60); LS.set("chat",AI.msgs.filter(function(m){ return m.role!=="tool"; }).slice(-40)); drawChat(); });
 }
 function histFor(ctxText){
