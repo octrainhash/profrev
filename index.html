@@ -343,6 +343,7 @@ mark.uh{color:inherit;border-radius:3px;cursor:pointer}
 .tc-mk{font-size:.85em}.tc-score{margin:8px 0;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent)}.tc-src{display:grid;gap:4px;margin:8px 0}.tc-src .nrow{padding:6px 8px}.vpill{display:inline-block;margin:0 6px 6px 0;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700}.vpill.v-right{background:#2f9e4422;color:#2b8a3e}.vpill.v-partial{background:#f08c0022;color:#d9480f}.vpill.v-wrong{background:#e0313122;color:#c92a2a}.tc-info{border:1px dashed color-mix(in srgb,var(--accent) 45%,transparent)}.tc-pic img{max-width:100%;max-height:360px;border-radius:10px}
 @media (max-width:760px){.tc-quick{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none}.tc-quick>*{flex:none}}
 mark.tc-reading{background:color-mix(in srgb,#ffd43b 70%,transparent);color:inherit;border-radius:4px;padding:0 2px;box-shadow:0 0 0 2px color-mix(in srgb,#ffd43b 60%,transparent);animation:tcpulse 1.2s ease-in-out infinite}.tc-point{outline:3px solid #ffd43b;outline-offset:3px;border-radius:6px}.msg.tc-speaking{box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 55%,transparent)}.msg.tc-speaking::before{content:'🔊 Rev is explaining';display:block;font-size:.72rem;font-weight:700;opacity:.7;margin-bottom:4px}@keyframes tcpulse{50%{box-shadow:0 0 0 4px color-mix(in srgb,#ffd43b 35%,transparent)}}
+.tc-follow{background:color-mix(in srgb,#ffd43b 22%,transparent);border-radius:8px;box-shadow:0 0 0 4px color-mix(in srgb,#ffd43b 22%,transparent);transition:background .3s}.tc-main{position:relative}.tc-recenter{position:absolute;left:50%;transform:translateX(-50%);bottom:150px;z-index:5;border:0;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;background:var(--accent);color:#fff;box-shadow:0 6px 18px #0003;cursor:pointer}
 .ink-cv{position:absolute;left:0;top:0;pointer-events:none;z-index:5}
 .ink-cv.on{pointer-events:auto;cursor:crosshair;touch-action:none}
 .inking{outline:2px dashed color-mix(in srgb,var(--accent) 50%,transparent);outline-offset:-2px}
@@ -1277,6 +1278,7 @@ function viewSettings(){
     '<div class="setrow"><label>App language</label><div class="row">'+[["en","English"],["ur","اردو Urdu"],["ar","العربية Arabic"]].map(function(x){ return '<button type="button" class="chip" data-act="set-lang" data-v="'+x[0]+'" aria-pressed="'+((S.lang||"en")===x[0])+'">'+x[1]+'</button>'; }).join("")+'</div></div><p class="setrow help hint">Changes menus, speech recognition and Rev\'s replies. Urdu and Arabic switch to right-to-left. Notes stay in English (medical terms); use 🌐 Translate on any note.</p>'+
     '<div class="setrow"><label>Rev speaks answers</label><div class="row"><button type="button" class="chip" data-act="set-voice" aria-pressed="'+!!S.voiceOn+'">'+(S.voiceOn?"🔊 On":"🔇 Off")+'</button><button type="button" class="chip" data-act="test-voice">▶ Test voice</button></div></div><p class="setrow help hint">Uses Google\'s natural AI voices through your Gemini key (no robotic voices). If unavailable, Rev just types.</p>'+
     '<div class="setrow"><label>Voice</label><div class="row">'+VOICES.map(function(v){ return '<button type="button" class="chip" data-act="set-vname" data-v="'+v[0]+'" aria-pressed="'+((S.voiceName||"Kore")===v[0])+'" data-tip="'+esc(v[1])+'">'+v[0]+'</button>'; }).join("")+'</div></div>'+
+    '<div class="setrow"><label>Voice engine</label><div class="row"><button type="button" class="chip" data-act="set-veng" data-v="auto" aria-pressed="'+(S.voiceEngine!=="device")+'" data-tip="Rev\'s Google voice; when it reaches its limit, a natural Microsoft/Google voice on your device takes over">🎙️ Rev\'s voice + natural backup</button><button type="button" class="chip" data-act="set-veng" data-v="device" aria-pressed="'+(S.voiceEngine==="device")+'" data-tip="Only the natural voice on your device: instant, no limits">⚡ Device natural voice only</button></div><small class="hint">Backup voices are only the Natural ones (Jenny, Aria, Ava… in Edge), never robotic voices.'+(window.speechSynthesis?((speechSynthesis.getVoices()||[]).filter(function(v){ return /natural|neural|online/i.test(v.name); }).length?'':' No natural voice found in this browser: open ProfRev in Microsoft Edge to get them.'):'')+'</small></div>'+
     '<div class="setrow"><label>Speech to text</label><div class="row"><button type="button" class="chip" data-act="set-stt" aria-pressed="'+!S.forceCloudSTT+'">'+(S.forceCloudSTT?"☁️ Gemini (best for Urdu)":"⚡ Browser (fastest)")+'</button></div></div>'+
     '<div class="setrow"><label>Pen</label><div class="row"><button type="button" class="chip" data-act="set-pencil" aria-pressed="'+!!S.pencilOnly+'">'+(S.pencilOnly?"✏️ Only Pencil/stylus draws":"👆 Finger and pencil draw")+'</button></div></div></section>';
   h+='<section class="glass setgrid" style="padding:22px"><h2>✨ AI tutor</h2><p class="hint" style="margin:0;font-size:.92rem">Status: <b id="ai-status-txt">'+aiStatusText()+'</b></p>'+
@@ -1417,6 +1419,7 @@ function act(a, el){
     case "set-lang": S.lang=d.v; saveAll(); applyLang(); render(); toast(d.v==="ur"?"اردو منتخب":d.v==="ar"?"تم اختيار العربية":"English selected"); return;
     case "set-voice": S.voiceOn=!S.voiceOn; saveAll(); if(!S.voiceOn) stopSpeaking(); render(); if(S.voiceOn&&!S.gemKey) toast("Add a Gemini key below for the natural voice"); var vb=$("#ai-voice"); if(vb){ vb.textContent=S.voiceOn?"🔊":"🔇"; } return;
     case "set-vname": S.voiceName=d.v; saveAll(); render(); return;
+    case "set-veng": S.voiceEngine=d.v; saveAll(); render(); toast(d.v==="device"?"Using your device's natural voice":"Using Rev's voice with a natural backup"); return;
     case "test-voice": if(!S.gemKey){ toast("Add a Gemini key first"); return; } var was=S.voiceOn; S.voiceOn=true; speakText(S.lang==="ur"?"السلام علیکم! میں ریو ہوں، آپ کا ٹیوٹر۔ آج کیا پڑھیں؟":"Hi! I'm Rev, your tutor. What shall we study today?"); S.voiceOn=was; return;
     case "set-stt": S.forceCloudSTT=!S.forceCloudSTT; saveAll(); render(); return;
     case "set-pencil": S.pencilOnly=!S.pencilOnly; saveAll(); render(); return;
@@ -2599,6 +2602,22 @@ function geminiNative(body,model){
 /* natural voice (Google Gemini text-to-speech). No robotic browser voices. */
 var TTS_MODELS=["gemini-2.5-flash-preview-tts","gemini-2.5-flash-tts","gemini-2.5-pro-preview-tts","gemini-3.5-flash-tts","gemini-3-flash-tts"], TTS_OK=null, AUDIO=null, TTS_Q=[], TTS_BUSY=false;
 var VOICES=[["Kore","Calm, clear (female)"],["Aoede","Warm, friendly (female)"],["Leda","Young, bright (female)"],["Puck","Upbeat (male)"],["Charon","Deep, steady (male)"],["Fenrir","Energetic (male)"],["Orus","Firm (male)"],["Zephyr","Light, airy"]];
+/* backup voice: only Microsoft/Google "Natural/Neural/Online" voices (never robotic ones) */
+var DEVV=null, DEV_UNTIL=0;
+function naturalVoice(){ if(!window.speechSynthesis) return null; var vs=speechSynthesis.getVoices()||[]; if(!vs.length) return null;
+  var lang=S.lang==="ur"?"ur":S.lang==="ar"?"ar":"en", good=vs.filter(function(v){ return /natural|neural|online/i.test(v.name)&&v.lang.toLowerCase().indexOf(lang)===0; });
+  if(!good.length) return null;
+  var fem=/jenny|aria|ava|emma|michelle|sonia|libby|natasha|clara|uzma|zariyah|salma|female/i;
+  good.sort(function(a,b){ var sa=(fem.test(a.name)?2:0)+(/en-us/i.test(a.lang)?1:0)+(/multilingual/i.test(a.name)?0.5:0), sb=(fem.test(b.name)?2:0)+(/en-us/i.test(b.lang)?1:0)+(/multilingual/i.test(b.name)?0.5:0); return sb-sa; });
+  var pick=S.devVoice&&good.filter(function(v){ return v.name===S.devVoice; })[0]; return pick||good[0]; }
+if(window.speechSynthesis){ try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=function(){ DEVV=null; }; }catch(e){} }
+function useDevice(){ return S.voiceEngine==="device" || Date.now()<DEV_UNTIL; }
+function deviceSay(c,gen,done){ var v=naturalVoice(); if(!v){ done(false); return; }
+  deviceSay.last=v.name; var u; try{ u=new SpeechSynthesisUtterance(c.say); u.voice=v; u.lang=v.lang; u.rate=1.02; }catch(e){ done(false); return; } var fin=false; deviceSay.last=v.name;
+  u.onstart=function(){ if(gen===TTS_GEN&&c.onstart) try{ c.onstart(); }catch(e){} };
+  u.onend=u.onerror=function(){ if(fin) return; fin=true; if(c.onend) try{ c.onend(); }catch(e){} done(true); };
+  AUDIO={pause:function(){ try{ speechSynthesis.cancel(); }catch(e){} },_c:c,dev:true};
+  try{ speechSynthesis.speak(u); }catch(e){ done(false); } }
 /* speech queue: one voice at a time; a new reply interrupts the old one; next parts are prepared while the current one plays (no gaps) */
 var TTS_GEN=0;
 function ttsClean(s){ return String(s).replace(/```[\s\S]*?```/g," ").replace(/^\s*\|.*\|\s*$/gm," ").replace(/\$([^$\n]+)\$/g,function(m,x){ return latexPlain(x); }).replace(/[*_#>`~]/g,"").replace(/\[\[(.*?)\]\]/g,"$1").replace(/\[(.*?)\]\(.*?\)/g,"$1").replace(/\n{2,}/g,"\n").replace(/[ \t]+/g," ").trim(); }
@@ -2614,15 +2633,20 @@ function speakText(text,opts){
   if(!items.length) return;
   items.forEach(function(c){ c.gen=TTS_GEN; c.say=ttsClean(c.text); });
   TTS_Q=TTS_Q.concat(items); pumpTTS(); }
-function stopSpeaking(){ TTS_GEN++; TTS_Q.forEach(function(c){ if(c.onend) try{ c.onend(); }catch(e){} }); TTS_Q=[]; if(AUDIO){ try{ AUDIO.pause(); }catch(e){} if(AUDIO._c&&AUDIO._c.onend) try{ AUDIO._c.onend(); }catch(e){} AUDIO=null; } TTS_BUSY=false; }
-function ttsPrefetch(){ for(var i=0;i<Math.min(2,TTS_Q.length);i++){ var c=TTS_Q[i]; if(!c.p){ c.p=ttsAudio(c.say); c.p.catch(function(){}); } } }
-function pumpTTS(){ if(TTS_BUSY||!TTS_Q.length) return; TTS_BUSY=true; var c=TTS_Q.shift(), gen=c.gen; if(!c.p) c.p=ttsAudio(c.say); ttsPrefetch();
+function stopSpeaking(){ TTS_GEN++; try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){} TTS_Q.forEach(function(c){ if(c.onend) try{ c.onend(); }catch(e){} }); TTS_Q=[]; if(AUDIO){ try{ AUDIO.pause(); }catch(e){} if(AUDIO._c&&AUDIO._c.onend) try{ AUDIO._c.onend(); }catch(e){} AUDIO=null; } TTS_BUSY=false; }
+function ttsPrefetch(){ if(useDevice()) return; for(var i=0;i<Math.min(2,TTS_Q.length);i++){ var c=TTS_Q[i]; if(!c.p){ c.p=ttsAudio(c.say); c.p.catch(function(){}); } } }
+function pumpTTS(){ if(TTS_BUSY||!TTS_Q.length) return; TTS_BUSY=true; var c=TTS_Q.shift(), gen=c.gen;
+  var viaDevice=function(why){ deviceSay(c,gen,function(ok){ if(gen!==TTS_GEN) return; AUDIO=null; TTS_BUSY=false; if(!ok){ TTS_Q=[]; if(why&&!speakText._warned){ speakText._warned=true; toast("Rev's voice has reached today's limit and no natural backup voice is on this device. Rev will keep typing."); } return; } pumpTTS(); }); };
+  if(useDevice()){ viaDevice(false); return; }
+  if(!c.p) c.p=ttsAudio(c.say); ttsPrefetch();
   c.p.then(function(url){ if(gen!==TTS_GEN){ URL.revokeObjectURL(url); return; }
       var a=new Audio(url); a._c=c; AUDIO=a; if(c.onstart) try{ c.onstart(); }catch(e){}
       a.onended=function(){ URL.revokeObjectURL(url); if(c.onend) try{ c.onend(); }catch(e){} if(gen!==TTS_GEN) return; AUDIO=null; TTS_BUSY=false; pumpTTS(); };
       a.onerror=function(){ if(c.onend) try{ c.onend(); }catch(e){} if(gen!==TTS_GEN) return; TTS_BUSY=false; pumpTTS(); };
       return a.play().catch(function(e){ if(gen!==TTS_GEN) return; TTS_BUSY=false; if(!speakText._tap){ speakText._tap=true; toast("Tap anywhere once to let Rev speak"); } }); })
-   .catch(function(e){ if(gen!==TTS_GEN) return; TTS_BUSY=false; if(TTS_Q.length&&!/quota|exhaust|429|key/i.test(String(e.message||e))){ pumpTTS(); return; } TTS_Q=[]; if(!speakText._warned){ speakText._warned=true; toast("Natural voice unavailable right now ("+String(e.message||e).slice(0,80)+"). Rev will keep typing."); } }); }
+   .catch(function(e){ if(gen!==TTS_GEN) return; /* Google voice failed or hit its limit: carry on right here with the device's natural voice, try Google again in 10 minutes */
+      DEV_UNTIL=Date.now()+10*60*1000; TTS_Q.forEach(function(x){ x.p=null; }); if(!speakText._sw){ speakText._sw=true; var v=naturalVoice(); if(v) toast("🔊 Rev's voice hit its limit, so switching to "+v.name.replace(/Microsoft |Online|\(Natural\)| - .*$/g,"").trim()+" (natural backup voice)"); }
+      viaDevice(true); }); }
 function ttsAudio(text){
   var list=TTS_OK?[TTS_OK]:TTS_MODELS, k=0;
   var style=(S.lang==="ur"?"Say in natural Urdu (Pakistani accent), like a friendly senior doctor teaching: ":S.lang==="ar"?"Say in natural Arabic, like a friendly teacher: ":"Say naturally, like a friendly senior doctor explaining to a medical student: ");
@@ -2712,7 +2736,7 @@ function viewTeach(p){
     '<div class="row">'+sug.map(function(s){ return '<button type="button" class="chip" data-tsug="'+esc(s)+'">'+esc(s)+'</button>'; }).join("")+'</div>'+
     '<div><b>Style</b><div class="row" style="margin-top:6px">'+TEACH_STYLES.map(function(s,i){ return '<button type="button" class="chip" data-tsty="'+s[0]+'" aria-pressed="'+((S.teachStyle||"socratic")===s[0])+'" data-tip="'+esc(s[2])+'">'+s[1]+'</button>'; }).join("")+'</div></div>'+
     '<div><b>Level</b><div class="row" style="margin-top:6px">'+TEACH_LEVELS.map(function(s){ return '<button type="button" class="chip" data-tlev="'+s[0]+'" aria-pressed="'+((S.teachLevel||"3rd")===s[0])+'">'+s[1]+'</button>'; }).join("")+'</div></div>'+
-    '<div><b>Options</b><div class="row" style="margin-top:6px"><button type="button" class="chip" id="tc-pre" aria-pressed="'+!!S.teachPretest+'" data-tip="Rev asks 3 quick questions first, then skips what you already know">🧪 Test me first</button></div></div>'+'<div class="row"><button type="button" class="btn" id="tc-go"'+(AI.mode==="none"?" disabled":"")+'>🎓 Start lesson</button>'+(AI.mode==="none"?'<span class="hint">Add a Gemini key in Settings → AI tutor first.</span>':'')+'<span class="spacer"></span><span class="hint" id="tc-hist"></span></div></section>'+
+    '<div><b>Options</b><div class="row" style="margin-top:6px"><button type="button" class="chip" id="tc-pre" aria-pressed="'+!!S.teachPretest+'" data-tip="Rev asks 3 quick questions first, then skips what you already know">🧪 Test me first</button></div></div>'+'<div class="row"><button type="button" class="btn" id="tc-go"'+(AI.mode==="none"&&!anyKey()?" disabled":"")+'>🎓 Start lesson</button>'+(AI.mode==="none"&&!anyKey()?'<span class="hint">Add a Gemini key in Settings → AI tutor first.</span>':'')+'<span class="spacer"></span><span class="hint" id="tc-hist"></span></div></section>'+
     '<section class="glass" style="padding:14px" id="tc-past"></section>';
   kvKeys("teach:").then(function(ks){ return Promise.all(ks.map(function(k){ return kvGet(k); })); }).then(function(ss){ ss=ss.filter(Boolean).sort(function(a,b){ return b.t-a.t; }).slice(0,12);
     $("#tc-past").innerHTML=ss.length?'<b>Continue a lesson</b>'+ss.map(function(s){ return '<button type="button" class="nrow" data-go="teach-resume-'+s.id+'"><span class="nt"><b>'+esc(s.topic)+'</b><small>'+(s.outline?(s.part||1)+" / "+s.outline.length+" parts":"")+' · '+s.msgs.length+' messages</small></span><span class="hint">'+new Date(s.t).toLocaleDateString()+'</span></button>'; }).join(""):'<p class="hint" style="margin:0">Your lessons are saved here so you can continue later.</p>'; });
@@ -2720,7 +2744,7 @@ function viewTeach(p){
     if(b.dataset.tsug){ $("#tc-topic").value=b.dataset.tsug; }
     if(b.dataset.tsty){ S.teachStyle=b.dataset.tsty; saveAll(); app.querySelectorAll("[data-tsty]").forEach(function(x){ x.setAttribute("aria-pressed",x===b); }); }
     if(b.dataset.tlev){ S.teachLevel=b.dataset.tlev; saveAll(); app.querySelectorAll("[data-tlev]").forEach(function(x){ x.setAttribute("aria-pressed",x===b); }); } });
-  $("#tc-go").addEventListener("click",function(){ var tp=$("#tc-topic").value.trim(); if(!tp){ toast("Type a topic first"); return; }
+  $("#tc-go").addEventListener("click",function(){ if(AI.mode==="none"&&anyKey()) aiInit(); var tp=$("#tc-topic").value.trim(); if(!tp){ toast("Type a topic first"); return; }
     TEACH={id:uid("t"),topic:tp,style:S.teachStyle||"socratic",level:S.teachLevel||"3rd",pretest:!!S.teachPretest,msgs:[],marks:[],outline:null,part:0,t:Date.now()}; TEACH.src=teachSources(tp); renderTeach(); teachSend(TEACH,""); });
   $("#tc-topic").addEventListener("keydown",function(e){ if(e.key==="Enter") $("#tc-go").click(); });
   $("#tc-pre").addEventListener("click",function(){ S.teachPretest=!S.teachPretest; saveAll(); this.setAttribute("aria-pressed",!!S.teachPretest); });
@@ -2802,7 +2826,7 @@ function teachSaveNotes(t){
   newPage({title:"🎓 "+t.topic,html:html}); toast("Saved to My notes"); }
 
 /* ---- voice in Teach me: Rev talks in its own words; when it points at the written lesson, that phrase lights up ---- */
-function teachUnmark(){ document.querySelectorAll("mark.tc-reading").forEach(function(m){ var p=m.parentNode; while(m.firstChild) p.insertBefore(m.firstChild,m); p.removeChild(m); p.normalize(); }); document.querySelectorAll(".tc-point,.tc-speaking").forEach(function(x){ x.classList.remove("tc-point","tc-speaking"); }); }
+function teachUnmark(){ document.querySelectorAll("mark.tc-reading").forEach(function(m){ var p=m.parentNode; while(m.firstChild) p.insertBefore(m.firstChild,m); p.removeChild(m); p.normalize(); }); document.querySelectorAll(".tc-point,.tc-speaking,.tc-follow").forEach(function(x){ x.classList.remove("tc-point","tc-speaking","tc-follow"); }); }
 function teachMark(host,q){ if(!host||!q) return null; q=q.trim(); if(/^(table|diagram|figure|picture|chart)$/i.test(q)){ var el=host.querySelector(q.toLowerCase()==="table"?"table":"svg,pre,.diagram,img,table"); if(el){ el.classList.add("tc-point"); return el; } return null; }
   var norm=function(s){ return s.toLowerCase().replace(/[*_`]/g,"").replace(/\s+/g," "); }, nq=norm(q);
   /* search across the whole message text, even when the phrase spans bold/italic, then mark each piece */
@@ -2817,16 +2841,34 @@ function teachMark(host,q){ if(!host||!q) return null; q=q.trim(); if(/^(table|d
   if(best&&bs>=Math.max(1,Math.ceil(words.length/2))){ best.classList.add("tc-point"); return best; } return null; }
 function markSpan(nodes,s,e){ var first=null; nodes.forEach(function(o){ var ns=o.s, ne=o.s+o.n.nodeValue.length; if(ne<=s||ns>=e) return; var a=Math.max(s,ns)-ns, b=Math.min(e,ne)-ns; if(b<=a) return;
     try{ var r=document.createRange(); r.setStart(o.n,a); r.setEnd(o.n,b); var mk=document.createElement("mark"); mk.className="tc-reading"; r.surroundContents(mk); if(!first) first=mk; }catch(x){} }); return first; }
+/* follow-along: like Google Maps re-centring. Rev scrolls to and highlights what it is talking about;
+   if you scroll yourself it lets go, and 3.5 s after you stop it takes over again */
+var TFOL={paused:false,timer:null,target:null};
+function tfolPill(show){ var b=$("#tc-body"); if(!b) return; var p=$("#tc-recenter"); if(show&&!p){ p=document.createElement("button"); p.type="button"; p.id="tc-recenter"; p.className="tc-recenter"; p.textContent="↺ Back to where Rev is"; p.addEventListener("click",function(){ tfolResume(); }); b.parentNode.appendChild(p); } if(!show&&p) p.remove(); }
+function tfolGo(){ if(TFOL.paused||!TFOL.target||!TFOL.target.isConnected) return; try{ TFOL.target.scrollIntoView({block:"center",behavior:"smooth"}); }catch(e){} }
+function tfolResume(){ clearTimeout(TFOL.timer); TFOL.paused=false; tfolPill(false); tfolGo(); }
+function tfolUser(){ if(!AUDIO&&!TTS_BUSY) return; TFOL.paused=true; tfolPill(true); clearTimeout(TFOL.timer); TFOL.timer=setTimeout(tfolResume,3500); }
+function tfolHook(){ var b=$("#tc-body"); if(!b||b._tfol) return; b._tfol=1; ["wheel","touchstart","touchmove","pointerdown"].forEach(function(ev){ b.addEventListener(ev,function(e){ if(ev==="pointerdown"&&e.target.closest("button,a,textarea,input")) return; tfolUser(); },{passive:true}); });
+  document.addEventListener("keydown",function(e){ if(/^(ArrowUp|ArrowDown|PageUp|PageDown|Home|End| )$/.test(e.key)&&!/INPUT|TEXTAREA/.test((document.activeElement||{}).tagName||"")&&$("#tc-body")) tfolUser(); }); }
+function teachFindBlock(text,mi){ var want=tToks(text); if(want.length<2) return null; var uniq={}; want.forEach(function(w){ uniq[w]=1; }); want=Object.keys(uniq);
+  var best=null, bs=0; document.querySelectorAll("#tc-body .msg.bot[data-mi]").forEach(function(msg){ var near=+msg.dataset.mi===mi?1.25:1;
+    msg.querySelectorAll("p,li,tr,h3,h4,pre,blockquote").forEach(function(el){ if(el.closest(".vpill")) return; var ws=tToks(el.textContent); if(!ws.length) return; var hit=0; want.forEach(function(w){ if(ws.indexOf(w)>=0) hit++; });
+      var sc=hit*near/Math.sqrt(Math.max(4,ws.length)/4); if(hit>=2&&sc>bs){ bs=sc; best=el; } }); });
+  return best; }
 function teachSpeak(t,mi){
-  if(!S.voiceOn) return; var m=t.msgs[mi]; if(!m) return;
+  if(!S.voiceOn) return; var m=t.msgs[mi]; if(!m) return; tfolHook(); TFOL.paused=false; tfolPill(false);
   var host=function(){ return document.querySelector('#tc-body [data-mi="'+mi+'"]'); };
-  if(!m.say){ speakText(m.text); return; }
-  var chunks=ttsChunks(m.say.replace(/\n+/g," ")).map(function(c){ var qs=[], re=/\[\[(.+?)\]\]/g, x; while((x=re.exec(c))) qs.push(x[1]);
-    return {text:c.replace(/\[\[(table|diagram|figure|picture|chart)\]\]/gi,"$1").replace(/\[\[(.+?)\]\]/g,"$1"),
-      onstart:function(){ teachUnmark(); var h=host(); if(!h) return; h.classList.add("tc-speaking"); var first=null; qs.forEach(function(q){ var el=teachMark(h,q); if(el&&!first) first=el; }); if(first) try{ first.scrollIntoView({block:"nearest",behavior:"smooth"}); }catch(e){} },
+  var src=m.say||m.text, spoken=!!m.say;
+  var chunks=(spoken?ttsChunks(src.replace(/\n+/g," ")):ttsChunks(ttsClean(src))).map(function(c){ var qs=[], re=/\[\[(.+?)\]\]/g, x; while((x=re.exec(c))) qs.push(x[1]); var plain=c.replace(/\[\[(table|diagram|figure|picture|chart)\]\]/gi,"$1").replace(/\[\[(.+?)\]\]/g,"$1");
+    return {text:plain,
+      onstart:function(){ teachUnmark(); var h=host(); if(!h) return; h.classList.add("tc-speaking"); var first=null;
+        qs.forEach(function(q){ var el=teachMark(h,q); if(el&&!first) first=el; });
+        /* no exact quote: light up the paragraph (anywhere in the lesson) that matches what Rev is saying */
+        var blk=teachFindBlock(qs.join(" ")+" "+plain,mi); if(blk){ blk.classList.add("tc-follow"); if(!first) first=blk; }
+        TFOL.target=first||h; tfolGo(); },
       onend:function(){ teachUnmark(); } }; });
   speakText(null,{chunks:chunks}); }
-window.__t={jobs:function(){ return {run:JOBS.run,q:JOBS.q.length,stop:JOBS.stop,cp:cpDone(),rem:completeRemaining()}; },check:function(){ completeCheck(); },set:function(k,v){ S[k]=v; saveAll(); },get:function(k){ return S[k]; },speak:function(x){ speakText(x); },q:function(){ return TTS_Q.length; },playing:function(){ return !!AUDIO; }};
+window.__t={devLast:function(){ return deviceSay.last||null; },natural:function(){ var v=naturalVoice(); return v&&v.name; },tfol:function(){ return {paused:TFOL.paused,target:TFOL.target?TFOL.target.tagName+":"+TFOL.target.textContent.slice(0,40):null,pill:!!$("#tc-recenter")}; },jobs:function(){ return {run:JOBS.run,q:JOBS.q.length,stop:JOBS.stop,cp:cpDone(),rem:completeRemaining()}; },check:function(){ completeCheck(); },set:function(k,v){ S[k]=v; saveAll(); },get:function(k){ return S[k]; },speak:function(x){ speakText(x); },q:function(){ return TTS_Q.length; },playing:function(){ return !!AUDIO; }};
 
 /* ---------- OSPE practice: timed stations, write or say answers, self-mark or Rev marks ---------- */
 var OSPE=[]; try{ OSPE=JSON.parse(document.getElementById("ospedata").textContent)||[]; }catch(e){}
