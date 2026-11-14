@@ -2605,14 +2605,14 @@ var VOICES=[["Kore","Calm, clear (female)"],["Aoede","Warm, friendly (female)"],
 /* backup voice: only Microsoft/Google "Natural/Neural/Online" voices (never robotic ones) */
 var DEVV=null, DEV_UNTIL=0;
 function naturalVoice(){ if(!window.speechSynthesis) return null; var vs=speechSynthesis.getVoices()||[]; if(!vs.length) return null;
-  var lang=S.lang==="ur"?"ur":S.lang==="ar"?"ar":"en", good=vs.filter(function(v){ return /natural|neural|online/i.test(v.name)&&v.lang.toLowerCase().indexOf(lang)===0; });
+  var lang=S.lang==="ur"?"ur":S.lang==="ar"?"ar":"en", good=vs.filter(function(v){ return (/natural|neural|online/i.test(v.name)||(/^Google /.test(v.name)&&!v.localService))&&v.lang.toLowerCase().indexOf(lang)===0; });
   if(!good.length) return null;
   var fem=/jenny|aria|ava|emma|michelle|sonia|libby|natasha|clara|uzma|zariyah|salma|female/i;
   good.sort(function(a,b){ var sa=(fem.test(a.name)?2:0)+(/en-us/i.test(a.lang)?1:0)+(/multilingual/i.test(a.name)?0.5:0), sb=(fem.test(b.name)?2:0)+(/en-us/i.test(b.lang)?1:0)+(/multilingual/i.test(b.name)?0.5:0); return sb-sa; });
   var pick=S.devVoice&&good.filter(function(v){ return v.name===S.devVoice; })[0]; return pick||good[0]; }
 if(window.speechSynthesis){ try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=function(){ DEVV=null; }; }catch(e){} }
 function useDevice(){ return S.voiceEngine==="device" || Date.now()<DEV_UNTIL; }
-function deviceSay(c,gen,done){ var v=naturalVoice(); if(!v){ done(false); return; }
+function deviceSay(c,gen,done){ var v=naturalVoice(); if(!v&&window.speechSynthesis&&!deviceSay._waited){ deviceSay._waited=true; var tm=setTimeout(function(){ deviceSay(c,gen,done); },1500); try{ speechSynthesis.addEventListener("voiceschanged",function once(){ speechSynthesis.removeEventListener("voiceschanged",once); clearTimeout(tm); deviceSay(c,gen,done); }); }catch(e){} return; } if(!v){ done(false); return; }
   deviceSay.last=v.name; var u; try{ u=new SpeechSynthesisUtterance(c.say); u.voice=v; u.lang=v.lang; u.rate=1.02; }catch(e){ done(false); return; } var fin=false; deviceSay.last=v.name;
   u.onstart=function(){ if(gen===TTS_GEN&&c.onstart) try{ c.onstart(); }catch(e){} };
   u.onend=u.onerror=function(){ if(fin) return; fin=true; if(c.onend) try{ c.onend(); }catch(e){} done(true); };
@@ -2636,7 +2636,7 @@ function speakText(text,opts){
 function stopSpeaking(){ TTS_GEN++; try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){} TTS_Q.forEach(function(c){ if(c.onend) try{ c.onend(); }catch(e){} }); TTS_Q=[]; if(AUDIO){ try{ AUDIO.pause(); }catch(e){} if(AUDIO._c&&AUDIO._c.onend) try{ AUDIO._c.onend(); }catch(e){} AUDIO=null; } TTS_BUSY=false; }
 function ttsPrefetch(){ if(useDevice()) return; for(var i=0;i<Math.min(2,TTS_Q.length);i++){ var c=TTS_Q[i]; if(!c.p){ c.p=ttsAudio(c.say); c.p.catch(function(){}); } } }
 function pumpTTS(){ if(TTS_BUSY||!TTS_Q.length) return; TTS_BUSY=true; var c=TTS_Q.shift(), gen=c.gen;
-  var viaDevice=function(why){ deviceSay(c,gen,function(ok){ if(gen!==TTS_GEN) return; AUDIO=null; TTS_BUSY=false; if(!ok){ TTS_Q=[]; if(why&&!speakText._warned){ speakText._warned=true; toast("Rev's voice has reached today's limit and no natural backup voice is on this device. Rev will keep typing."); } return; } pumpTTS(); }); };
+  var viaDevice=function(why){ deviceSay(c,gen,function(ok){ if(gen!==TTS_GEN) return; AUDIO=null; TTS_BUSY=false; if(!ok){ if(why) toast("🔇 Voice problem: "+(speakText._lastErr||"").slice(0,90)+(naturalVoice()?"":" (no natural backup voice in this browser; open ProfRev in Microsoft Edge)")); TTS_Q=[]; return; } pumpTTS(); }); };
   if(useDevice()){ viaDevice(false); return; }
   if(!c.p) c.p=ttsAudio(c.say); ttsPrefetch();
   c.p.then(function(url){ if(gen!==TTS_GEN){ URL.revokeObjectURL(url); return; }
@@ -2645,7 +2645,7 @@ function pumpTTS(){ if(TTS_BUSY||!TTS_Q.length) return; TTS_BUSY=true; var c=TTS
       a.onerror=function(){ if(c.onend) try{ c.onend(); }catch(e){} if(gen!==TTS_GEN) return; TTS_BUSY=false; pumpTTS(); };
       return a.play().catch(function(e){ if(gen!==TTS_GEN) return; TTS_BUSY=false; if(!speakText._tap){ speakText._tap=true; toast("Tap anywhere once to let Rev speak"); } }); })
    .catch(function(e){ if(gen!==TTS_GEN) return; /* Google voice failed or hit its limit: carry on right here with the device's natural voice, try Google again in 10 minutes */
-      DEV_UNTIL=Date.now()+10*60*1000; TTS_Q.forEach(function(x){ x.p=null; }); if(!speakText._sw){ speakText._sw=true; var v=naturalVoice(); if(v) toast("🔊 Rev's voice hit its limit, so switching to "+v.name.replace(/Microsoft |Online|\(Natural\)| - .*$/g,"").trim()+" (natural backup voice)"); }
+      if(naturalVoice()) DEV_UNTIL=Date.now()+10*60*1000; TTS_Q.forEach(function(x){ x.p=null; }); speakText._lastErr=String(e&&e.message||e); if(!speakText._sw){ speakText._sw=true; var v=naturalVoice(); if(v) toast("🔊 Rev's voice hit its limit, so switching to "+v.name.replace(/Microsoft |Online|\(Natural\)| - .*$/g,"").trim()+" (natural backup voice)"); }
       viaDevice(true); }); }
 function ttsAudio(text){
   var list=TTS_OK?[TTS_OK]:TTS_MODELS, k=0;
