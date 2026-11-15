@@ -2638,16 +2638,23 @@ var VOICES=[["Kore","Calm, clear (female)"],["Aoede","Warm, friendly (female)"],
 /* backup voice: only Microsoft/Google "Natural/Neural/Online" voices (never robotic ones) */
 var DEVV=null, DEV_UNTIL=0;
 function naturalVoice(){ if(!window.speechSynthesis) return null; var vs=speechSynthesis.getVoices()||[]; if(!vs.length) return null;
-  var lang=S.lang==="ur"?"ur":S.lang==="ar"?"ar":"en", good=vs.filter(function(v){ return (/natural|neural|online/i.test(v.name)||(/^Google /.test(v.name)&&!v.localService))&&v.lang.toLowerCase().indexOf(lang)===0; });
+  var lang=S.lang==="ur"?"ur":S.lang==="ar"?"ar":"en", ua=navigator.userAgent||"", apple=/iPhone|iPad|iPod|Macintosh/i.test(ua), android=/Android/i.test(ua);
+  var novelty=/albert|bad news|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grand(ma|pa)|rocko|shelley|eddy|flo\b|reed|sandy|espeak|robot/i;
+  var good=vs.filter(function(v){ if(v.lang.toLowerCase().replace("_","-").indexOf(lang)!==0||novelty.test(v.name)) return false;
+    if(/natural|neural|online/i.test(v.name)||(/^Google /.test(v.name)&&!v.localService)) return true;
+    if(apple&&(/\((enhanced|premium)\)/i.test(v.name)||/siri|samantha|ava|zoe|allison|susan|serena|daniel|karen|moira|tessa|rishi|veena/i.test(v.name))) return true;
+    if(android) return true; /* Android's speech voices are Google's natural TTS */
+    return false; });
   if(!good.length) return null;
-  var fem=/jenny|aria|ava|emma|michelle|sonia|libby|natasha|clara|uzma|zariyah|salma|female/i;
-  good.sort(function(a,b){ var sa=(fem.test(a.name)?2:0)+(/en-us/i.test(a.lang)?1:0)+(/multilingual/i.test(a.name)?0.5:0), sb=(fem.test(b.name)?2:0)+(/en-us/i.test(b.lang)?1:0)+(/multilingual/i.test(b.name)?0.5:0); return sb-sa; });
+  var fem=/jenny|aria|ava|emma|michelle|sonia|libby|natasha|clara|uzma|zariyah|salma|samantha|zoe|allison|susan|serena|karen|moira|tessa|female/i;
+  var sc=function(v){ return (/premium/i.test(v.name)?6:/enhanced|natural|neural|online/i.test(v.name)?4:/^Google /.test(v.name)?3:0)+(fem.test(v.name)?2:0)+(/en.us/i.test(v.lang)?1:0)+(/multilingual/i.test(v.name)?0.5:0); };
+  good.sort(function(a,b){ return sc(b)-sc(a); });
   var pick=S.devVoice&&good.filter(function(v){ return v.name===S.devVoice; })[0]; return pick||good[0]; }
 if(window.speechSynthesis){ try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=function(){ DEVV=null; }; }catch(e){} }
 function useDevice(){ return S.voiceEngine==="device" || (!S.gemKey&&!S.elKey&&!S.gcKey) || Date.now()<DEV_UNTIL; }
 function deviceSay(c,gen,done){ var v=naturalVoice(); if(!v&&window.speechSynthesis&&!deviceSay._waited){ deviceSay._waited=true; var tm=setTimeout(function(){ deviceSay(c,gen,done); },5000); try{ speechSynthesis.addEventListener("voiceschanged",function once(){ speechSynthesis.removeEventListener("voiceschanged",once); clearTimeout(tm); deviceSay(c,gen,done); }); }catch(e){} return; } if(!v){ done(false); return; }
   deviceSay.last=v.name; var u; try{ u=new SpeechSynthesisUtterance(c.say); u.voice=v; u.lang=v.lang; u.rate=1.02; }catch(e){ done(false); return; } var fin=false; deviceSay.last=v.name;
-  voiceBadge("🔊 Backup voice: "+v.name.replace(/Microsoft |Online|\(Natural\)| - .*$/g,"").trim()); u.onstart=function(){ if(gen===TTS_GEN&&c.onstart) try{ c.onstart(); }catch(e){} };
+  voiceBadge("🔊 Backup voice: "+v.name.replace(/Microsoft |Online|\(Natural\)|\((Enhanced|Premium)\)| - .*$/g,"").trim()); u.onstart=function(){ if(gen===TTS_GEN&&c.onstart) try{ c.onstart(); }catch(e){} };
   u.onend=u.onerror=function(){ if(fin) return; fin=true; if(c.onend) try{ c.onend(); }catch(e){} done(true); };
   AUDIO={pause:function(){ try{ speechSynthesis.cancel(); }catch(e){} },_c:c,dev:true};
   try{ speechSynthesis.speak(u); }catch(e){ done(false); } }
@@ -2744,6 +2751,7 @@ function openInEdge(){ var u=location.href.replace(/#.*$/,"")+"#settings"; locat
   try{ speechSynthesis.addEventListener("voiceschanged",function(){ var h=document.getElementById("nv-hint"); if(h) h.innerHTML=voiceHintHtml(); }); }catch(e){} })();
 function voiceHintHtml(){ var nv=naturalVoice();
   if(nv) return "✅ Natural backup voice found: <b>"+esc(nv.name.replace(/Microsoft |Online|\(Natural\)| - .*$/g,"").trim())+"</b>. Never robotic voices.";
+  if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) return "No natural voice found yet. On iPhone: Settings → Accessibility → Spoken Content → Voices → English → download an <b>Enhanced</b> or <b>Premium</b> voice (free), then reopen ProfRev. The online voices (Gemini, ElevenLabs) still work meanwhile.";
   var s="No natural voice in this browser yet"+(edgeHere()?" (Edge can take a few seconds to load them)":"")+". The online voices (Gemini, ElevenLabs) still work here. ";
   if(winHere()&&!edgeHere()) s+=' <button type="button" class="chip" data-act="open-edge">🌐 Open ProfRev in Edge for its natural voices</button>';
   return s; }
