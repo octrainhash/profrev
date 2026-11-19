@@ -3074,7 +3074,7 @@ function viewOspeRun(){
     '<span class="spacer"></span>'+(ORUN.i>0?'<button type="button" class="btn ghost" data-or="prev">← Prev</button>':'')+(ORUN.i<ORUN.ids.length-1?'<button type="button" class="btn'+(shown?'':' ghost')+'" data-or="next">Next station →</button>':'<button type="button" class="btn" data-or="finish">Finish ✓</button>')+'</div><div id="orev"></div></section></div>';
   app.innerHTML=h; ospeImgFallback(app);
   app.querySelectorAll(".oans").forEach(function(t){ t.addEventListener("input",function(){ ORUN.ans[t.dataset.k]=t.value; }); });
-  app.querySelectorAll("[data-omic]").forEach(function(b){ b.addEventListener("click",function(){ var ta=app.querySelector('.oans[data-k="'+b.dataset.omic+'"]'); listen(ta,function(txt){ ta.value=((ORUN.ans[b.dataset.omic]||"")+" "+txt).trim(); ORUN.ans[b.dataset.omic]=ta.value; },b); }); });
+  app.querySelectorAll("[data-omic]").forEach(function(b){ b.addEventListener("click",function(){ var ta=app.querySelector('.oans[data-k="'+b.dataset.omic+'"]'); listen(ta,function(txt){ ta.value=String(txt).trim(); ORUN.ans[b.dataset.omic]=ta.value; },b); }); });
   app.querySelector(".ospe").addEventListener("click",function(e){ var b=e.target.closest("[data-or],[data-om]"); if(!b) return;
     if(b.dataset.om){ var p2=b.dataset.om.split("|"); ORUN.marks[p2[0]]=+p2[1]; b.parentNode.querySelectorAll("[data-om]").forEach(function(x){ x.setAttribute("aria-pressed",x===b); }); return; }
     var a=b.dataset.or;
