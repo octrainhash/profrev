@@ -153,6 +153,7 @@ select{min-width:0}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tabs button{border:1px solid var(--line);background:var(--glass-strong);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.9rem}
 .tabs button[aria-selected="true"]{background:var(--c);border-color:var(--c);color:#fff}
+[data-theme=dark] .tabs button[aria-selected="true"]{color:#10121c}
 .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 select,.input,textarea{border:1px solid var(--line);background:var(--glass-strong);border-radius:12px;padding:9px 12px;max-width:100%}
 textarea{width:100%;min-height:80px;resize:vertical}
@@ -174,7 +175,7 @@ textarea{width:100%;min-height:80px;resize:vertical}
 .btn{border:0;border-radius:12px;padding:10px 18px;font-weight:700;background:var(--accent);color:var(--accent-ink);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 35%,transparent)}
 .btn.ghost{background:var(--glass-strong);color:var(--ink);border:1px solid var(--line);box-shadow:none}
 .btn.good{background:var(--good);box-shadow:none;color:#fff}
-.btn.warn{background:var(--warn);box-shadow:none;color:#fff}
+.btn.warn{background:var(--warn);box-shadow:none;color:#fff}[data-theme=dark] .btn.warn{color:#1f1300}
 .btn.sm{padding:7px 12px;font-size:.86rem}
 .btn:disabled{opacity:.45;cursor:default}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -668,7 +669,7 @@ var PRESETS = [["Lilac","#7c5cff","#ff6fb5"],["Rose","#e64980","#ff922b"],["Ocea
 function inkFor(hex){ var h=hex.replace("#",""); if(h.length===3) h=h.split("").map(function(x){return x+x;}).join(""); var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16); var y=(r*299+g*587+b*114)/1000; return y>165?"#14152a":"#ffffff"; }
 function applyTheme(){
   var r=document.documentElement;
-  if(S.mode==="system") r.removeAttribute("data-theme"); else r.setAttribute("data-theme",S.mode);
+  r.setAttribute("data-theme", S.mode==="system" ? ((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light") : S.mode);
   r.style.setProperty("--accent",S.accent); r.style.setProperty("--accent-2",S.accent2); r.style.setProperty("--accent-ink",inkFor(S.accent));
   r.style.setProperty("--fs",S.fs+"px");
   document.body.dataset.glass=S.glass; document.body.dataset.bg=S.bg; document.body.dataset.motion=S.motion;
@@ -1022,8 +1023,10 @@ function viewAtlas(s){
 }
 
 /* ---------- quiz generation ---------- */
-function words(s){ return String(s).toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){ return w.length>2; }); }
-function sim(a,b){ var A=words(a),B=words(b); if(!A.length||!B.length) return 0; var set={}; A.forEach(function(w){ set[w]=1; }); var n=0; B.forEach(function(w){ if(set[w]) n++; }); return n/Math.sqrt(A.length*B.length); }
+var _WC=new Map();
+function _wc(s){ s=String(s); var e=_WC.get(s); if(e) return e; var a=s.toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){ return w.length>2; }); var st=new Set(a); e={a:a,s:st}; if(_WC.size>200000) _WC.clear(); _WC.set(s,e); return e; }
+function words(s){ return _wc(s).a.slice(); }
+function sim(a,b){ var A=_wc(a),B=_wc(b); if(!A.a.length||!B.a.length) return 0; var n=0, ba=B.a, as=A.s; for(var i=0;i<ba.length;i++) if(as.has(ba[i])) n++; return n/Math.sqrt(A.a.length*B.a.length); }
 function okCell(v){ return v && v!=="-" && v.length<=220; }
 function makeQ(t, ri, c, diff){
   var row=t.rows[ri], val=row[c], key=row[0], head=t.head;
@@ -2592,17 +2595,17 @@ function grabFrames(v,from,to,n){ var times=[]; for(var i=0;i<n;i++) times.push(
 var SPEECH_LANG={en:"en-US",ur:"ur-PK",ar:"ar-SA"};
 var REC=null;
 function canBrowserSTT(){ return !!(window.SpeechRecognition||window.webkitSpeechRecognition); }
-/* listen once; calls onText(final) automatically when the speaker stops */
+/* tap mic to start; keeps listening through pauses; tap mic again to stop and send */
 function listen(input,onText,btn){
-  if(REC){ REC.stop(); return; }
+  if(REC){ REC._user=true; REC.stop(); return; }
   var setBtn=function(on){ if(btn){ btn.classList.toggle("rec",on); btn.setAttribute("aria-pressed",on); btn.title=on?"Listening… tap to stop":"Speak"; } };
   var lang=SPEECH_LANG[S.lang||"en"]||"en-US";
   if(canBrowserSTT() && !S.forceCloudSTT){
-    var R=window.SpeechRecognition||window.webkitSpeechRecognition, r=new R(), finalTxt="", base=input?input.value:"";
-    r.lang=lang; r.interimResults=true; r.continuous=true; r.maxAlternatives=1; var quiet=null, WAIT=2800, arm=function(){ clearTimeout(quiet); quiet=setTimeout(function(){ try{ r.stop(); }catch(e){} },WAIT); }; arm(); quiet=setTimeout(function(){ try{ r.stop(); }catch(e){} },9000);
+    var R=window.SpeechRecognition||window.webkitSpeechRecognition, r=new R(), finalTxt="", base=input?input.value:""; r._base0=base;
+    r.lang=lang; r.interimResults=true; r.continuous=true; r.maxAlternatives=1; var quiet=null, arm=function(){};
     r.onresult=function(e){ var interim=""; for(var i=e.resultIndex;i<e.results.length;i++){ if(e.results[i].isFinal) finalTxt+=e.results[i][0].transcript; else interim+=e.results[i][0].transcript; } if(input) input.value=(base?base+" ":"")+finalTxt+interim; arm(); };
-    r.onerror=function(e){ REC=null; setBtn(false); if(e.error==="not-allowed"||e.error==="service-not-allowed"){ if(geminiKeyOk()){ S.forceCloudSTT=true; listen(input,onText,btn); } else toast("Allow microphone access to talk to Rev"); } else if(e.error==="network" && geminiKeyOk()){ S.forceCloudSTT=true; listen(input,onText,btn); } else if(e.error!=="no-speech"&&e.error!=="aborted") toast("Voice error: "+e.error); };
-    r.onend=function(){ clearTimeout(quiet); REC=null; setBtn(false); var t=((base?base+" ":"")+finalTxt).trim(); if(finalTxt.trim()){ if(input) input.value=""; onText(t); } };
+    r.onerror=function(e){ if(e.error==="no-speech"||e.error==="aborted") return; r._dead=true; REC=null; setBtn(false); if(e.error==="not-allowed"||e.error==="service-not-allowed"){ if(geminiKeyOk()){ S.forceCloudSTT=true; listen(input,onText,btn); } else toast("Allow microphone access to talk to Rev"); } else if(e.error==="network" && geminiKeyOk()){ S.forceCloudSTT=true; listen(input,onText,btn); } else if(e.error!=="no-speech"&&e.error!=="aborted") toast("Voice error: "+e.error); };
+    r.onend=function(){ if(!r._user&&!r._dead&&REC===r){ base=((base?base+" ":"")+finalTxt).trim(); finalTxt=""; try{ r.start(); return; }catch(e){} } clearTimeout(quiet); REC=null; setBtn(false); var t=((base?base+" ":"")+finalTxt).trim(); if(t && t!==(r._base0||"").trim()){ if(input) input.value=""; onText(t); } };
     REC=r; setBtn(true); try{ r.start(); }catch(e){ REC=null; setBtn(false); toast("Couldn't start the microphone"); }
     return;
   }
@@ -2615,9 +2618,9 @@ function recordAndTranscribe(input,onText,setBtn){
   navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
     var type=MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/webm")?"audio/webm":(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/mp4")?"audio/mp4":"");
     var mr=new MediaRecorder(stream,type?{mimeType:type}:undefined), chunks=[], ac, an, silentFor=0, heard=false, t0=Date.now(), iv;
-    REC={stop:function(){ try{ mr.stop(); }catch(e){} }}; setBtn(true); if(input) input.placeholder="🎙️ Listening… (stops when you pause)";
+    REC={stop:function(){ try{ mr.stop(); }catch(e){} }}; setBtn(true); if(input) input.placeholder="🎙️ Listening… tap the mic again to send";
     try{ ac=new (window.AudioContext||window.webkitAudioContext)(); an=ac.createAnalyser(); ac.createMediaStreamSource(stream).connect(an); var buf=new Uint8Array(an.fftSize);
-      iv=setInterval(function(){ an.getByteTimeDomainData(buf); var mx=0; for(var i=0;i<buf.length;i++) mx=Math.max(mx,Math.abs(buf[i]-128)); if(mx>12){ heard=true; silentFor=0; } else silentFor+=100; if((heard&&silentFor>2800)||Date.now()-t0>60000||(!heard&&Date.now()-t0>8000)) REC.stop(); },100); }catch(e){}
+      iv=setInterval(function(){ an.getByteTimeDomainData(buf); var mx=0; for(var i=0;i<buf.length;i++) mx=Math.max(mx,Math.abs(buf[i]-128)); if(mx>12){ heard=true; silentFor=0; } else silentFor+=100; if(Date.now()-t0>600000) REC.stop(); },100); }catch(e){}
     mr.ondataavailable=function(e){ if(e.data.size) chunks.push(e.data); };
     mr.onstop=function(){ clearInterval(iv); try{ ac&&ac.close(); }catch(e){} stream.getTracks().forEach(function(t){ t.stop(); }); REC=null; setBtn(false); if(input) input.placeholder=input.dataset.ph||"";
       if(!heard){ toast("Didn't hear anything"); return; }
@@ -3164,6 +3167,7 @@ function sigWords(t){ return String(t).toLowerCase().replace(/[^a-z0-9 ]+/g," ")
 function wmatch(x,y){ return x===y||(x.length>=4&&y.length>=4&&x.slice(0,Math.min(6,x.length,y.length))===y.slice(0,Math.min(6,x.length,y.length))); }
 function syllCovered(it){
   var head=sigWords(it.title.split(/[:;]/)[0]); if(!head.length) head=sigWords(it.title);
+  if(!head.length){ var tl=String(it.title).toLowerCase().trim(); return notesFor(it.mod,it.subj).some(function(n){ var nt=String(n.title).toLowerCase().trim(); return nt===tl||nt.indexOf(tl)===0; }); }
   return notesFor(it.mod,it.subj).some(function(n){ var w=sigWords(n.title+" "+(n.sub||"")); var hit=head.filter(function(x){ return w.some(function(y){ return wmatch(x,y); }); }).length; return head.length&&hit/head.length>=0.5; });
 }
 function syllGaps(subjs,tox){ return SYLL.filter(function(it){ return subjs.indexOf(it.subj)>=0 && (!tox||it.tox) && !syllCovered(it); }); }
@@ -3321,24 +3325,29 @@ function qTable(t){ var h0=String(t.head[0]||"").replace(/[*_]/g,"").trim().toLo
     return {id:t.id+"T",title:t.title,kind:t.kind,topic:t.topic,mod:t.mod,subj:t.subj,head:["option"].concat(keys),rows:t.head.slice(1).map(function(h,ci){ return [String(h).replace(/[*_]/g,"").trim()].concat(t.rows.map(function(r){ return r[ci+1]; })); })};
   }
   return t; }
-function buildPrebank(){ var R0=Math.random, sd=1234567; Math.random=function(){ sd=(sd*1103515245+12345)%2147483648; return sd/2147483648; }; try{ buildPrebank0(); } finally{ Math.random=R0; } }
-function buildPrebank0(){
+function buildPrebank0(T){
   var per={}, add=function(q){ var k=q.mod+"|"+q.subj+"|"+q.topic; per[k]=per[k]||[]; per[k].push(q); };
-  DATA.forEach(function(m){ ORDER.forEach(function(s){ (m.subjects[s].bcq||[]).forEach(function(q){ if(/^pq\|h/.test(q.id)) add(Object.assign({pb:true},q)); }); }); });
-  TABLES.forEach(function(t0){ var t=qTable(t0); if(!t||!t.topic||ORDER.indexOf(t.subj)<0||t.rows.length<4) return;
-    t.rows.forEach(function(r,ri){ for(var c=1;c<t.head.length;c++){ if(!okCell(r[c])||!okCell(r[0])) continue; ["Easy","Hard"].forEach(function(d){ var q=null; try{ q=makeQ(t,ri,c,d); }catch(e){} if(q){ q.id="pb|"+t.id+"|"+ri+"|"+c+"|"+(q.id.slice(-1)); if(per[t.mod+"|"+t.subj+"|"+t.topic]&&per[t.mod+"|"+t.subj+"|"+t.topic].some(function(x){ return x.id===q.id; })) return; q.topic=t.topic; q.pb=true; add(q); } }); } }); });
-  DATA.forEach(function(m){ ORDER.forEach(function(s){ var defs=m.subjects[s].cards.filter(function(c){ return /what is \*\*|^Define \*\*/.test(c.q); }).map(function(c){ var mm=/\*\*(.+?)\*\*/.exec(c.q); var a=c.a.replace(/\*\*/g,"").replace(/\s+/g," ").split(/(?<=[.;])\s/)[0].slice(0,220); return {term:mm?mm[1]:"",a:a,topic:c.topic,id:c.id}; }).filter(function(x){ return x.term&&x.a.length>25; });
-    defs.forEach(function(x,i){ var pool=defs.filter(function(y){ return y!==x&&y.a!==x.a&&y.term.toLowerCase()!==x.term.toLowerCase(); }); var same=pool.filter(function(y){ return y.topic===x.topic; }); var pick=shuffle(same).concat(shuffle(pool)).filter(function(y,j,arr){ return arr.indexOf(y)===j; }).slice(0,3); if(pick.length<3) return;
+  T.push(function(){ DATA.forEach(function(m){ ORDER.forEach(function(s){ (m.subjects[s].bcq||[]).forEach(function(q){ if(/^pq\|h/.test(q.id)) add(Object.assign({pb:true},q)); }); }); }); });
+  TABLES.forEach(function(t0){ T.push(function(){ var t=qTable(t0); if(!t||!t.topic||ORDER.indexOf(t.subj)<0||t.rows.length<4) return;
+    t.rows.forEach(function(r,ri){ for(var c=1;c<t.head.length;c++){ if(!okCell(r[c])||!okCell(r[0])) continue; ["Easy","Hard"].forEach(function(d){ if((per[t.mod+"|"+t.subj+"|"+t.topic]||[]).length>=50) return; var q=null; try{ q=makeQ(t,ri,c,d); }catch(e){} if(q){ q.id="pb|"+t.id+"|"+ri+"|"+c+"|"+(q.id.slice(-1)); if(per[t.mod+"|"+t.subj+"|"+t.topic]&&per[t.mod+"|"+t.subj+"|"+t.topic].some(function(x){ return x.id===q.id; })) return; q.topic=t.topic; q.pb=true; add(q); } }); } }); }); });
+  DATA.forEach(function(m){ ORDER.forEach(function(s){ T.push(function(){ var defs=m.subjects[s].cards.filter(function(c){ return /what is \*\*|^Define \*\*/.test(c.q); }).map(function(c){ var mm=/\*\*(.+?)\*\*/.exec(c.q); var a=c.a.replace(/\*\*/g,"").replace(/\s+/g," ").split(/(?<=[.;])\s/)[0].slice(0,220); return {term:mm?mm[1]:"",a:a,topic:c.topic,id:c.id}; }).filter(function(x){ return x.term&&x.a.length>25; });
+    var byT={}; defs.forEach(function(y){ y._t=y.term.toLowerCase(); (byT[y.topic]=byT[y.topic]||[]).push(y); });
+    defs.forEach(function(x,i){ if((per[m.id+"|"+s+"|"+x.topic]||[]).length>=50) return; var ok=function(y){ return y!==x&&y.a!==x.a&&y._t!==x._t; };
+      var pick=shuffle(byT[x.topic].filter(ok)).slice(0,3), got=new Set(pick), tries=0;
+      while(pick.length<3 && tries<60 && defs.length>1){ tries++; var y=defs[Math.floor(Math.random()*defs.length)]; if(ok(y)&&!got.has(y)){ got.add(y); pick.push(y); } }
+      if(pick.length<3){ var rest=defs.filter(function(y){ return ok(y)&&!got.has(y); }); pick=pick.concat(shuffle(rest).slice(0,3-pick.length)); }
+      if(pick.length<3) return;
       var opts=[x].concat(pick), order=shuffle([0,1,2,3]);
-      add({id:"pb|d|"+x.id,stem:"Which statement best describes **"+x.term+"**?",options:order.map(function(k){ return capFirst(opts[k].a); }),why:order.map(function(k){ return k===0?"Correct. This is "+x.term+".":"Not this one. That describes "+opts[k].term+", not "+x.term+"."; }),correct:order.indexOf(0),difficulty:"Medium",topic:x.topic,mod:m.id,subj:s,pb:true}); }); }); });
-  DATA.forEach(function(m){ ORDER.forEach(function(s){ (m.subjects[s].bcq||[]).forEach(function(q){ if(!/^pq\|h/.test(q.id)) add(Object.assign({pb:true},q)); }); }); });
-  /* pharma / patho / micro: built-in BCQs from their cheat-sheet tables too */
-  TABLES.forEach(function(t0){ var t=qTable(t0); if(!t||t.topic||FMCM.indexOf(t.subj)>=0||t.rows.length<4) return; t.rows.forEach(function(r,ri){ for(var c=1;c<t.head.length;c++){ if(!okCell(r[c])||!okCell(r[0])) continue; ["Easy","Hard"].forEach(function(d){ var q=null; try{ q=makeQ(t,ri,c,d); }catch(e){} if(q){ q.id="pb|"+t.id+"|"+ri+"|"+c+"|"+q.id.slice(-1); q.topic=t.title; q.pb=true; var k=t.mod+"|"+t.subj+"|"+t.title; if(!(per[k]||[]).some(function(x){ return x.id===q.id; })) add(q); } }); } }); });
-  Object.keys(per).forEach(function(k){ var n=Math.min(50,per[k].length); per[k]=per[k].slice(0,n); });
-  Object.keys(BANK).forEach(function(k){ BANK[k]=BANK[k].filter(function(q){ return !q.pb; }); });
-  Object.keys(per).forEach(function(k){ var p=k.split("|"), key=p[0]+"-"+p[1]; BANK[key]=(BANK[key]||[]).concat(per[k]); PREBANK_N+=per[k].length; });
+      add({id:"pb|d|"+x.id,stem:"Which statement best describes **"+x.term+"**?",options:order.map(function(k){ return capFirst(opts[k].a); }),why:order.map(function(k){ return k===0?"Correct. This is "+x.term+".":"Not this one. That describes "+opts[k].term+", not "+x.term+"."; }),correct:order.indexOf(0),difficulty:"Medium",topic:x.topic,mod:m.id,subj:s,pb:true}); }); }); }); });
+  T.push(function(){ DATA.forEach(function(m){ ORDER.forEach(function(s){ (m.subjects[s].bcq||[]).forEach(function(q){ if(!/^pq\|h/.test(q.id)) add(Object.assign({pb:true},q)); }); }); }); });
+  TABLES.forEach(function(t0){ T.push(function(){ var t=qTable(t0); if(!t||t.topic||FMCM.indexOf(t.subj)>=0||t.rows.length<4) return; t.rows.forEach(function(r,ri){ for(var c=1;c<t.head.length;c++){ if(!okCell(r[c])||!okCell(r[0])) continue; ["Easy","Hard"].forEach(function(d){ if((per[t.mod+"|"+t.subj+"|"+t.title]||[]).length>=50) return; var q=null; try{ q=makeQ(t,ri,c,d); }catch(e){} if(q){ q.id="pb|"+t.id+"|"+ri+"|"+c+"|"+q.id.slice(-1); q.topic=t.title; q.pb=true; var k=t.mod+"|"+t.subj+"|"+t.title; if(!(per[k]||[]).some(function(x){ return x.id===q.id; })) add(q); } }); } }); }); });
+  T.push(function(){ Object.keys(per).forEach(function(k){ var n=Math.min(50,per[k].length); per[k]=per[k].slice(0,n); }); Object.keys(BANK).forEach(function(k){ BANK[k]=BANK[k].filter(function(q){ return !q.pb; }); }); Object.keys(per).forEach(function(k){ var p=k.split("|"), key=p[0]+"-"+p[1]; BANK[key]=(BANK[key]||[]).concat(per[k]); PREBANK_N+=per[k].length; }); });
 }
-try{ buildPrebank(); }catch(e){ console.warn("prebank",e); }
+function buildPrebank(done){
+  var T=[]; buildPrebank0(T); var i=0, R0=Math.random, sd=1234567, seeded=function(){ sd=(sd*1103515245+12345)%2147483648; return sd/2147483648; };
+  (function step(){ var t0=Date.now(); Math.random=seeded; try{ while(i<T.length){ try{ T[i++](); }catch(e){ console.warn("prebank",e); } if(Date.now()-t0>24) break; } } finally{ Math.random=R0; }
+    if(i<T.length){ setTimeout(step,0); return; } try{ _WC.clear(); }catch(e){} if(done) done(); })(); }
+setTimeout(function(){ buildPrebank(function(){ try{ refreshBankUI(); if(ROUTE.name==="home") render(); }catch(e){} }); },60);
 (function(){ var sb=saveBank; saveBank=function(){ var keep={}; Object.keys(BANK).forEach(function(k){ keep[k]=BANK[k].filter(function(q){ return !q.pb; }); }); LS.set("bank",keep); LS.set("bankwrong",BW); }; })();
 
 window.__rev={cpJobs:function(){ var L=completeJobs(); return {n:L.length,r:completeRemaining(),list:L.map(function(j){ return [j.kind||j.type||"",j.mod||"",j.subj||"",(j.topic||j.title||"").slice(0,60)]; })}; },gaps:function(){ return SYLL.filter(function(it){ return !syllCovered(it); }).map(function(it){ return [it.mod,it.subj,it.title.slice(0,70),!!it.tox]; }); },syllN:function(){ return SYLL.length; },bankKey:function(k){ return (BANK[k]||[]).slice(); },bankAll:function(){ var o=[]; DATA.forEach(function(m){ ORDER.forEach(function(s){ var t={}; m.subjects[s].cards.forEach(function(c){ t[c.topic]=1; }); Object.keys(t).forEach(function(x){ o.push([m.id,s,x,bankCount(m.id,s,x)]); }); }); }); return o; },deficits:function(){ return allTopics(FMCM).map(function(x){ return [x[0],x[1],x[2],cardCount(x[0],x[1],x[2]),MOD[x[0]].subjects[x[1]].cards.filter(function(c){ return c.topic===x[2]&&c.type==="Viva"; }).length,bankCount(x[0],x[1],x[2]),notesFor(x[0],x[1]).some(function(n){ return n.title===x[2]; })]; }); },bt:function(){ return [bankTotal(),Object.keys(BANK).map(function(k){ return k+":"+BANK[k].length; }).join(" ")]; },save:function(o){ return saveAiNote(o); },tidy:function(t){ return tidyMd(t); },completeRemaining:function(){ return completeRemaining(); },gaps:function(){ return syllGaps(FMCM,false).map(function(x){ return x.mod+"/"+x.subj+": "+x.title.slice(0,70); }); },prebank:function(){ return PREBANK_N; },jobs:function(){ return completeJobs().length; },jobsOld:function(){ var n=syllGaps(FMCM,false).length; allTopics(FMCM).forEach(function(x){ var c=20-cardCount(x[0],x[1],x[2]); if(c>0) n+=Math.ceil(c/30); var v=20-MOD[x[0]].subjects[x[1]].cards.filter(function(cc){ return cc.topic===x[2]&&cc.type==="Viva"; }).length; if(v>0) n+=Math.ceil(v/30); var m=50-bankCount(x[0],x[1],x[2]); if(m>0) n+=Math.ceil(m/40); }); return n; },jobsFor:function(){ var n={}; ["tox","gaps","cards","viva","mcq"].forEach(function(k){ var q=JOBS.q.length; n[k]=0; }); return n; }};
@@ -4812,7 +4821,7 @@ var GUIDE=[
   "🔄 Sync & share → ⬆️ Save sync file, put it in Google Drive / iCloud / OneDrive, then ⬇️ Load it on your other device.",
   "On a laptop with Chrome or Edge, 🔁 Turn on automatic sync and the file updates itself a few seconds after every change.",
   "📦 Export deck shares a topic's (or a whole subject's) cards, Rev notes and BCQs with friends; they open it with 📥 Import a deck."]],
- ["🔊","Rev's voice",["Turn Rev's voice on with 🔊 (in the chat or in Teach me). Only one voice speaks at a time, and it starts as soon as each sentence is written.", "<b>Voice order</b>: Rev's Gemini voice first → Google Cloud voice (if you added that key) → ElevenLabs → your device's free <b>natural</b> voice. Robotic voices are never used.", "<b>Free unlimited natural voices</b>: on Windows use <b>Microsoft Edge</b> (Aria, Jenny, Ava…). On iPhone, download a free Enhanced or Premium voice in Settings → Accessibility → Spoken Content → Voices. Android uses Google's natural voices. In other browsers on Windows, Settings shows an 🌐 Open in Edge button.", "Settings → Voice: choose the voice and the engine (⚡ Device natural voice only is instant and never runs out), set Short / Medium / Full for how much Rev explains out loud, and press 🔊 Test voice to see which voices work.", "The small label next to 🔊 in Teach me always tells you which voice is speaking right now."]],
+ ["🔊","Rev's voice",["🎤 <b>Dictation</b>: tap the mic and speak. It keeps listening through pauses and types as you talk. Tap the mic again (it stops glowing) to finish, and only then is your message sent.", "Turn Rev's voice on with 🔊 (in the chat or in Teach me). Only one voice speaks at a time, and it starts as soon as each sentence is written.", "<b>Voice order</b>: Rev's Gemini voice first → Google Cloud voice (if you added that key) → ElevenLabs → your device's free <b>natural</b> voice. Robotic voices are never used.", "<b>Free unlimited natural voices</b>: on Windows use <b>Microsoft Edge</b> (Aria, Jenny, Ava…). On iPhone, download a free Enhanced or Premium voice in Settings → Accessibility → Spoken Content → Voices. Android uses Google's natural voices. In other browsers on Windows, Settings shows an 🌐 Open in Edge button.", "Settings → Voice: choose the voice and the engine (⚡ Device natural voice only is instant and never runs out), set Short / Medium / Full for how much Rev explains out loud, and press 🔊 Test voice to see which voices work.", "The small label next to 🔊 in Teach me always tells you which voice is speaking right now."]],
  ["⚙️","Settings and AI keys",["🔑 <b>Paste any AI key</b> (Settings → AI tutor): Gemini (free), OpenRouter, Claude, ChatGPT, Groq, DeepSeek, Mistral, Grok and more. ProfRev detects the service and picks the best model. You can paste <b>several Gemini keys at once</b> (one per line); Rev uses the next one when one hits its limit.", "Settings shows <b>every key in use</b> (partly hidden) and what each is for. 🗑️ removes one.", "Free Gemini keys: aistudio.google.com/apikey. Keys from the <b>same Google account share one daily limit</b>, so for more free use make keys from different Gmail accounts.", "⚙️ Advanced (under the key box) lets you choose the main AI and the exact models.", "Themes: colours, background, dark mode, glass, motion and text size. Daily goal: how many cards you aim to review each day.", "Installing the app on phones, tablets and computers is explained step by step on the 📲 Install & offline page."]],
  ["⌨️","Handy shortcuts",[
   "Ctrl/⌘ + K: search · Esc: close full screen, focus mode or a pop-up · Enter: send in chat · Shift+Enter: new line.",
